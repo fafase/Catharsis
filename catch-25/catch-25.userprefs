@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Level1\oneDeathTrigger.cs">
+    <Files>
+      <File FileName="Assets\scripts\Level1\oneDeathTrigger.cs" Line="29" Column="18" />
+      <File FileName="Assets\scripts\deathTrigger.cs" Line="8" Column="32" />
+      <File FileName="Assets\scripts\gameHandler.cs" Line="30" Column="17" />
+      <File FileName="Assets\scripts\CameraFollow.cs" Line="50" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
