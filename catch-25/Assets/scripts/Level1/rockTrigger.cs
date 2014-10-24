@@ -24,7 +24,7 @@ public class rockTrigger : MonoBehaviour {
 				rockRigidbody.isKinematic = false;
 				rockFallen = true;
 				target = rockRigidbody.transform;
-				range = 0.5f;
+				range = 0.2f;
 			} 
 			else 
 			{

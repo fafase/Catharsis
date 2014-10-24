@@ -5,16 +5,22 @@ public class CatController : MonoBehaviour
 {
 	[SerializeField] private catMove catMoveRef;
 	[SerializeField] private CatHealth catHealth;
+	[SerializeField] private GameObject catPrefab;
+	private Vector3 startPosition;
 
 	// Use this for initialization
 	void Start () 
 	{
 		InputManager.OnMovement += catMoveRef.Move;
 		InputManager.OnJump += catMoveRef.Jump;
+		oneDeathTrigger.OnDeath += DeadCatClone;
+		startPosition = transform.position;
 	}
 
-	public void Death()
+	private void DeadCatClone()
 	{
-		catHealth.Lives -= 1;
-	}
+		catHealth.DecreaseHealth ();
+		Instantiate (catPrefab, transform.position, Quaternion.identity);
+		transform.position = startPosition;
+	} 
 }

@@ -4,21 +4,20 @@ using System;
 
 public class CatHealth : MonoBehaviour {
 
-	public event Action OnDeath = () => {};
-
+	public event Action OnLivesNull = () => {};
+	public event Action OnChangeLives = () => {};
 	[SerializeField] private int lives = 9;
-
-	public int Lives {
-		get{
-			return lives;
-		}
-		set
+	
+	public int Lives{
+		get{return lives;}
+	}
+	public void DecreaseHealth()
+	{
+		lives -= 1;
+		OnChangeLives ();
+		if (lives <= 0) 
 		{
-			lives = value;
-			if(lives <= 0)
-			{
-				OnDeath();
-			}
+			OnLivesNull();
 		}
 	}
 }

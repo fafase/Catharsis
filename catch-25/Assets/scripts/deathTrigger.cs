@@ -16,9 +16,4 @@ public class deathTrigger : MonoBehaviour {
 			mainCamera.GetComponent<gameHandler>().handlePlayerDeath(true);
 		}
 	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
 }

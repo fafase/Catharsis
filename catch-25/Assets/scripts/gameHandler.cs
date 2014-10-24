@@ -22,7 +22,7 @@ public class gameHandler : MonoBehaviour {
 
 	private Transform player;
 	private Transform spawn;
-	private GameObject gameInterface;
+
 	private GameObject body;
 
 	private GameState gameState = GameState.Play;
@@ -50,7 +50,6 @@ public class gameHandler : MonoBehaviour {
 		}
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
-		gameInterface = GameObject.Find("GUI");
 	}
 	
 	public void handlePlayerDeath(bool leaveCorpse) 
@@ -64,8 +63,6 @@ public class gameHandler : MonoBehaviour {
 			// Make body
 			//body = (GameObject)Instantiate (Resources.Load ("deadBody"), player.position, Quaternion.identity);
 		}
-		deathCount++;
-		gameInterface.guiText.text = "Deaths: "+deathCount+"/9";
 		// Lock entities
 		playerLock = true;
 		cameraLock = true;
