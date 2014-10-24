@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Level1\oneDeathTrigger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CameraFollow1.cs">
     <Files>
-      <File FileName="Assets\scripts\Level1\oneDeathTrigger.cs" Line="29" Column="18" />
-      <File FileName="Assets\scripts\deathTrigger.cs" Line="8" Column="32" />
-      <File FileName="Assets\scripts\gameHandler.cs" Line="30" Column="17" />
-      <File FileName="Assets\scripts\CameraFollow.cs" Line="50" Column="3" />
+      <File FileName="Assets\scripts\CameraFollow1.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\catMove.cs" Line="20" Column="4" />
+      <File FileName="Assets\scripts\InputManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Scripts\Camera Scripts\SmoothFollow.js" Line="57" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

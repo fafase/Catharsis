@@ -11,58 +11,47 @@ public class catMove : MonoBehaviour {
 	float groundRadius = 0.2f;
 	public float jumpForce = 500f;
 
-	private GameObject mainCamera;
+	//private GameObject mainCamera;
 
-	Animator anim;
-
+	[SerializeField] private Animator anim;
+	private float movement = 0f;
 	void Start()
 	{
-		anim = GetComponent<Animator> ();
-		mainCamera = GameObject.Find("mainCamera");
+	//	mainCamera = GameObject.Find("mainCamera");
 	}
-	
+
 	void FixedUpdate()
-	{
-		// Check if player just died
-		if(mainCamera.GetComponent<gameHandler>().playerLock){
-
-		}
-		else{
-
-			grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
-			anim.SetBool ("Ground", grounded);
-
-			anim.SetFloat ("vSpeed", rigidbody2D.velocity.y);
-
-			float move = Input.GetAxis("Horizontal");
-
-			anim.SetFloat ("speed", Mathf.Abs (move));
-
-			rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
-			
-			if (move > 0 && !facingRight) {
-				Flip ();
-			} else if (move < 0 && facingRight ) {
-				Flip();						
-			}
-		}
+	{						
+		grounded = Physics2D.OverlapCircle (groundCheck.position, groundRadius, whatIsGround);
+		anim.SetBool ("Ground", grounded);
+		anim.SetFloat ("vSpeed", rigidbody2D.velocity.y);
+		rigidbody2D.velocity = new Vector2 (movement * maxSpeed, rigidbody2D.velocity.y);
 	}
 
-	void Update()
+	public void Move(float move)
 	{
-		if (grounded) {
-		
-		}
-
-		// korjaa tämä. laita hyppy input Manageriin !
-		if(grounded && Input.GetKeyDown(KeyCode.UpArrow))
+		anim.SetFloat ("speed", Mathf.Abs (move));
+		movement = move; 
+		if (move > 0 && !facingRight) 
 		{
-			anim.SetBool ("Ground", false);
-			rigidbody2D.AddForce(new Vector2(0, jumpForce));
-
+			Flip ();
+		} 
+		else if (move < 0 && facingRight ) 
+		{
+			Flip();						
 		}
 	}
-	
+
+	public void Jump()
+	{
+		if (!grounded) 
+		{
+			return;
+		}
+		anim.SetBool ("Ground", false);
+		rigidbody2D.AddForce(new Vector2(0, jumpForce));
+	}
+
 	void Flip ()
 	{
 		facingRight = !facingRight;

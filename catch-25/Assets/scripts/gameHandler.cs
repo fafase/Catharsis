@@ -13,7 +13,7 @@ using System.Collections;
  */
 
 public class gameHandler : MonoBehaviour {
-	
+
 	public float deathCount;
 	private float playerTimer = 0.6f;	 // Lock time for player after death.
 	private float cameraTimer = 0.3f; 	// Lock time for camera after death (slightly shorter).
@@ -24,31 +24,45 @@ public class gameHandler : MonoBehaviour {
 	private Transform spawn;
 	private GameObject gameInterface;
 	private GameObject body;
-	
+
+	private GameState gameState = GameState.Play;
+
+	public GameState State{
+		get{ 
+			return gameState;
+		}
+	}
+
+	private static gameHandler instance;
+	public static gameHandler Instance{
+		get
+		{
+			return instance;
+		}
+	}
 
 	// Use this for initialization
-	void Start () {
-		Debug.Log ("Initialized gameHandler.");
-		Debug.Log ("Set death count to 0.");
-		deathCount = 0f;
+	void Start () 
+	{
+		if(instance == null)
+		{
+			instance = this;
+		}
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
 		gameInterface = GameObject.Find("GUI");
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
-	public void handlePlayerDeath(bool leaveCorpse) {
+	public void handlePlayerDeath(bool leaveCorpse) 
+	{
 		StartCoroutine(death(leaveCorpse));
 	}
 
 	IEnumerator death(bool leaveCorpse){
-		if (leaveCorpse) {
+		if (leaveCorpse) 
+		{
 			// Make body
-			body = (GameObject)Instantiate (Resources.Load ("deadBody"), player.position, Quaternion.identity);
+			//body = (GameObject)Instantiate (Resources.Load ("deadBody"), player.position, Quaternion.identity);
 		}
 		deathCount++;
 		gameInterface.guiText.text = "Deaths: "+deathCount+"/9";
@@ -61,7 +75,9 @@ public class gameHandler : MonoBehaviour {
 		cameraLock = false;
 		yield return new WaitForSeconds(playerTimer - cameraTimer);
 		playerLock = false;
-
 	}
-
+}
+public enum GameState
+{
+	None, Play, GameOver, Pause
 }

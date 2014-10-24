@@ -3,7 +3,7 @@ using System.Collections;
 
 public class oneDeathTrigger : MonoBehaviour {
 	
-	private Transform player;
+	/*private Transform player;
 	private Transform spawn;
 	private GameObject gameInterface;
 	private GameObject body;
@@ -13,7 +13,8 @@ public class oneDeathTrigger : MonoBehaviour {
 	private bool usedUp = false;
 
 	// Use this for initialization
-	void Awake () {
+	void Awake () 
+	{
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -32,18 +33,18 @@ public class oneDeathTrigger : MonoBehaviour {
 				mainCamera.GetComponent<gameHandler>().handlePlayerDeath(true);
 			}
 		}
-		if (colliderObject.gameObject.name == "rockStopper") {
+		if (colliderObject.gameObject.name == "rockStopper") 
+		{
 			gameObject.collider2D.isTrigger = false;
 			gameObject.transform.GetComponent<Rigidbody2D>().isKinematic = true;
 		}
+	}*/
+
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.gameObject.CompareTag ("Player")) 
+		{
+			print ("Call");
+		}
 	}
-	
-	
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-	
 }
