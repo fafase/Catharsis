@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: fe47368e388e2a542a1e812054b71152
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: kentta1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

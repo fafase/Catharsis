@@ -5,12 +5,12 @@ using System;
 public class oneDeathTrigger : MonoBehaviour {
 
 	public static Action OnDeath = () => {};
-	[SerializeField] private Environment environment;
+	[SerializeField] private EnvironmentItem environment;
 	void Start()
 	{
 		switch(environment)
 		{
-			case Environment.FallingRock:
+			case EnvironmentItem.FallingRock:
 			break;
 		}
 	}
@@ -28,6 +28,6 @@ public class oneDeathTrigger : MonoBehaviour {
 	}
 }
 
-public enum Environment{
+public enum EnvironmentItem{
 	FallingRock
 }
