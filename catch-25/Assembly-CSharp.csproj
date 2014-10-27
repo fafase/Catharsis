@@ -87,7 +87,6 @@
      <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
      <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerConfigurator.cs" />
      <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestingAssets\CallTesting.cs" />
-     <Compile Include="Assets\scripts\CameraFollow.cs" />
      <Compile Include="Assets\scripts\CameraSmoothFollow.cs" />
      <Compile Include="Assets\scripts\CatScript\CatController.cs" />
      <Compile Include="Assets\scripts\CatScript\CatHealth.cs" />
