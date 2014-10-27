@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GuiScore : MonoBehaviour {
 
 	[SerializeField] private CatHealth catHealth;
-	[SerializeField] private GUIText text;
+	[SerializeField] private Text text;
 
 	void Start () 
 	{

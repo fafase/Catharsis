@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CatController : MonoBehaviour 
 {
-	[SerializeField] private catMove catMoveRef;
+	[SerializeField] private CatMovement catMoveRef;
 	[SerializeField] private CatHealth catHealth;
 	[SerializeField] private GameObject catPrefab;
 	private Vector3 startPosition;
@@ -13,7 +13,7 @@ public class CatController : MonoBehaviour
 	{
 		InputManager.OnMovement += catMoveRef.Move;
 		InputManager.OnJump += catMoveRef.Jump;
-		oneDeathTrigger.OnDeath += DeadCatClone;
+		DeathTrigger.OnDeath += DeadCatClone;
 		startPosition = transform.position;
 	}
 

@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class rockTrigger : MonoBehaviour {
+public class RockTrigger : MonoBehaviour {
 
 	private bool rockFallen = false;
 	[SerializeField] private Transform player;
 	[SerializeField] private Rigidbody2D rockRigidbody;
+    [SerializeField] private Transform checkPosition;
 	private Transform target;
 	private float range;
 	void Start () 
@@ -16,7 +17,7 @@ public class rockTrigger : MonoBehaviour {
 	}
 	void Update()
 	{
-		float distance = Vector2.Distance (transform.position, target.position);
+		float distance = Vector2.Distance (checkPosition.position, target.position);
 		if(distance < range)
 		{
 			if (!rockFallen) 
@@ -29,7 +30,7 @@ public class rockTrigger : MonoBehaviour {
 			else 
 			{
 				rockRigidbody.isKinematic = true;
-				Destroy (gameObject);
+				Destroy (this);
 			}
 		}
 	}

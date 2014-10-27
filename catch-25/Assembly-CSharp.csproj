@@ -91,13 +91,13 @@
      <Compile Include="Assets\scripts\CameraSmoothFollow.cs" />
      <Compile Include="Assets\scripts\CatScript\CatController.cs" />
      <Compile Include="Assets\scripts\CatScript\CatHealth.cs" />
-     <Compile Include="Assets\scripts\CatScript\catMove.cs" />
+     <Compile Include="Assets\scripts\CatScript\CatMovement.cs" />
      <Compile Include="Assets\scripts\GuiScore.cs" />
      <Compile Include="Assets\scripts\InputManager.cs" />
-     <Compile Include="Assets\scripts\Level1\oneDeathTrigger.cs" />
-     <Compile Include="Assets\scripts\Level1\rockTrigger.cs" />
+     <Compile Include="Assets\scripts\Level1\DeathTrigger.cs" />
+     <Compile Include="Assets\scripts\Level1\RockTrigger.cs" />
      <Compile Include="Assets\scripts\StatefulMonobehaviour.cs" />
-     <Compile Include="Assets\scripts\deathTrigger.cs" />
+     <Compile Include="Assets\scripts\Utility.cs" />
      <Compile Include="Assets\scripts\followingLight.cs" />
      <Compile Include="Assets\scripts\gameHandler.cs" />
      <Compile Include="Assets\scripts\glowingLight.cs" />
