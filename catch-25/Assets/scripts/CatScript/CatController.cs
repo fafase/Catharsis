@@ -27,8 +27,7 @@ public class CatController : StatefulMonobehaviour
 
     protected virtual void Update() 
     {
-        StateUpdate();
-    
+        StateUpdate(); 
     }
 
     protected virtual void EnterStateReset(string oldState) 

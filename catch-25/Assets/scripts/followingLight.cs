@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class followingLight : MonoBehaviour 
+public class followingLight : MonoBehaviour
 {
 	private Transform player;		// Reference to the player's transform.
 	
@@ -23,4 +23,6 @@ public class followingLight : MonoBehaviour
 			float targetY = player.position.y;
 			transform.position = new Vector3 (targetX, targetY, transform.position.z);
 	}
+
+
 }
