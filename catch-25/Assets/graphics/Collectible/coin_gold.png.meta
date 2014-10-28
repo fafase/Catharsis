@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 577fb8bb5c1ca1e4797800f4800ecc9f
+guid: b18a458b115c37a4eba3b4eb9750df7f
 TextureImporter:
   fileIDToRecycleName:
-    21300000: KISSEWALK
+    21300000: coin_gold
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

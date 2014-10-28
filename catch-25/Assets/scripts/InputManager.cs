@@ -4,20 +4,16 @@ using System;
 
 public class InputManager : MonoBehaviour {
 
-	public static event Action<float> OnMovement = (f) => { };
-	public static event Action OnJump = () => {};
-	void Start () {
+	public static event Action<float> OnMovementCall= (f) => { };
+	public static event Action OnJumpCall = () => {};
 	
-	}
-	
-	// Update is called once per frame
 	void Update () 
 	{
 		float horizontal = Input.GetAxis ("Horizontal");
-		OnMovement(horizontal);
+		OnMovementCall(horizontal);
 		if (Input.GetKeyDown (KeyCode.UpArrow)) 
 		{
-			OnJump();
+			OnJumpCall();
 		}
 	}
 }

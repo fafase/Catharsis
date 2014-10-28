@@ -4,6 +4,13 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: KISSE_HYPPY
     21300002: Cat_Jump
+    21300004: Cat_Jump_0
+    21300006: Cat_Jump_1
+    21300008: Cat_Jump_2
+    21300010: Cat_Jump_3
+    21300012: Cat_Jump_4
+    21300014: Cat_Jump_5
+    21300016: Cat_Jump_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -33,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -44,6 +51,76 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Cat_Jump_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1785
+        width: 256
+        height: 256
+      alignment: 9
+      pivot: {x: .670939922, y: .618343353}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Cat_Jump_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1785
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Cat_Jump_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1785
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Cat_Jump_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1785
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Cat_Jump_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1785
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Cat_Jump_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1785
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Cat_Jump_6
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1785
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

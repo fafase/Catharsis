@@ -3,18 +3,18 @@ using System.Collections;
 
 public class CatController : StatefulMonobehaviour 
 {
-	[SerializeField] private CatMovement catMoveRef;
+	[SerializeField] private CatMove catMoveRef;
 	[SerializeField] private CatHealth catHealth;
 	[SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform jellyPosition;
 
-	// Use this for initialization
 	void Start () 
 	{
-		InputManager.OnMovement += catMoveRef.Move;
-		InputManager.OnJump += catMoveRef.Jump;
-		DeathTrigger.OnDeath += DeadCatClone;
-       
+	    InputManager.OnMovementCall += catMoveRef.Move;     
+		InputManager.OnJumpCall += catMoveRef.Jump;
+		
+        DeathTrigger.OnDeath += DeadCatClone;
+        
         InitializeStatefulness(true);
         AddStateWithTransitions(Utility.STATE_STARTING, new string[]{Utility.STATE_PLAYING});
         AddStateWithTransitions(Utility.STATE_PLAYING, new string[] { Utility.STATE_PAUSE, Utility.STATE_RESET, Utility.STATE_DEAD });
@@ -33,8 +33,6 @@ public class CatController : StatefulMonobehaviour
     protected virtual void EnterStateReset(string oldState) 
     {
         catHealth.DecreaseHealth();
-        Instantiate(catPrefab, transform.position, Quaternion.identity);
-        renderer.enabled = false;
         resetTimer = 1.0f;
     }
     float resetTimer = 1.0f;
@@ -44,16 +42,17 @@ public class CatController : StatefulMonobehaviour
         if (resetTimer > 0.0f) 
         {
             return;
-        } 
+        }
+        Instantiate(catPrefab, transform.position, Quaternion.identity);
+
         Vector3 position = jellyPosition.position;
-        position.y -= 1f;
+        position.y -= 0.5f;
         transform.position = position;
-        renderer.enabled = true;
+        catMoveRef.ResetToPlay();
         RequestState(Utility.STATE_PLAYING);
     }
 	private void DeadCatClone()
 	{
         RequestState(Utility.STATE_RESET);
-		
 	} 
 }

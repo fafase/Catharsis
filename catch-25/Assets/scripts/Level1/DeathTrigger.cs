@@ -4,7 +4,7 @@ using System;
 
 public class DeathTrigger : MonoBehaviour {
 
-	public static Action OnDeath = () => {};
+	public static event Action OnDeath = () => {};
     private Action<Collision2D> OnCollision = (Collision2D) => { };
 	[SerializeField] private EnvironmentItem environment;
 	void Start()
