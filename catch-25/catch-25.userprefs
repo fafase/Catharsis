@@ -1,15 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnityTestTools\Common\Editor\ResultWriter\XmlResultWriter.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\UnityTestTools\UnitTesting\Editor\NUnit\Renderer\UnitTestRendererLine.cs">
     <Files>
-      <File FileName="Assets\scripts\CatHealth.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\CatController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\gameHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\deathTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Level1\oneDeathTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Level1\rockTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\GuiScore.cs" Line="1" Column="1" />
-      <File FileName="Assets\UnityTestTools\Common\Editor\ResultWriter\XmlResultWriter.cs" Line="1" Column="1" />
+      <File FileName="Assets\UnityTestTools\UnitTesting\Editor\NUnit\Renderer\UnitTestRendererLine.cs" Line="4" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
