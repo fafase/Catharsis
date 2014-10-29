@@ -13,7 +13,7 @@ public class LoadingScreen : MonoBehaviour {
 
     private float timer = 0.5f;
     private int index = 0;
-    string[] str = {"Dreaming.", "Dreaming..","Dreaming..."};
+    string[] str = {"Dreaming.", "Dreaming..", "Dreaming...?"};
 	void Awake () 
     {
         text.text = str[index];

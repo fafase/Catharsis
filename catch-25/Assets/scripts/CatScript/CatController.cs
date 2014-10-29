@@ -10,8 +10,6 @@ public class CatController : StatefulMonobehaviour
 
 	void Start () 
 	{
-	    InputManager.OnMovementCall += catMoveRef.Move;     
-		InputManager.OnJumpCall += catMoveRef.Jump;
         GameHandler.OnChangeState += OnGameHandlerChangeState;
         DeathTrigger.OnDeath += DeadCatClone;
         
@@ -27,11 +25,17 @@ public class CatController : StatefulMonobehaviour
 
     protected virtual void Update() 
     {
-        StateUpdate(); 
+        StateUpdate();
+        if (CurrentStateName == Utility.STATE_STARTING)
+        { 
+            return; 
+        }
     }
     protected virtual void EnterStatePlaying(string oldState)
     {
         AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN,1.0f,1.0f);
+        InputManager.OnMovementCall += catMoveRef.Move;
+        InputManager.OnJumpCall += catMoveRef.Jump;
     }
     protected virtual void EnterStateReset(string oldState) 
     {
@@ -68,5 +72,21 @@ public class CatController : StatefulMonobehaviour
         {
             RequestState(Utility.STATE_PLAYING);
         }
+    }
+
+    private void SubscribeControl() 
+    {
+        InputManager.OnMovementCall += catMoveRef.Move;
+        InputManager.OnJumpCall += catMoveRef.Jump;
+    }
+    private void UnsuscribeControl() 
+    {
+        InputManager.OnMovementCall -= catMoveRef.Move;
+        InputManager.OnJumpCall -= catMoveRef.Jump;
+    }
+    void OnDestroy() 
+    {
+        InputManager.OnMovementCall -= catMoveRef.Move;
+        InputManager.OnJumpCall -= catMoveRef.Jump;
     }
 }
