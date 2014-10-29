@@ -15,6 +15,8 @@ using System;
 
 public class GameHandler : StatefulMonobehaviour 
 {
+    [SerializeField]
+    private GameObject pauseMenu;
     public static Action<string> OnChangeState = (string s)=>{};
     private static GameHandler instance;
 	public static GameHandler Instance{
@@ -29,6 +31,12 @@ public class GameHandler : StatefulMonobehaviour
         {
             instance = this;
         }
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+        Application.runInBackground = true;
+
+        
         InputManager.OnPause += this.OnPause;
         InitializeStatefulness(true);
         AddStateWithTransitions(Utility.GAME_STATE_LOADING, new string []{ Utility.GAME_STATE_PLAYING });
@@ -37,6 +45,8 @@ public class GameHandler : StatefulMonobehaviour
         AddStateWithTransitions(Utility.GAME_STATE_GAMELOST, new string[]{Utility.GAME_STATE_LOADING});
         AddStateWithTransitions(Utility.GAME_STATE_GAMEWON, new string[]{Utility.GAME_STATE_LOADING});
         RequestStateHandler(Utility.GAME_STATE_LOADING);
+
+        pauseMenu.SetActive(false);
     }
     void Update() 
     {
@@ -66,6 +76,8 @@ public class GameHandler : StatefulMonobehaviour
     {
         isPause = !isPause;
         string state =  (isPause == true) ? Utility.GAME_STATE_PAUSE : Utility.GAME_STATE_PLAYING;
+        Time.timeScale = (isPause == true) ? 0.0f : 1.0f;
+        pauseMenu.SetActive(isPause);
         RequestStateHandler(state);
     }
 }

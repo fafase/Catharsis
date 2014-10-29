@@ -34,8 +34,7 @@ public class CatController : StatefulMonobehaviour
     protected virtual void EnterStatePlaying(string oldState)
     {
         AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN,1.0f,1.0f);
-        InputManager.OnMovementCall += catMoveRef.Move;
-        InputManager.OnJumpCall += catMoveRef.Jump;
+        SuscribeControl();
     }
     protected virtual void EnterStateReset(string oldState) 
     {
@@ -43,6 +42,10 @@ public class CatController : StatefulMonobehaviour
         collider2D.enabled = false;
         rigidbody2D.isKinematic = true;
         resetTimer = 1.5f;
+    }
+    protected virtual void EnterStatePause(string oldState)
+    {
+        UnsuscribeControl();
     }
     float resetTimer = 1.5f;
     protected virtual void UpdateReset() 
@@ -72,9 +75,13 @@ public class CatController : StatefulMonobehaviour
         {
             RequestState(Utility.STATE_PLAYING);
         }
+        else if (newState == Utility.GAME_STATE_PAUSE)
+        {
+            RequestState(Utility.STATE_PAUSE);
+        }
     }
 
-    private void SubscribeControl() 
+    private void SuscribeControl() 
     {
         InputManager.OnMovementCall += catMoveRef.Move;
         InputManager.OnJumpCall += catMoveRef.Jump;

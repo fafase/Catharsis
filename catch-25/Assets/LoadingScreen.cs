@@ -11,9 +11,9 @@ public class LoadingScreen : MonoBehaviour {
     [SerializeField]
     private Image cat;
 
-    private float timer = 0.5f;
+    private float timer = 1f;
     private int index = 0;
-    string[] str = {"Dreaming.", "Dreaming..", "Dreaming...?"};
+    string[] str = {"Dreaming.", "Dreaming..", "Dreaming..?"};
 	void Awake () 
     {
         text.text = str[index];
@@ -27,7 +27,7 @@ public class LoadingScreen : MonoBehaviour {
         {
             if (timer <= 0.0f)
             {
-                timer = 0.5f;
+                timer = 1f;
                 if (++index == str.Length)
                 {
                     index = 0;
