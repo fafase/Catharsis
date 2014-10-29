@@ -23,7 +23,8 @@ public class Coin : Collectible {
         translatePosition = new Vector3(frustumWidth, frustumHeight, 0f);
         randomStart = Random.Range(0.0f, Mathf.PI);
         startPosition = transform.position.y;
-        ci = GameObject.FindGameObjectWithTag("Player").GetComponent<CatInventory>();
+        GameObject cat = GameObject.FindGameObjectWithTag("Player");
+        ci = cat.GetComponent<CatInventory>();
     }
     private bool isCollided = false;
     void Update() 

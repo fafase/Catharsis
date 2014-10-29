@@ -3,7 +3,6 @@ using System.Collections;
 
 public class CatMove : MonoBehaviour
 {
-
     [SerializeField]
     private Transform groundCheck;
     [SerializeField]
@@ -17,7 +16,6 @@ public class CatMove : MonoBehaviour
 
     private bool facingRight = true;
     private bool grounded = false;
-    private float groundRadius = 0.2f;
     private float movement = 0f;
     private bool isAlive = true;
 
@@ -31,12 +29,13 @@ public class CatMove : MonoBehaviour
         {
             return;
         }
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-
+        
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down,0.5f, whatIsGround);
+        grounded = (hit.collider != null) ? true:false;
         anim.SetBool(Utility.ANIM_GROUND, grounded);
-
-        if (grounded == true)
+        if (grounded)
         {
+            transform.up = hit.normal;
             anim.SetFloat(Utility.ANIM_SPEED, Mathf.Abs(rigidbody2D.velocity.x));
             anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
         }
@@ -45,6 +44,7 @@ public class CatMove : MonoBehaviour
             anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
             anim.SetFloat(Utility.ANIM_VSPEED, rigidbody2D.velocity.y);
         }
+        
         rigidbody2D.velocity = new Vector2(movement * maxSpeed, rigidbody2D.velocity.y);
     }
 
@@ -77,7 +77,7 @@ public class CatMove : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
-    void ResetOnDeath()
+    void ResetOnDeath(bool newClone)
     {
         anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
         anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);

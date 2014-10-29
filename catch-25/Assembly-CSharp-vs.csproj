@@ -62,7 +62,7 @@
      <Compile Include="Assets\Scripts\General\Utility.cs" />
      <Compile Include="Assets\Scripts\GuiScore.cs" />
      <Compile Include="Assets\Scripts\Level1\DeathTrigger.cs" />
-     <Compile Include="Assets\Scripts\Level1\RockTrigger.cs" />
+     <Compile Include="Assets\Scripts\Level1\TriggerRock.cs" />
      <Compile Include="Assets\Scripts\followingLight.cs" />
      <Compile Include="Assets\Scripts\glowingLight.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">

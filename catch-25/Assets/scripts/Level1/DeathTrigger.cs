@@ -4,7 +4,7 @@ using System;
 
 public class DeathTrigger : MonoBehaviour {
 
-	public static event Action OnDeath = () => {};
+	public static event Action<bool> OnDeath = (bool newClone) => {};
     private Action<Collision2D> OnCollision = (Collision2D) => { };
 	[SerializeField] private EnvironmentItem environment;
 	void Start()
@@ -17,6 +17,9 @@ public class DeathTrigger : MonoBehaviour {
             case EnvironmentItem.Spikes:
                 OnCollision = SpikeCollision;
                 break;
+            case EnvironmentItem.DeathZone:
+                OnCollision = DeathZoneCollision;
+                break;
 		}
 	}
 	void OnCollisionEnter2D(Collision2D col)
@@ -27,7 +30,7 @@ public class DeathTrigger : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("Player") && rigidbody2D.isKinematic == false)
         {
-            OnDeath();
+            OnDeath(true);
             AudioManager.Instance.PlayAudio(Utility.SOUND_SQUISHED, 1.0f, 1.0f);
         }
         if (col.gameObject.CompareTag("DeadCat"))
@@ -39,8 +42,15 @@ public class DeathTrigger : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            OnDeath();
+            OnDeath(true);
             AudioManager.Instance.PlayAudio(Utility.SOUND_SPIKE_IMPALE,1.0f,1.0f);
+        }
+    }
+    void DeathZoneCollision(Collision2D col) 
+    {
+        if (col.gameObject.CompareTag("Player")) 
+        {
+            OnDeath(false);
         }
     }
     void OnDestroy() 
@@ -51,7 +61,7 @@ public class DeathTrigger : MonoBehaviour {
 
 public enum EnvironmentItem
 {
-	FallingRock, Spikes
+	FallingRock, Spikes, DeathZone
 }
 
 

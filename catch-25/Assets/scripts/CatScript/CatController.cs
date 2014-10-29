@@ -22,7 +22,6 @@ public class CatController : StatefulMonobehaviour
         RequestState(Utility.STATE_STARTING);
         
 	}
-
     protected virtual void Update() 
     {
         StateUpdate();
@@ -36,6 +35,10 @@ public class CatController : StatefulMonobehaviour
         AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN,1.0f,1.0f);
         SuscribeControl();
     }
+    protected virtual void ExitStatePlaying(string oldState)
+    {
+        UnsuscribeControl();
+    }
     protected virtual void EnterStateReset(string oldState) 
     {
         catHealth.DecreaseHealth();
@@ -43,11 +46,9 @@ public class CatController : StatefulMonobehaviour
         rigidbody2D.isKinematic = true;
         resetTimer = 1.5f;
     }
-    protected virtual void EnterStatePause(string oldState)
-    {
-        UnsuscribeControl();
-    }
+
     float resetTimer = 1.5f;
+    bool clone = false;
     protected virtual void UpdateReset() 
     {
         resetTimer -= Time.deltaTime;
@@ -55,8 +56,10 @@ public class CatController : StatefulMonobehaviour
         {
             return;
         }
-        Instantiate(catPrefab, transform.position, Quaternion.identity);
-
+        if (clone)
+        {
+            Instantiate(catPrefab, transform.position, Quaternion.identity);
+        }
         Vector3 position = jellyPosition.position;
         position.y -= 0.5f;
         transform.position = position;
@@ -65,8 +68,9 @@ public class CatController : StatefulMonobehaviour
         rigidbody2D.isKinematic = false;
         RequestState(Utility.STATE_PLAYING);
     }
-	private void DeadCatClone()
+	private void DeadCatClone(bool newClone)
 	{
+        this.clone = newClone;
         RequestState(Utility.STATE_RESET);
 	}
     private void OnGameHandlerChangeState(string newState)
