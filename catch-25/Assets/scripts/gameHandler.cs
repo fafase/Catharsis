@@ -29,7 +29,7 @@ public class GameHandler : StatefulMonobehaviour
         {
             instance = this;
         }
-
+        InputManager.OnPause += this.OnPause;
         InitializeStatefulness(true);
         AddStateWithTransitions(Utility.GAME_STATE_LOADING, new string []{ Utility.GAME_STATE_PLAYING });
         AddStateWithTransitions(Utility.GAME_STATE_PLAYING, new string[]{Utility.GAME_STATE_PAUSE, Utility.GAME_STATE_GAMEWON, Utility.GAME_STATE_GAMELOST});
@@ -44,23 +44,29 @@ public class GameHandler : StatefulMonobehaviour
     }
     protected virtual void EnterStateLoading(string oldState)
     {
-        timer = 2.0f;
+        timer = 3.0f;
     }
     private float timer;
     protected virtual void UpdateLoading() 
     {
-        timer -= Time.deltaTime;
+        timer -= Time.deltaTime; 
         if (timer <= 0.0f)
         {
             RequestStateHandler(Utility.GAME_STATE_PLAYING);
         }
     }
-
-    
+  
     private void RequestStateHandler(string state)
     {
         RequestState(state);
         OnChangeState(CurrentStateName);
+    }
+    private bool isPause = false;
+    private void OnPause() 
+    {
+        isPause = !isPause;
+        string state =  (isPause == true) ? Utility.GAME_STATE_PAUSE : Utility.GAME_STATE_PLAYING;
+        RequestStateHandler(state);
     }
 }
 

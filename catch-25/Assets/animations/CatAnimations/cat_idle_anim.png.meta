@@ -1,16 +1,18 @@
 fileFormatVersion: 2
-guid: 40b4165592c7ea84ea0b4688119cc5ce
+guid: 5c8288c4022e0224cbca8790bba30adf
 TextureImporter:
   fileIDToRecycleName:
-    21300000: KISSE_HYPPY
-    21300002: Cat_Jump
-    21300004: Cat_Jump_0
-    21300006: Cat_Jump_1
-    21300008: Cat_Jump_2
-    21300010: Cat_Jump_3
-    21300012: Cat_Jump_4
-    21300014: Cat_Jump_5
-    21300016: Cat_Jump_6
+    21300000: cat_idle_anim
+    21300002: cat_idle_anim_0
+    21300004: cat_idle_anim_1
+    21300006: cat_idle_anim_2
+    21300008: cat_idle_anim_3
+    21300010: cat_idle_anim_4
+    21300012: cat_idle_anim_5
+    21300014: cat_idle_anim_6
+    21300016: cat_idle_anim_7
+    21300018: cat_idle_anim_8
+    21300020: cat_idle_anim_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -52,75 +54,105 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Cat_Jump_0
+    - name: cat_idle_anim_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1785
+        y: 256
         width: 256
         height: 256
-      alignment: 9
-      pivot: {x: .670939922, y: .618343353}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Cat_Jump_1
+    - name: cat_idle_anim_1
       rect:
         serializedVersion: 2
         x: 256
-        y: 1785
+        y: 256
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Cat_Jump_2
+    - name: cat_idle_anim_2
       rect:
         serializedVersion: 2
         x: 512
-        y: 1785
+        y: 256
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Cat_Jump_3
+    - name: cat_idle_anim_3
       rect:
         serializedVersion: 2
         x: 768
-        y: 1785
+        y: 256
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Cat_Jump_4
+    - name: cat_idle_anim_4
       rect:
         serializedVersion: 2
         x: 1024
-        y: 1785
+        y: 256
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Cat_Jump_5
+    - name: cat_idle_anim_5
       rect:
         serializedVersion: 2
-        x: 1280
-        y: 1785
+        x: 0
+        y: 0
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Cat_Jump_6
+    - name: cat_idle_anim_6
       rect:
         serializedVersion: 2
-        x: 1536
-        y: 1785
+        x: 256
+        y: 0
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cat_idle_anim_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cat_idle_anim_8
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cat_idle_anim_9
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
