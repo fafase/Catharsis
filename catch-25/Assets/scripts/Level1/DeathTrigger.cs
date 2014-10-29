@@ -50,7 +50,8 @@ public class DeathTrigger : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("Player")) 
         {
-            OnDeath(false);
+			OnDeath(false);
+			AudioManager.Instance.PlayAudio(Utility.SOUND_SQUISHED,1.0f,1.0f);
         }
     }
     void OnDestroy() 
