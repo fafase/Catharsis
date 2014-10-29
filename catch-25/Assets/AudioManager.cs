@@ -7,9 +7,18 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip [] clips;
     private List<AudioSource> audioList = new List<AudioSource>();
     private Dictionary<string, AudioClip> clipDict = new Dictionary<string, AudioClip>();
-
+    private static AudioManager instance;
+    public static AudioManager Instance {
+        get {
+            return instance;
+        }
+    }
     void Awake() 
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         for (int i = 0; i < 16; i++)
         {
             var audio = gameObject.AddComponent<AudioSource>();
@@ -21,7 +30,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayAudio(string clipName, float volume, float pitch, bool loop = false, bool forcePlay = false) 
+    public void PlayAudio(string clipName, float volume = 1.0f, float pitch = 1.0f, bool loop = false, bool forcePlay = false) 
     {
         
         if (string.IsNullOrEmpty(clipName))
@@ -33,7 +42,6 @@ public class AudioManager : MonoBehaviour
         {
             return;
         }
-        
         AudioSource audioSource = GetAudioSource(forcePlay);
         if (audioSource == null)
         {
@@ -83,5 +91,9 @@ public class AudioManager : MonoBehaviour
         var audio = audioList[index];
         audioList.RemoveAt(index);
         audioList.Add(audio);
+    }
+    void OnDestroy() 
+    {
+        instance = null;
     }
 }

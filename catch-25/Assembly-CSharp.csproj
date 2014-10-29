@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AudioManager.cs" />
+     <Compile Include="Assets\LoadingScreen.cs" />
      <Compile Include="Assets\Scripts\CameraSmoothFollow.cs" />
      <Compile Include="Assets\Scripts\CatScript\CatController.cs" />
      <Compile Include="Assets\Scripts\CatScript\CatHealth.cs" />
@@ -54,6 +55,7 @@
      <Compile Include="Assets\Scripts\CatScript\CatMove.cs" />
      <Compile Include="Assets\Scripts\Collectible\Coin.cs" />
      <Compile Include="Assets\Scripts\Collectible\Collectible.cs" />
+     <Compile Include="Assets\Scripts\GameHandler.cs" />
      <Compile Include="Assets\Scripts\GuiScore.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\Level1\DeathTrigger.cs" />
@@ -61,7 +63,6 @@
      <Compile Include="Assets\Scripts\StatefulMonobehaviour.cs" />
      <Compile Include="Assets\Scripts\Utility.cs" />
      <Compile Include="Assets\Scripts\followingLight.cs" />
-     <Compile Include="Assets\Scripts\gameHandler.cs" />
      <Compile Include="Assets\Scripts\glowingLight.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>

@@ -28,10 +28,11 @@ public class DeathTrigger : MonoBehaviour {
         if (col.gameObject.CompareTag("Player") && rigidbody2D.isKinematic == false)
         {
             OnDeath();
+            AudioManager.Instance.PlayAudio(Utility.SOUND_SQUISHED, 1.0f, 1.0f);
         }
         if (col.gameObject.CompareTag("DeadCat"))
         {
-            col.gameObject.collider2D.enabled = false;
+            col.gameObject.collider2D.enabled = false;         
         }
     }
     void SpikeCollision(Collision2D col)
@@ -39,6 +40,7 @@ public class DeathTrigger : MonoBehaviour {
         if (col.gameObject.CompareTag("Player"))
         {
             OnDeath();
+            AudioManager.Instance.PlayAudio(Utility.SOUND_SPIKE_IMPALE,1.0f,1.0f);
         }
     }
     void OnDestroy() 

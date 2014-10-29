@@ -17,4 +17,15 @@ public class Utility
     public static string STATE_DEAD = "Dead";
     public static string STATE_PAUSE = "Pause";
 
+    public static string GAME_STATE_LOADING = "Loading";
+    public static string GAME_STATE_PLAYING = "Playing";
+    public static string GAME_STATE_PAUSE = "Pause";
+    public static string GAME_STATE_GAMELOST = "GameLost";
+    public static string GAME_STATE_GAMEWON = "GameWon";
+
+
+    public static string SOUND_SQUISHED = "squished";
+    public static string SOUND_RESPAWN = "respawn";
+    public static string SOUND_SPIKE_IMPALE = "spike_impale";
+    public static string SOUND_FALLING_ROCK = "falling_rock";
 }

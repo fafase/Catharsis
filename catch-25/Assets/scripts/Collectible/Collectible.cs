@@ -7,6 +7,7 @@ public class Collectible : MonoBehaviour {
     public CollectibleItem Item { get { return item; } }
 }
 
-public enum CollectibleItem { 
+public enum CollectibleItem 
+{ 
     SmallCoin, LargeCoin
 }
