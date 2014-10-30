@@ -30,13 +30,12 @@ public class CatMove : MonoBehaviour
             return;
         }
         
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down,0.5f, whatIsGround);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down,1f, whatIsGround);
         grounded = (hit.collider != null) ? true:false;
         anim.SetBool(Utility.ANIM_GROUND, grounded);
         if (grounded)
         {
             float angle = Vector2.Angle(Vector2.up, hit.normal);
-            print(angle);
             transform.up = (angle > 30f) ? hit.normal : Vector2.up;
            
             anim.SetFloat(Utility.ANIM_SPEED, Mathf.Abs(rigidbody2D.velocity.x));

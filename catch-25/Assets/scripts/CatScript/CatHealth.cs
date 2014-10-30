@@ -21,4 +21,12 @@ public class CatHealth : MonoBehaviour {
 			OnLivesNull();
 		}
 	}
+    public void IncreaseHealth() 
+    {
+        if (++lives > 9)
+        {
+            lives = 9;
+        }
+        OnChangeLives();
+    }
 }

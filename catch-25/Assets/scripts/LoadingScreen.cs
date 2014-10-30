@@ -8,8 +8,6 @@ public class LoadingScreen : MonoBehaviour {
     private Text text;
     [SerializeField]
     private Image bg;
-    [SerializeField]
-    private Image cat;
 
     private float timer = 1f;
     private int index = 0;
@@ -40,12 +38,10 @@ public class LoadingScreen : MonoBehaviour {
             Color col = bg.color;
             col.a = Mathf.Lerp(col.a, 0.0f, 5f * Time.deltaTime);
             bg.color = col;
-            cat.color = col;
             text.color = col;
             if (col.a <= 0.0f)
             {
                 bg.gameObject.SetActive(false);
-                cat.gameObject.SetActive(false);
                 text.gameObject.SetActive(false);
             }
         }

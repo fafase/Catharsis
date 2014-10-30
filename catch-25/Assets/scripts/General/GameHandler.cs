@@ -17,6 +17,8 @@ public class GameHandler : StatefulMonobehaviour
 {
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField]
+    private FadeController fade;
     public static Action<string> OnChangeState = (string s)=>{};
     private static GameHandler instance;
 	public static GameHandler Instance{
@@ -45,6 +47,8 @@ public class GameHandler : StatefulMonobehaviour
         AddStateWithTransitions(Utility.GAME_STATE_GAMELOST, new string[]{Utility.GAME_STATE_LOADING});
         AddStateWithTransitions(Utility.GAME_STATE_GAMEWON, new string[]{Utility.GAME_STATE_LOADING});
         RequestStateHandler(Utility.GAME_STATE_LOADING);
+
+        fade.ChangeFadeState(FadeController.FadeState.FadeIn);
 
         pauseMenu.SetActive(false);
     }

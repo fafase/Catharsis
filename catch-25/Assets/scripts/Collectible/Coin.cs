@@ -42,7 +42,7 @@ public class Coin : Collectible {
             transform.position = Vector3.MoveTowards(transform.position,target, 10f *Time.deltaTime);
             if (Vector3.Distance(transform.position, target) < 0.1f) 
             {
-               ci.CoinAmount += value;
+               ci.CoinAmount(value);
                Destroy(gameObject);
             }
         }

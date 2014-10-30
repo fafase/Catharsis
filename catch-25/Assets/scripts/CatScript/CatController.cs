@@ -5,6 +5,7 @@ public class CatController : StatefulMonobehaviour
 {
 	[SerializeField] private CatMove catMoveRef;
 	[SerializeField] private CatHealth catHealth;
+    [SerializeField] private CatInventory catInventory;
 	[SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform jellyPosition;
 
@@ -12,7 +13,8 @@ public class CatController : StatefulMonobehaviour
 	{
         GameHandler.OnChangeState += OnGameHandlerChangeState;
         DeathTrigger.OnDeath += DeadCatClone;
-        
+        catInventory.OnAddCoin += CheckCoinForExtraLife;
+
         InitializeStatefulness(true);
         AddStateWithTransitions(Utility.STATE_STARTING, new string[]{Utility.STATE_PLAYING});
         AddStateWithTransitions(Utility.STATE_PLAYING, new string[] { Utility.STATE_PAUSE, Utility.STATE_RESET, Utility.STATE_DEAD });
@@ -94,6 +96,17 @@ public class CatController : StatefulMonobehaviour
     {
         InputManager.OnMovementCall -= catMoveRef.Move;
         InputManager.OnJumpCall -= catMoveRef.Jump;
+    }
+
+    private int coins;
+    private void CheckCoinForExtraLife(int coin) 
+    {
+        coins += coin;
+        if (coins > 10)
+        {
+            coins -= 10;
+            catHealth.IncreaseHealth();
+        }
     }
     void OnDestroy() 
     {
