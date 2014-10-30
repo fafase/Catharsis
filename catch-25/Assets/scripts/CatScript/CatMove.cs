@@ -35,12 +35,16 @@ public class CatMove : MonoBehaviour
         anim.SetBool(Utility.ANIM_GROUND, grounded);
         if (grounded)
         {
-            transform.up = hit.normal;
+            float angle = Vector2.Angle(Vector2.up, hit.normal);
+            print(angle);
+            transform.up = (angle > 30f) ? hit.normal : Vector2.up;
+           
             anim.SetFloat(Utility.ANIM_SPEED, Mathf.Abs(rigidbody2D.velocity.x));
             anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
         }
         else
         {
+            transform.up = Vector2.up;
             anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
             anim.SetFloat(Utility.ANIM_VSPEED, rigidbody2D.velocity.y);
         }
