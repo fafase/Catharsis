@@ -26,8 +26,9 @@ public class Utility
 
     public static string SOUND_SQUISHED = "squished";
     public static string SOUND_RESPAWN = "respawn";
-    public static string SOUND_SPIKE_IMPALE = "spike_impale";
-    public static string SOUND_FALLING_ROCK = "falling_rock";
+	public static string SOUND_SPIKE_IMPALE = "spike_impale";
+	public static string SOUND_FALLING_ROCK = "falling_rock";
+	public static string SOUND_POISONED = "gas_poisoning";
 
     public static string LEVEL_1 = "Level1";
 }

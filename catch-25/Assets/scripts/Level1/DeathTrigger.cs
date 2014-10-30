@@ -16,10 +16,13 @@ public class DeathTrigger : MonoBehaviour {
 			    break;
             case EnvironmentItem.Spikes:
                 OnCollision = SpikeCollision;
-                break;
-            case EnvironmentItem.DeathZone:
-                OnCollision = DeathZoneCollision;
-                break;
+			break;
+			case EnvironmentItem.DeathZone:
+				OnCollision = DeathZoneCollision;
+			break;
+			case EnvironmentItem.GasPoison:
+				OnCollision = GasLeakCollision;
+			break;
 		}
 	}
 	void OnCollisionEnter2D(Collision2D col)
@@ -45,7 +48,16 @@ public class DeathTrigger : MonoBehaviour {
             OnDeath(true);
             AudioManager.Instance.PlayAudio(Utility.SOUND_SPIKE_IMPALE,1.0f,1.0f);
         }
-    }
+	}
+	void GasLeakCollision(Collision2D col) 
+	{
+		if (col.gameObject.CompareTag("Player")) 
+		{
+			AudioManager.Instance.PlayAudio(Utility.SOUND_POISONED,1.0f,1.0f);
+			col.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+			OnDeath(true);
+		}
+	}
     void DeathZoneCollision(Collision2D col) 
     {
         if (col.gameObject.CompareTag("Player")) 
@@ -62,7 +74,7 @@ public class DeathTrigger : MonoBehaviour {
 
 public enum EnvironmentItem
 {
-	FallingRock, Spikes, DeathZone
+	FallingRock, Spikes, DeathZone, GasPoison
 }
 
 

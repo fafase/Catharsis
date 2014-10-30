@@ -54,6 +54,8 @@
      <Compile Include="Assets\scripts\ChallengeMessage.cs" />
      <Compile Include="Assets\scripts\Collectible\Coin.cs" />
      <Compile Include="Assets\scripts\Collectible\Collectible.cs" />
+     <Compile Include="Assets\scripts\GasLeak\GasPoison.cs" />
+     <Compile Include="Assets\scripts\GasLeak\GasSuffocate.cs" />
      <Compile Include="Assets\scripts\General\CameraSmoothFollow.cs" />
      <Compile Include="Assets\scripts\General\FadeController.cs" />
      <Compile Include="Assets\scripts\General\GameHandler.cs" />
