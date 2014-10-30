@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour {
 
 		float horizontal = Input.GetAxis ("Horizontal");
 		OnMovementCall(horizontal);
-		if (Input.GetKeyDown (KeyCode.UpArrow)) 
+		if (Input.GetKeyDown (KeyCode.UpArrow) || Input.GetKeyDown (KeyCode.W)) 
 		{
 			OnJumpCall();
 		}
