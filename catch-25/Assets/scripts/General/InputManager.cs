@@ -4,16 +4,19 @@ using System;
 
 public class InputManager : MonoBehaviour {
 
-	public static event Action<float> OnMovementCall= (f) => { };
-	public static event Action OnJumpCall = () => { };
-    public static event Action OnPause = () => { };
-    public static event Action OnPress = () => { };
+	public event Action<float> OnMovementCall= (f) => { };
+	public event Action OnJumpCall = () => { };
+    public event Action OnPause = () => { };
+    public event Action OnRestart = () => { };
+    public event Action OnPress = () => { };
+
 	void Update () 
 	{
         if (Input.anyKeyDown)
         {
-            OnPress();
+            OnPress();  
         }
+
 		float horizontal = Input.GetAxis ("Horizontal");
 		OnMovementCall(horizontal);
 		if (Input.GetKeyDown (KeyCode.UpArrow)) 
@@ -23,6 +26,10 @@ public class InputManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.P))
         {
             OnPause();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            OnRestart();
         }
 	}
 }

@@ -29,4 +29,9 @@ public class CatHealth : MonoBehaviour {
         }
         OnChangeLives();
     }
+
+    internal void SetHealth()
+    {
+        throw new NotImplementedException();
+    }
 }

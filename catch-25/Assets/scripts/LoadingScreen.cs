@@ -15,7 +15,7 @@ public class LoadingScreen : MonoBehaviour {
 	void Awake () 
     {
         text.text = str[index];
-        GameHandler.OnChangeState += RemoveSreen;
+        FindObjectOfType<GameHandler>().OnChangeState += RemoveSreen;
 	}
     private bool isLoading = true;
 	void Update () 

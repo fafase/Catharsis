@@ -19,7 +19,10 @@ public class GameHandler : StatefulMonobehaviour
     private GameObject pauseMenu;
     [SerializeField]
     private FadeController fade;
-    public static Action<string> OnChangeState = (string s)=>{};
+    [SerializeField]
+    private PauseHandler pauseHandler;
+    public Action<string> OnChangeState = (string s)=>{};
+    
     private static GameHandler instance;
 	public static GameHandler Instance{
 		get
@@ -38,8 +41,9 @@ public class GameHandler : StatefulMonobehaviour
         Application.targetFrameRate = 60;
         Application.runInBackground = true;
 
+        pauseHandler.enabled = false;
         
-        InputManager.OnPause += this.OnPause;
+        FindObjectOfType<InputManager>().OnPause += this.OnPause;
         InitializeStatefulness(true);
         AddStateWithTransitions(Utility.GAME_STATE_LOADING, new string []{ Utility.GAME_STATE_PLAYING });
         AddStateWithTransitions(Utility.GAME_STATE_PLAYING, new string[]{Utility.GAME_STATE_PAUSE, Utility.GAME_STATE_GAMEWON, Utility.GAME_STATE_GAMELOST});
@@ -82,6 +86,7 @@ public class GameHandler : StatefulMonobehaviour
         string state =  (isPause == true) ? Utility.GAME_STATE_PAUSE : Utility.GAME_STATE_PLAYING;
         Time.timeScale = (isPause == true) ? 0.0f : 1.0f;
         pauseMenu.SetActive(isPause);
+        pauseHandler.enabled = isPause;
         RequestStateHandler(state);
     }
 }

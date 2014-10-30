@@ -10,7 +10,8 @@ public class IntroManager : MonoBehaviour {
 
 	void Awake () 
     {
-        InputManager.OnPress += LoadNextOnPress;
+        FindObjectOfType<InputManager>().OnPress += LoadNextOnPress;
+       
         fade.SetStart();
         fade.ChangeFadeState(FadeController.FadeState.FadeIn);
         StartCoroutine(AppearText());

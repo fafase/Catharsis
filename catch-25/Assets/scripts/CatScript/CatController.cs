@@ -9,9 +9,12 @@ public class CatController : StatefulMonobehaviour
 	[SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform jellyPosition;
 
-	void Start () 
+    private InputManager inputManager;
+
+	void Awake () 
 	{
-        GameHandler.OnChangeState += OnGameHandlerChangeState;
+        inputManager = FindObjectOfType<InputManager>();
+        FindObjectOfType<GameHandler>().OnChangeState += OnGameHandlerChangeState;
         DeathTrigger.OnDeath += DeadCatClone;
         catInventory.OnAddCoin += CheckCoinForExtraLife;
 
@@ -89,13 +92,13 @@ public class CatController : StatefulMonobehaviour
 
     private void SuscribeControl() 
     {
-        InputManager.OnMovementCall += catMoveRef.Move;
-        InputManager.OnJumpCall += catMoveRef.Jump;
+        inputManager.OnMovementCall += catMoveRef.Move;
+        inputManager.OnJumpCall += catMoveRef.Jump;
     }
     private void UnsuscribeControl() 
     {
-        InputManager.OnMovementCall -= catMoveRef.Move;
-        InputManager.OnJumpCall -= catMoveRef.Jump;
+        inputManager.OnMovementCall -= catMoveRef.Move;
+        inputManager.OnJumpCall -= catMoveRef.Jump;
     }
 
     private int coins;
@@ -110,7 +113,7 @@ public class CatController : StatefulMonobehaviour
     }
     void OnDestroy() 
     {
-        InputManager.OnMovementCall -= catMoveRef.Move;
-        InputManager.OnJumpCall -= catMoveRef.Jump;
-    }
+        inputManager.OnMovementCall -= catMoveRef.Move;
+        inputManager.OnJumpCall -= catMoveRef.Jump;
+    }   
 }

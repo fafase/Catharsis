@@ -22,6 +22,7 @@ public class CatMove : MonoBehaviour
     void Start()
     {
         DeathTrigger.OnDeath += ResetOnDeath;
+        
     }
     void FixedUpdate()
     {
