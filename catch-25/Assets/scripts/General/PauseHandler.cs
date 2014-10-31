@@ -7,8 +7,12 @@ public class PauseHandler : MonoBehaviour {
     private string faceBookUrl;
     [SerializeField]
     private string webUrl;
+	[SerializeField]
+	private string qaSurveyUrl;
     [SerializeField]
     private InputManager inputManager;
+
+
 	public void ButtonFacebook () 
     {
         Application.OpenURL(faceBookUrl);
@@ -18,6 +22,10 @@ public class PauseHandler : MonoBehaviour {
     {
         Application.OpenURL(webUrl);
     }
+	public void ButtonQASurvey() 
+	{
+		Application.OpenURL(qaSurveyUrl);
+	}
     void OnEnable() 
     {
         inputManager.OnRestart += this.Restart;

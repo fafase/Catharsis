@@ -61,6 +61,7 @@
      <Compile Include="Assets\scripts\DeathTrigger\Spike.cs" />
      <Compile Include="Assets\scripts\GasSuffocate.cs" />
      <Compile Include="Assets\scripts\General\CameraSmoothFollow.cs" />
+     <Compile Include="Assets\scripts\General\EndLevel.cs" />
      <Compile Include="Assets\scripts\General\FadeController.cs" />
      <Compile Include="Assets\scripts\General\GameHandler.cs" />
      <Compile Include="Assets\scripts\General\InputManager.cs" />

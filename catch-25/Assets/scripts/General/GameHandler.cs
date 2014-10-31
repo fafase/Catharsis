@@ -74,7 +74,7 @@ public class GameHandler : StatefulMonobehaviour
         }
     }
   
-    private void RequestStateHandler(string state)
+    public void RequestStateHandler(string state)
     {
         RequestState(state);
         OnChangeState(CurrentStateName);
@@ -89,5 +89,6 @@ public class GameHandler : StatefulMonobehaviour
         pauseHandler.enabled = isPause;
         RequestStateHandler(state);
     }
+
 }
 
