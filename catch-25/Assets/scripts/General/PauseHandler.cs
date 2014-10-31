@@ -15,17 +15,17 @@ public class PauseHandler : MonoBehaviour {
 
 	public void ButtonFacebook () 
     {
-        Application.OpenURL(faceBookUrl);
+		Application.ExternalEval("window.open('"+faceBookUrl+"','_blank')");
 	}
 
     public void ButtonWebSite() 
     {
 		print ("Yep");
-        Application.OpenURL(webUrl);
+		Application.ExternalEval("window.open('"+webUrl+"','_blank')");
     }
 	public void ButtonQASurvey() 
 	{
-		Application.OpenURL(qaSurveyUrl);
+		Application.ExternalEval("window.open('"+qaSurveyUrl+"','_blank')");
 	}
     void OnEnable() 
     {

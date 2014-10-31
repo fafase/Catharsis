@@ -1,11 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\General\GameHandler.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\General\PauseHandler.cs">
     <Files>
-      <File FileName="Assets\scripts\ChallengeMessage.cs" Line="35" Column="70" />
-      <File FileName="Assets\scripts\General\SetRespawn.cs" Line="29" Column="1" />
-      <File FileName="Assets\scripts\General\PauseHandler.cs" Line="23" Column="14" />
-      <File FileName="Assets\scripts\General\GameHandler.cs" Line="61" Column="1" />
+      <File FileName="Assets\scripts\General\PauseHandler.cs" Line="16" Column="32" />
+      <File FileName="Assets\scripts\DeathTrigger\GasLeak.cs" Line="36" Column="3" />
+      <File FileName="Assets\scripts\DeathTrigger\FallingRock.cs" Line="10" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
