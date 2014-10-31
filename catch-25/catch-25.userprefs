@@ -1,18 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\General\GameHandler.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PressurePlate.cs">
     <Files>
       <File FileName="Assets\scripts\CatScript\CatController.cs" Line="88" Column="10" />
       <File FileName="Assets\scripts\Skull\SkullTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Skull\Skull.cs" Line="26" Column="6" />
+      <File FileName="Assets\scripts\Skull\Skull.cs" Line="44" Column="18" />
       <File FileName="Assets\scripts\Skull\Jaws.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\General\EndLevel.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\General\GameHandler.cs" Line="49" Column="28" />
+      <File FileName="Assets\scripts\General\GameHandler.cs" Line="61" Column="1" />
       <File FileName="Assets\scripts\General\PauseHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\General\SetRespawn.cs" Line="11" Column="1" />
-      <File FileName="Assets\PressurePlate.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\General\SetRespawn.cs" Line="1" Column="1" />
+      <File FileName="Assets\PressurePlate.cs" Line="30" Column="1" />
       <File FileName="Assets\scripts\Level1\TriggerRock.cs" Line="24" Column="1" />
-      <File FileName="Assets\scripts\GasSuffocate.cs" Line="42" Column="43" />
+      <File FileName="Assets\scripts\GasSuffocate.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
