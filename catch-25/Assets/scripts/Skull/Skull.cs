@@ -7,34 +7,44 @@ public class Skull : MonoBehaviour {
     private Animator anim;
 	[SerializeField] private Collider2D[] jaws;
 	[SerializeField] private float timer;
+	private float setTimer;
+	private bool isOpen = false;
 
-
-	private bool b = false;
-	void Update()
+	void Start()
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
-		{
-			print ("Yep");
-			b =!b;
-			SetSkullOpen(b);
-		}
+		setTimer = timer;
+	}
+	public bool IsOpen
+	{
+		get{return isOpen;}
+	}
+	public void ResetTimer()
+	{
+		mTimer = setTimer;
 	}
     public void SetSkullOpen(bool value)
     {
+		if (value == true && isOpen)
+		{
+			ResetTimer();
+			return;
+		}
         anim.SetBool("opening", value);
 		foreach (Collider2D col in jaws) 
 		{
 			col.enabled = !value;
 		}
-		if (value == true) 
+		if (value == true && !isOpen) 
 		{
-			StartCoroutine(CloseSkull());
+			StartCoroutine (CloseSkull ());
+			isOpen = value;
 		}
     }
-				
+
+	private float mTimer;			
 	private IEnumerator CloseSkull()
 	{
-		float mTimer = timer;
+		mTimer = timer;
 		while (mTimer > 0) 
 		{
 			mTimer -= Time.deltaTime;
@@ -45,6 +55,7 @@ public class Skull : MonoBehaviour {
 	public void SetSkullCloseNoCollider()
 	{
 		StopAllCoroutines ();
+		isOpen = false;
 		anim.SetBool("opening", false);
 	}
 }

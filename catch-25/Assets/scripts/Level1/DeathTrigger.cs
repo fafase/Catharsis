@@ -16,6 +16,7 @@ public abstract class DeathTrigger : MonoBehaviour {
 	{
         CollisionCall(col);
 	}
+
     void OnDestroy() 
     {
         OnDeath = null;
