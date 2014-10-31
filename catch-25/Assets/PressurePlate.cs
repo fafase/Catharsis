@@ -12,14 +12,14 @@ public class PressurePlate : MonoBehaviour {
 		sprite.sprite = sprites [0];
 	}
 	
-	void OnCollisionEnter2D(Collision2D col)
+	void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.gameObject.CompareTag ("Player")) 
 		{
 			sprite.sprite = sprites[1];
 		}
 	}
-	void OnCollisionExit2D(Collision2D col)
+	void OnTriggerExit2D(Collider2D col)
 	{
 		if (col.gameObject.CompareTag ("Player")) 
 		{
