@@ -20,8 +20,6 @@ public class GameHandler : StatefulMonobehaviour
 	[SerializeField]
 	private GameObject endMenu;
     [SerializeField]
-    private FadeController fade;
-    [SerializeField]
     private PauseHandler pauseHandler;
     public Action<string> OnChangeState = (string s)=>{};
     
@@ -61,10 +59,6 @@ public class GameHandler : StatefulMonobehaviour
 		endMenu.SetActive (false);
     }
 
-	void Start()
-	{
-		fade.SetStart (0);
-	}
     void Update() 
     {
         StateUpdate();
