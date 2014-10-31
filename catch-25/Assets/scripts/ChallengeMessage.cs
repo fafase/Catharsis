@@ -10,30 +10,38 @@ public class ChallengeMessage : MonoBehaviour {
     private Canvas canvas;
     [SerializeField]
     private Text text;
-    [SerializeField]
     private Transform position;
     [SerializeField]
     private float messageLength = 3f;
 
-    void Start() 
-    {
-        text.text = message;
-    }
     private bool showMessage = false;
 
+	void Start()
+	{
+		foreach (Transform t in transform)
+		{
+			if(t == this.transform)
+			{
+				continue;
+			}
+			position = t;
+		}
+	}
     void OnTriggerEnter2D(Collider2D col) 
     {
         if (col.gameObject.CompareTag("Player") && showMessage == false)
         {
+			canvas.gameObject.SetActive(true);
+			canvas.GetComponent<RectTransform>().position = position.position;
+			showMessage = true;
+			text.text = message;
             StartCoroutine(CountdownMessage());
         }
     }
 
     private IEnumerator CountdownMessage()
     {
-        canvas.GetComponent<RectTransform>().position = position.position;
-        canvas.gameObject.SetActive(true);
-        showMessage = true;
+        
         float timer = messageLength;
         while (timer > 0)
         {
@@ -41,6 +49,6 @@ public class ChallengeMessage : MonoBehaviour {
             yield return null;
         }
         canvas.gameObject.SetActive(false);
-        showMessage = false;
+		Destroy (gameObject);
     }
 }

@@ -20,6 +20,7 @@ public class PauseHandler : MonoBehaviour {
 
     public void ButtonWebSite() 
     {
+		print ("Yep");
         Application.OpenURL(webUrl);
     }
 	public void ButtonQASurvey() 

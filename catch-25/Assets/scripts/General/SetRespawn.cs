@@ -8,7 +8,7 @@ public class SetRespawn : MonoBehaviour
 	[SerializeField]
 	private GameObject player;
 	[SerializeField]
-	private bool active = true;
+	private bool activeJelly = true;
 
 	void Start()
 	{
@@ -16,17 +16,13 @@ public class SetRespawn : MonoBehaviour
 		player = GameObject.Find("Cat");
 	}
 
-	void OnTriggerEnter2D(Collider2D target) {
-		if (target.gameObject == player && active) {
+	void OnTriggerEnter2D(Collider2D target) 
+	{
+		if (target.gameObject == player && activeJelly) 
+		{
 			AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN,0.7f,0.7f);
 			medusa.position = new Vector3 (transform.position.x, transform.position.y, 0);
-			active = false;
+			activeJelly = false;
 		}	
 	}
-
-	void Update()
-	{
-
-	}
-
 }
