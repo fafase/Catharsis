@@ -15,14 +15,15 @@ public class EndLevel : MonoBehaviour {
 		{
 			OnEnd();
 			skullManager.SetSkullCloseNoCollider();
-			endMenu.SetActive (true);
+            FindObjectOfType<GameHandler>().RequestStateHandler(Utility.GAME_STATE_GAMEWON);
+			/*endMenu.SetActive (true);
 			canvasGroup = endMenu.GetComponent<CanvasGroup> ();
 			canvasGroup.alpha = 0;
-			StartCoroutine (FadeInEndScreen());
+			StartCoroutine (FadeInEndScreen());*/
 		}
 	}
 
-	private IEnumerator FadeInEndScreen ()
+	/*private IEnumerator FadeInEndScreen ()
 	{
 		float timer = 0f;
 		while (timer < 1f) 
@@ -31,5 +32,5 @@ public class EndLevel : MonoBehaviour {
 			canvasGroup.alpha = timer;
 			yield return null;
 		}
-	}
+	}*/
 }

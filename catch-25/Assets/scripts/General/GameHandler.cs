@@ -45,6 +45,7 @@ public class GameHandler : StatefulMonobehaviour
         
         FindObjectOfType<InputManager>().OnPause += this.OnPause;
 		FindObjectOfType<EndLevel>().OnEnd += this.OnEnd;
+        FindObjectOfType<CatHealth>().OnLivesNull += this.OnEnd;
         InitializeStatefulness(true);
         AddStateWithTransitions(Utility.GAME_STATE_LOADING, new string []{ Utility.GAME_STATE_PLAYING });
         AddStateWithTransitions(Utility.GAME_STATE_PLAYING, new string[]{Utility.GAME_STATE_PAUSE, Utility.GAME_STATE_GAMEWON, Utility.GAME_STATE_GAMELOST});
@@ -52,8 +53,6 @@ public class GameHandler : StatefulMonobehaviour
         AddStateWithTransitions(Utility.GAME_STATE_GAMELOST, new string[]{Utility.GAME_STATE_LOADING});
         AddStateWithTransitions(Utility.GAME_STATE_GAMEWON, new string[]{Utility.GAME_STATE_LOADING});
         RequestStateHandler(Utility.GAME_STATE_LOADING);
-
-
 
         pauseMenu.SetActive(false);
 		endMenu.SetActive (false);
@@ -76,7 +75,6 @@ public class GameHandler : StatefulMonobehaviour
             RequestStateHandler(Utility.GAME_STATE_PLAYING);
         }
     }
-  
     public void RequestStateHandler(string state)
     {
         RequestState(state);
@@ -92,10 +90,27 @@ public class GameHandler : StatefulMonobehaviour
         pauseHandler.enabled = isPause;
         RequestStateHandler(state);
     }
-
+    protected void EnterStateGameWon(string oldState)
+    {
+        endMenu.SetActive(true);
+        CanvasGroup canvasGroup = endMenu.GetComponent<CanvasGroup>();
+        pauseHandler.enabled = true;
+        StartCoroutine(FadeInEndScreen(canvasGroup));
+    }
 	private void OnEnd () 
 	{	
-		RequestStateHandler(Utility.GAME_STATE_GAMEWON);
+		RequestStateHandler(Utility.GAME_STATE_GAMEWON);       
 	}
+    private IEnumerator FadeInEndScreen(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = 0;
+        float timer = 0f;
+        while (timer < 1f)
+        {
+            timer += Time.deltaTime * 0.5f;
+            canvasGroup.alpha = timer;
+            yield return null;
+        }
+    }
 }
 

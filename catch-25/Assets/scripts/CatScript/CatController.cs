@@ -8,14 +8,18 @@ public class CatController : StatefulMonobehaviour
     [SerializeField] private CatInventory catInventory;
 	[SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform jellyPosition;
+    [SerializeField]
+    private GameHandler gameHandler;
 
     private InputManager inputManager;
 
 	void Awake () 
 	{
         inputManager = FindObjectOfType<InputManager>();
-        FindObjectOfType<GameHandler>().OnChangeState += OnGameHandlerChangeState;
-        DeathTrigger.OnDeath += DeadCatClone;
+        gameHandler = FindObjectOfType<GameHandler>();
+        gameHandler.OnChangeState += OnGameHandlerChangeState;
+        DeathTrigger.OnDeath += ResetOnDeath;
+
         catInventory.OnAddCoin += CheckCoinForExtraLife;
 
         InitializeStatefulness(true);
@@ -24,9 +28,17 @@ public class CatController : StatefulMonobehaviour
         AddStateWithTransitions(Utility.STATE_RESET, new string[]{Utility.STATE_PLAYING, Utility.STATE_PAUSE});
         AddStateWithTransitions(Utility.STATE_DEAD, new string[] { Utility.STATE_STARTING});
         AddStateWithTransitions(Utility.STATE_PAUSE, new string[]{Utility.STATE_PLAYING, Utility.STATE_RESET});      
-        RequestState(Utility.STATE_STARTING);
-        
+        RequestState(Utility.STATE_STARTING);   
 	}
+
+    private void ResetOnDeath(bool newClone)
+    {
+        RequestState(Utility.STATE_RESET);
+        catMoveRef.ResetOnDeath(newClone);
+        catHealth.DecreaseHealth();
+        this.clone = newClone;
+        
+    }
     protected virtual void Update() 
     {
         StateUpdate();
@@ -58,13 +70,13 @@ public class CatController : StatefulMonobehaviour
     }
     protected virtual void EnterStateReset(string oldState) 
     {
-        catHealth.DecreaseHealth();
+        
         collider2D.enabled = false;
         rigidbody2D.isKinematic = true;
-        resetTimer = 1.5f;
+        resetTimer = 1f;
     }
 
-    float resetTimer = 1.5f;
+    float resetTimer = 1f;
     bool clone = false;
     protected virtual void UpdateReset() 
     {
@@ -85,11 +97,6 @@ public class CatController : StatefulMonobehaviour
         rigidbody2D.isKinematic = false;
         RequestState(Utility.STATE_PLAYING);
     }
-	private void DeadCatClone(bool newClone)
-	{
-        this.clone = newClone;
-        RequestState(Utility.STATE_RESET);
-	}
     private void OnGameHandlerChangeState(string newState)
     {
         if (newState == Utility.GAME_STATE_PLAYING)

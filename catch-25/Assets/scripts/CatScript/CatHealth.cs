@@ -14,12 +14,16 @@ public class CatHealth : MonoBehaviour {
 	public void DecreaseHealth()
 	{
 		lives -= 1;
-		OnChangeLives ();
-		if (lives < 0) 
-		{
+		
+        if (lives < 0)
+        {
             lives = 0;
-			OnLivesNull();
-		}
+            OnLivesNull();
+        }
+        else 
+        {
+            OnChangeLives();
+        }
 	}
     public void IncreaseHealth() 
     {
@@ -28,10 +32,5 @@ public class CatHealth : MonoBehaviour {
             lives = 9;
         }
         OnChangeLives();
-    }
-
-    internal void SetHealth()
-    {
-        throw new NotImplementedException();
     }
 }

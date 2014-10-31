@@ -19,11 +19,6 @@ public class CatMove : MonoBehaviour
     private float movement = 0f;
     private bool isAlive = true;
 
-    void Start()
-    {
-        DeathTrigger.OnDeath += ResetOnDeath;
-        
-    }
     void FixedUpdate()
     {
         if (isAlive == false)
@@ -81,7 +76,7 @@ public class CatMove : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
     }
-    void ResetOnDeath(bool newClone)
+    public void ResetOnDeath(bool newClone)
     {
         anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
         anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
