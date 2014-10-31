@@ -7,6 +7,7 @@ public class DeathTrigger : MonoBehaviour {
 	public static event Action<bool> OnDeath = (bool newClone) => {};
     private Action<Collision2D> OnCollision = (Collision2D) => { };
 	[SerializeField] private EnvironmentItem environment;
+
 	void Start()
 	{
 		switch(environment)
@@ -38,7 +39,8 @@ public class DeathTrigger : MonoBehaviour {
         }
         if (col.gameObject.CompareTag("DeadCat"))
         {
-            col.gameObject.collider2D.enabled = false;         
+            col.gameObject.collider2D.enabled = false;  
+			col.gameObject.rigidbody2D.isKinematic = true;
         }
     }
     void SpikeCollision(Collision2D col)
