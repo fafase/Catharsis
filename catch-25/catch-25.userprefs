@@ -1,18 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\DeathTrigger\SkullDeath.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\General\EndLevel.cs">
     <Files>
-      <File FileName="Assets\scripts\DeathTrigger\FallingRock.cs" Line="10" Column="15" />
-      <File FileName="Assets\scripts\CatScript\CatController.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\CatScript\CatController.cs" Line="89" Column="45" />
       <File FileName="Assets\scripts\Skull\SkullTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Skull\Skull.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Skull\Skull.cs" Line="47" Column="20" />
       <File FileName="Assets\scripts\Skull\Jaws.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Level1\DeathTrigger.cs" Line="11" Column="28" />
-      <File FileName="Assets\scripts\Level1\TriggerRock.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\DeathTrigger\Spike.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\DeathTrigger\GasLeak.cs" Line="11" Column="70" />
-      <File FileName="Assets\scripts\DeathTrigger\DeathZone.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\DeathTrigger\SkullDeath.cs" Line="11" Column="58" />
+      <File FileName="Assets\scripts\General\EndLevel.cs" Line="30" Column="33" />
+      <File FileName="Assets\scripts\General\GameHandler.cs" Line="84" Column="22" />
+      <File FileName="Assets\scripts\General\PauseHandler.cs" Line="16" Column="2" />
+      <File FileName="Assets\scripts\General\SetRespawn.cs" Line="11" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

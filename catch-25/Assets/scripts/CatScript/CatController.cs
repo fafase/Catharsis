@@ -84,7 +84,7 @@ public class CatController : StatefulMonobehaviour
         {
             RequestState(Utility.STATE_PLAYING);
         }
-        else if (newState == Utility.GAME_STATE_PAUSE)
+        else if (newState == Utility.GAME_STATE_PAUSE || newState == Utility.GAME_STATE_GAMEWON)
         {
             RequestState(Utility.STATE_PAUSE);
         }
