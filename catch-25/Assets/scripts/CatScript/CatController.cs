@@ -40,6 +40,17 @@ public class CatController : StatefulMonobehaviour
         AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN,1.0f,1.0f);
 		GetComponent<SpriteRenderer> ().color = Color.white;
         SuscribeControl();
+
+	
+		/// //////////////////////////////////////////////////////
+		/// 
+		/// Should be fixed later
+		GasLeak [] gl =FindObjectsOfType<GasLeak> ();
+		foreach (GasLeak g in gl) 
+		{
+			g.CancelInvoke();
+		}
+		/// ////////////////////////////////////////////////////
     }
     protected virtual void ExitStatePlaying(string oldState)
     {

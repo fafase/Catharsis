@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spike : DeathTrigger {
+public class Spike : DeathCollider 
+{
 
 	protected override void CollisionCall (Collision2D col)
 	{

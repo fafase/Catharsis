@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SkullDeath : DeathTrigger 
+public class SkullDeath : DeathCollider
 {
 	protected override void CollisionCall (Collision2D col)
 	{

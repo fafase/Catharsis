@@ -2,25 +2,14 @@
 using System.Collections;
 using System;
 
-public abstract class DeathTrigger : MonoBehaviour {
+public abstract class DeathTrigger : DeathController 
+{
+	protected abstract void TriggerCall (Collider2D col);
 
-	public static event Action<bool> OnDeath = (bool newClone) => {};
-	protected abstract void CollisionCall (Collision2D col);
-
-
-	protected void OnDeathCall(bool value)
+	protected void OnTriggerEnter2D(Collider2D col)
 	{
-		OnDeath (value);
+		TriggerCall(col);
 	}
-	protected void OnCollisionEnter2D(Collision2D col)
-	{
-        CollisionCall(col);
-	}
-
-    void OnDestroy() 
-    {
-        OnDeath = null;
-    }
 }
 
 
