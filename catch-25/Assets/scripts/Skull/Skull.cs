@@ -42,4 +42,9 @@ public class Skull : MonoBehaviour {
 		}
 		SetSkullOpen (false);
 	}
+	public void SetSkullCloseNoCollider()
+	{
+		StopAllCoroutines ();
+		anim.SetBool("opening", false);
+	}
 }
