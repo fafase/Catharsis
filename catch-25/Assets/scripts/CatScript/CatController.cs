@@ -38,6 +38,7 @@ public class CatController : StatefulMonobehaviour
     protected virtual void EnterStatePlaying(string oldState)
     {
         AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN,1.0f,1.0f);
+		GetComponent<SpriteRenderer> ().color = Color.white;
         SuscribeControl();
     }
     protected virtual void ExitStatePlaying(string oldState)
