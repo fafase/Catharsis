@@ -65,7 +65,7 @@ public class GameHandler : StatefulMonobehaviour
     }
     protected virtual void EnterStateLoading(string oldState)
     {
-        timer = 2.5f;
+        timer = 2.0f;
     }
     private float timer;
     protected virtual void UpdateLoading() 
