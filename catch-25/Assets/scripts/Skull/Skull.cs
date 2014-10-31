@@ -29,6 +29,7 @@ public class Skull : MonoBehaviour {
 			ResetTimer();
 			return;
 		}
+
         anim.SetBool("opening", value);
 		foreach (Collider2D col in jaws) 
 		{
@@ -36,9 +37,11 @@ public class Skull : MonoBehaviour {
 		}
 		if (value == true && !isOpen) 
 		{
-			StartCoroutine (CloseSkull ());
 			isOpen = value;
+			StartCoroutine (CloseSkull ());
+			return;
 		}
+		isOpen = value;
     }
 
 	private float mTimer;			
