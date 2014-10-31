@@ -12,7 +12,7 @@ public class IntroManager : MonoBehaviour {
     {
         FindObjectOfType<InputManager>().OnPress += LoadNextOnPress;
        
-        fade.SetStart();
+        fade.SetStart(1);
         fade.ChangeFadeState(FadeController.FadeState.FadeIn);
         StartCoroutine(AppearText());
 	}

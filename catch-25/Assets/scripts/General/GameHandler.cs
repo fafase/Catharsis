@@ -55,11 +55,16 @@ public class GameHandler : StatefulMonobehaviour
         AddStateWithTransitions(Utility.GAME_STATE_GAMEWON, new string[]{Utility.GAME_STATE_LOADING});
         RequestStateHandler(Utility.GAME_STATE_LOADING);
 
-        fade.ChangeFadeState(FadeController.FadeState.FadeIn);
+
 
         pauseMenu.SetActive(false);
 		endMenu.SetActive (false);
     }
+
+	void Start()
+	{
+		fade.SetStart (0);
+	}
     void Update() 
     {
         StateUpdate();

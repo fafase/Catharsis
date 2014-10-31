@@ -30,10 +30,10 @@ public class FadeController : MonoBehaviour
                 break;
         }
     }
-    public void SetStart() 
+    public void SetStart(int value) 
     {      
         Color col = fadeImage.color;
-        col.a = 1;
+        col.a = value;
         fadeImage.color = col;
     }
     public enum FadeState
