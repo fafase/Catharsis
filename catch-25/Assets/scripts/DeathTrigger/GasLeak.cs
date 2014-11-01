@@ -7,29 +7,18 @@ public class GasLeak : DeathTrigger
 	[SerializeField] private Transform castPoint;
 	[SerializeField]
 	private LayerMask layer;
-
-	private Color greenify;
-	private Color whiten;
+    private bool oneHitOnly = false;
 
 	[SerializeField] ParticleSystem particles;
 
 	protected override void TriggerCall (Collider2D col)
 	{
-		if (col.gameObject.CompareTag("Player")) 
+		if (col.gameObject.CompareTag("Player") && oneHitOnly == false) 
 		{
-			print ("Call");
-			greenify = new Color(0.1f,0.7f,0.1f,1.0f);
-			whiten = new Color(1.0f,1.0f,1.0f,1.0f);
+            oneHitOnly = true;
+            col.GetComponent<CatController>().PoisonCat();
 			AudioManager.Instance.PlayAudio(Utility.SOUND_POISONED,1.0f,1.0f);
-			spriteRenderer = col.gameObject.GetComponent<SpriteRenderer>();
-			spriteRenderer.color = greenify;
-			Invoke("GasInvoke", 3f);
 		}
-	}
-	void GasInvoke()
-	{
-		spriteRenderer.color = whiten;
-		OnDeathCall(true);
 	}
 
 	void Update()
@@ -37,6 +26,7 @@ public class GasLeak : DeathTrigger
 		Collider2D [] cols = Physics2D.OverlapCircleAll (castPoint.position, 0.5f,layer);
 		if (cols.Length == 0) 
 		{
+            oneHitOnly = false;
 			particles.startLifetime = 3f;
 			particles.startSpeed = 1f;
 			collider2D.enabled = true;

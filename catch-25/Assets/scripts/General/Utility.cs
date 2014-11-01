@@ -16,6 +16,7 @@ public class Utility
     public static string STATE_RESET = "Reset";
     public static string STATE_DEAD = "Dead";
     public static string STATE_PAUSE = "Pause";
+    public static string STATE_POISONED = "Poisoned";
 
     public static string GAME_STATE_LOADING = "Loading";
     public static string GAME_STATE_PLAYING = "Playing";
