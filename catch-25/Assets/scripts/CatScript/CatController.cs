@@ -47,7 +47,7 @@ public class CatController : StatefulMonobehaviour
             return; 
         }
     }
-    protected virtual void EnterStatePlaying(string oldState)
+    protected virtual void EnterPlaying(string oldState)
     {
         AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN,1.0f,1.0f);
 		GetComponent<SpriteRenderer> ().color = Color.white;
@@ -64,11 +64,11 @@ public class CatController : StatefulMonobehaviour
 		}
 		/// ////////////////////////////////////////////////////
     }
-    protected virtual void ExitStatePlaying(string oldState)
+    protected virtual void ExitPlaying(string oldState)
     {
         UnsuscribeControl();
     }
-    protected virtual void EnterStateReset(string oldState) 
+    protected virtual void EnterReset(string oldState) 
     {
         
         collider2D.enabled = false;

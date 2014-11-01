@@ -62,7 +62,7 @@ public class GameHandler : StatefulMonobehaviour
     {
         StateUpdate();
     }
-    protected virtual void EnterStateLoading(string oldState)
+    protected virtual void EnterLoading(string oldState)
     {
         timer = 2.0f;
     }
@@ -90,7 +90,7 @@ public class GameHandler : StatefulMonobehaviour
         pauseHandler.enabled = isPause;
         RequestStateHandler(state);
     }
-    protected void EnterStateGameWon(string oldState)
+    protected void EnterGameWon(string oldState)
     {
         endMenu.SetActive(true);
         CanvasGroup canvasGroup = endMenu.GetComponent<CanvasGroup>();

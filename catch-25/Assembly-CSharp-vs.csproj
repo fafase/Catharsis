@@ -46,8 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Flower.cs" />
-     <Compile Include="Assets\PressurePlate.cs" />
      <Compile Include="Assets\scripts\AudioManager.cs" />
      <Compile Include="Assets\scripts\CatScript\CatController.cs" />
      <Compile Include="Assets\scripts\CatScript\CatHealth.cs" />
@@ -60,10 +58,10 @@
      <Compile Include="Assets\scripts\DeathTrigger\DeathController.cs" />
      <Compile Include="Assets\scripts\DeathTrigger\DeathZone.cs" />
      <Compile Include="Assets\scripts\DeathTrigger\FallingRock.cs" />
+     <Compile Include="Assets\scripts\DeathTrigger\Flower.cs" />
      <Compile Include="Assets\scripts\DeathTrigger\GasLeak.cs" />
      <Compile Include="Assets\scripts\DeathTrigger\SkullDeath.cs" />
      <Compile Include="Assets\scripts\DeathTrigger\Spike.cs" />
-     <Compile Include="Assets\scripts\GasSuffocate.cs" />
      <Compile Include="Assets\scripts\General\CameraSmoothFollow.cs" />
      <Compile Include="Assets\scripts\General\EndLevel.cs" />
      <Compile Include="Assets\scripts\General\FadeController.cs" />
@@ -78,6 +76,7 @@
      <Compile Include="Assets\scripts\Level1\DeathTrigger.cs" />
      <Compile Include="Assets\scripts\Level1\TriggerRock.cs" />
      <Compile Include="Assets\scripts\LoadingScreen.cs" />
+     <Compile Include="Assets\scripts\PressurePlate.cs" />
      <Compile Include="Assets\scripts\Skull\Jaws.cs" />
      <Compile Include="Assets\scripts\Skull\Skull.cs" />
      <Compile Include="Assets\scripts\Skull\SkullTrigger.cs" />

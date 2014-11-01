@@ -9,7 +9,7 @@ public class Skull : MonoBehaviour {
 	[SerializeField] private float timer;
 	private float setTimer;
 	private bool isOpen = false;
-
+    private bool hasPassed = false;
 	void Start()
 	{
 		setTimer = timer;
@@ -53,7 +53,10 @@ public class Skull : MonoBehaviour {
 			mTimer -= Time.deltaTime;
 			yield return null;
 		}
-		SetSkullOpen (false);
+        if (hasPassed == false)
+        {
+            SetSkullOpen(false);
+        }
 	}
 	public void SetSkullCloseNoCollider()
 	{
@@ -61,4 +64,12 @@ public class Skull : MonoBehaviour {
 		isOpen = false;
 		anim.SetBool("opening", false);
 	}
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+            hasPassed = true;
+        }
+    }
 }

@@ -49,6 +49,7 @@ public class CatMove : MonoBehaviour
 
     public void Move(float move)
     {
+        print("Move");
         movement = move;
         if (move > 0 && !facingRight)
         {
