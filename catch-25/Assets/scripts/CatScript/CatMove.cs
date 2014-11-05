@@ -13,24 +13,26 @@ public class CatMove : MonoBehaviour
     private float jumpForce = 500f;
     [SerializeField]
     private Animator anim;
-
+    [SerializeField]
+    private bool wallJump = false;
     private bool facingRight = true;
     private bool grounded = false;
     private float movement = 0f;
     private bool isAlive = true;
-
+    bool preventDbJump = false;
     void FixedUpdate()
     {
         if (isAlive == false)
         {
             return;
         }
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.50f, whatIsGround);
+        grounded = (hit.collider != null) ? true : false;
         
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down,1f, whatIsGround);
-        grounded = (hit.collider != null) ? true:false;
         anim.SetBool(Utility.ANIM_GROUND, grounded);
         if (grounded)
         {
+            preventDbJump = false;
             float angle = Vector2.Angle(Vector2.up, hit.normal);
             transform.up = (angle > 30f) ? hit.normal : Vector2.up;
            
@@ -43,7 +45,11 @@ public class CatMove : MonoBehaviour
             anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
             anim.SetFloat(Utility.ANIM_VSPEED, rigidbody2D.velocity.y);
         }
-        
+        if (preventDbJump)
+        {
+            return;
+        }
+        preventDbJump = true;
         rigidbody2D.velocity = new Vector2(movement * maxSpeed, rigidbody2D.velocity.y);
     }
 
@@ -64,6 +70,24 @@ public class CatMove : MonoBehaviour
     {
         if (!grounded)
         {
+            if (wallJump == false)
+            {
+                return;
+            }
+            float sideForce = -jumpForce * 2f;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.right * 0.5f, 0.5f, whatIsGround);
+            if (hit.collider == null)
+            {
+                hit = Physics2D.Raycast(transform.position, Vector3.right * -0.5f, 0.5f, whatIsGround);
+                if (hit.collider == null)
+                {
+                    return;
+                }
+                sideForce *= -1f;
+            }
+                 
+            Vector2 force = new Vector2(sideForce, jumpForce * 1.1f);
+            rigidbody2D.AddForce(force);
             return;
         }
         rigidbody2D.AddForce(new Vector2(0, jumpForce));

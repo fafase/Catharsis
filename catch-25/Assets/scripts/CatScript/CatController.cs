@@ -30,16 +30,19 @@ public class CatController : StatefulMonobehaviour
         inputManager = FindObjectOfType<InputManager>();
         gameHandler = FindObjectOfType<GameHandler>();
         // Listens to game state changing
-        gameHandler.OnChangeState += OnGameHandlerChangeState;
+        if (gameHandler != null)
+        {
+            gameHandler.OnChangeState += OnGameHandlerChangeState;
+        }
         // DeathTrigger.OnDeath is called by any colliders inheriting from DeathController
         // The event is static so one registration for all killing colliders as they all call the same one
         DeathTrigger.OnDeath += ResetOnDeath;
         // Listening for new coins
         catInventory.OnAddCoin += CheckCoinForExtraLife;
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        InitializeStatefulness(true);
+        InitializeStateMachine(true);
         AddStateWithTransitions(Utility.STATE_STARTING, new string[]{Utility.STATE_PLAYING});
         AddStateWithTransitions(Utility.STATE_PLAYING, new string[] { Utility.STATE_PAUSE, Utility.STATE_RESET,Utility.STATE_POISONED, Utility.STATE_DEAD });
         AddStateWithTransitions(Utility.STATE_RESET, new string[]{Utility.STATE_PLAYING, Utility.STATE_PAUSE});
@@ -52,7 +55,7 @@ public class CatController : StatefulMonobehaviour
     void Update()
     {
         StateUpdate();
-        if (CurrentStateName == Utility.STATE_STARTING)
+        if (CurrentState == Utility.STATE_STARTING)
         {
             return;
         }
@@ -60,12 +63,19 @@ public class CatController : StatefulMonobehaviour
     // Is called to poison the cat
     public void PoisonCat()
     {
+        if (CurrentState == Utility.STATE_POISONED) 
+        {
+            return;
+        }
         RequestState(Utility.STATE_POISONED);
     }
     //Entering the playing state, we play audio and subscribe controls
     protected virtual void EnterPlaying(string oldState)
     {
-        AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN, 1.0f, 1.0f);
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN, 1.0f, 1.0f);
+        }
         SuscribeControl();
     }
     // Exiting playing we unsuscribe the control so that Pause or death disable controls

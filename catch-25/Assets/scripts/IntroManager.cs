@@ -4,16 +4,18 @@ using UnityEngine.UI;
 
 public class IntroManager : MonoBehaviour {
 
-    [SerializeField] private Text introText;
     [SerializeField]
-    private FadeController fade;
+    private GUITexture backTexture;
+    [SerializeField]
+    private GUIText introText;
+
+    [SerializeField]
+    private float speed;
 
 	void Awake () 
     {
         FindObjectOfType<InputManager>().OnPress += LoadNextOnPress;
-       
-        fade.SetStart(1);
-        fade.ChangeFadeState(FadeController.FadeState.FadeIn);
+      
         StartCoroutine(AppearText());
 	}
 
@@ -23,18 +25,24 @@ public class IntroManager : MonoBehaviour {
     }
     private IEnumerator AppearText() 
     {
-        Color col = introText.color;
+
+        Color col = Color.white;
         col.a = 0f;
+        backTexture.color = col;
         introText.color = col;
-        while (fade.FadeOver != true)
+
+        while (backTexture.color.a < 1f)
         {
+            //col = introText.color;
+            col.a += Time.deltaTime * 1/ speed;
+            backTexture.color = col;
             yield return null;
         }
-        
-        while (introText.color.a < 1)
+        col.a = 0f;
+        while (introText.color.a < 1f)
         { 
-            col = introText.color;
-            col.a += Time.deltaTime;
+            //colText = introText.color;
+            col.a += Time.deltaTime * 1 / speed;
             introText.color = col;
             yield return null;
         }

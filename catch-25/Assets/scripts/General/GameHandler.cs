@@ -35,14 +35,13 @@ public class GameHandler : StatefulMonobehaviour
         }
 
         SetGlobalSettings();
-
-        
+      
         // Register the pause and end level events
         FindObjectOfType<InputManager>().OnPause += this.OnPause;
 		FindObjectOfType<EndLevel>().OnEnd += this.OnEnd;
         
         // Register all states of the game
-        InitializeStatefulness(true);
+        InitializeStateMachine(true);
         AddStateWithTransitions(Utility.GAME_STATE_LOADING, new string []{ Utility.GAME_STATE_PLAYING });
         AddStateWithTransitions(Utility.GAME_STATE_PLAYING, new string[]{Utility.GAME_STATE_PAUSE, Utility.GAME_STATE_GAMEWON, Utility.GAME_STATE_GAMELOST});
         AddStateWithTransitions(Utility.GAME_STATE_PAUSE, new string[]{Utility.GAME_STATE_PLAYING});
@@ -81,24 +80,22 @@ public class GameHandler : StatefulMonobehaviour
     protected void EnterGameWon(string oldState)
     {
         endMenu.SetActive(true);
-        CanvasGroup canvasGroup = endMenu.GetComponent<CanvasGroup>();
-        pauseHandler.enabled = true;
-        StartCoroutine(FadeInEndScreen(canvasGroup));
+        //CanvasGroup canvasGroup = endMenu.GetComponent<CanvasGroup>();
+        //pauseHandler.enabled = true;
+        StartCoroutine(FadeInEndScreen(endMenu));
     }
 
     protected void EnterGameLost(string oldState)
     {
         endMenu.SetActive(true);
-        CanvasGroup canvasGroup = endMenu.GetComponent<CanvasGroup>();
-        pauseHandler.enabled = true;
-        StartCoroutine(FadeInEndScreen(canvasGroup));
+        StartCoroutine(FadeInEndScreen(endMenu));
     }
     // Public method so that cat controller can modify the state of the game based on health mainly
     // The method is also called for end level and pause, it also calls a public event for CatController to listen
     public void RequestStateHandler(string state)
     {
         RequestState(state);
-        OnChangeState(CurrentStateName);
+        OnChangeState(CurrentState);
     }
 
     private void SetGlobalSettings()
@@ -126,14 +123,39 @@ public class GameHandler : StatefulMonobehaviour
 		RequestStateHandler(Utility.GAME_STATE_GAMEWON);       
 	}
     
-    private IEnumerator FadeInEndScreen(CanvasGroup canvasGroup)
+    private IEnumerator FadeInEndScreen(GameObject panel)
     {
-        canvasGroup.alpha = 0;
+        GUITexture [] guiTextures = panel.GetComponentsInChildren<GUITexture>();
+        GUIText [] guiTexts = panel.GetComponentsInChildren<GUIText>();
+        
+        for (int i = 0; i < guiTextures.Length; i++)
+        {
+            Color col = guiTextures[i].color;
+            col.a = 0f;
+            guiTextures[i].color = col;
+        }
+        for (int i = 0; i < guiTexts.Length; i++)
+        {
+            Color col = guiTexts[i].color;
+            col.a = 0f;
+            guiTexts[i].color = col;
+        }
         float timer = 0f;
         while (timer < 1f)
         {
-            timer += Time.deltaTime * 0.5f;
-            canvasGroup.alpha = timer;
+            timer += Time.deltaTime * 0.5f; 
+            for (int i = 0; i < guiTextures.Length; i++)
+            {
+                Color col = guiTextures[i].color;
+                col.a = timer;
+                guiTextures[i].color = col;
+            }
+            for (int i = 0; i < guiTexts.Length; i++)
+            {
+                Color col = guiTexts[i].color;
+                col.a = timer;
+                guiTexts[i].color = col;
+            }
             yield return null;
         }
     }

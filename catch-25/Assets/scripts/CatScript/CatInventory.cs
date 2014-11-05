@@ -5,13 +5,16 @@ using System;
 
 public class CatInventory : MonoBehaviour {
 
-    [SerializeField] private Text text; 
+    [SerializeField] private GUIText text; 
     private int coinAmount;
     public event Action<int> OnAddCoin = (int i) => { };
     void Start() 
     {
         coinAmount = 0;
-        text.text = coinAmount.ToString();
+        if (text != null)
+        {
+            text.text = coinAmount.ToString();
+        }
     }
 
     public void CoinAmount(int value) 

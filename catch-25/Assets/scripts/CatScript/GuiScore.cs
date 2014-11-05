@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GuiScore : MonoBehaviour {
 
 	[SerializeField] private CatHealth catHealth;
-	[SerializeField] private Text text;
+	[SerializeField] private GUIText text;
 
 	void Start () 
 	{

@@ -6,10 +6,10 @@ public class ChallengeMessage : MonoBehaviour {
 
     [SerializeField]
     private string message;
+   
+    private GameObject messageObject;
     [SerializeField]
-    private Canvas canvas;
-    [SerializeField]
-    private Text text;
+    private TextMesh text;
     private Transform position;
     [SerializeField]
     private float messageLength = 3f;
@@ -26,13 +26,14 @@ public class ChallengeMessage : MonoBehaviour {
 			}
 			position = t;
 		}
+        messageObject = text.gameObject;
 	}
     void OnTriggerEnter2D(Collider2D col) 
     {
         if (col.gameObject.CompareTag("Player") && showMessage == false)
         {
-			canvas.gameObject.SetActive(true);
-			canvas.GetComponent<RectTransform>().position = position.position;
+			messageObject.SetActive(true);
+			messageObject.transform.position = position.position;
 			showMessage = true;
 			text.text = message;
             StartCoroutine(CountdownMessage());
@@ -48,7 +49,7 @@ public class ChallengeMessage : MonoBehaviour {
             timer -= Time.deltaTime;
             yield return null;
         }
-        canvas.gameObject.SetActive(false);
+        messageObject.SetActive(false);
 		Destroy (gameObject);
     }
 }

@@ -8,9 +8,9 @@ public class StatefulMonobehaviour : MonoBehaviour {
     public event Action<object, string, string> OnStateTransition = 
         (object behaviour, string oldState, string newState) => { };
 
-    internal class State {
+    class State {
         public string name;
-        public List<string> allowedTransitions;
+        public List<string> transitions;
         public bool allowAnyTransition;
         public Action updateMethod = ()=>{};
         public Action<string> enterMethod = (string oldState) => { };
@@ -19,49 +19,49 @@ public class StatefulMonobehaviour : MonoBehaviour {
         public State(string name) {
             this.name = name;
             this.allowAnyTransition = false;
-            this.allowedTransitions = new List<string>();
+            this.transitions = new List<string>();
         }
     }
 
-    private Dictionary<string, State> legalStates; 
- 
-    private State CurrentState;
-    private bool inTransition;
-    private State transitionSource;
-    private State transitionTarget;
-    private bool statefulnessInitialized = false;
+    private Dictionary<string, State> states;
+
+    private State currentState = null;
+    private State transitionSource = null;
+    private State transitionTarget = null;
+    private bool inTransition = false;
+    
+    private bool initialized = false;
     private bool debugTransitions;
 
     private Action OnUpdate = () => { };
 
-    public string CurrentStateName {
-        get { return CurrentState.name; }
+    public string CurrentState {
+        get { return currentState.name; }
     }
 
-    protected void InitializeStatefulness( bool debug ) {
-        if (statefulnessInitialized) {
+    protected void InitializeStateMachine( bool debug ) {
+        if (initialized) {
             Debug.LogWarning( GetType().ToString() + " is trying to initialize statefulness multiple times." );
             return;
         }
 
-        this.legalStates = new Dictionary<string, State>();
+        this.states = new Dictionary<string, State>();
 
-        // create an initial state that can transition into any state but cannot be transitioned to
         this.AddState( "InitialState" );
-        State initial = legalStates["InitialState"];
+        State initial = states["InitialState"];
         initial.allowAnyTransition = true;
 
-        CurrentState = initial;
+        currentState = initial;
         inTransition = false;
         transitionSource = null;
         transitionTarget = null;
-        statefulnessInitialized = true;
+        initialized = true;
         debugTransitions = debug;
     }
 
     protected bool IsLegalTransition(string fromstate, string tostate) {
-        if (legalStates.ContainsKey(fromstate) && legalStates.ContainsKey(tostate)) {
-            if (legalStates[fromstate].allowAnyTransition || legalStates[fromstate].allowedTransitions.Contains(tostate)) {
+        if (states.ContainsKey(fromstate) && states.ContainsKey(tostate)) {
+            if (states[fromstate].allowAnyTransition || states[fromstate].transitions.Contains(tostate)) {
                 return true;
             }
         }
@@ -69,13 +69,13 @@ public class StatefulMonobehaviour : MonoBehaviour {
     }
     
     private void TransitionTo(string newstate) {
-        transitionSource = CurrentState;
-        transitionTarget = legalStates[newstate];
+        transitionSource = currentState;
+        transitionTarget = states[newstate];
         inTransition = true;
 
-        CurrentState.exitMethod(transitionTarget.name);
-        transitionTarget.enterMethod(CurrentState.name);
-        CurrentState = transitionTarget;
+        currentState.exitMethod(transitionTarget.name);
+        transitionTarget.enterMethod(currentState.name);
+        currentState = transitionTarget;
     }
 
     private void FinalizeCurrentTransition() {
@@ -92,7 +92,7 @@ public class StatefulMonobehaviour : MonoBehaviour {
     }
     
     protected bool RequestState(string newstate) {
-        if (!statefulnessInitialized) {
+        if (!initialized) {
             Debug.LogError( this.GetType().ToString()+ " requests transition to state " + newstate + " but statefulness is not initialized!");
             return false;            
         }
@@ -105,23 +105,22 @@ public class StatefulMonobehaviour : MonoBehaviour {
             return false;
         }
 
-        if( IsLegalTransition( CurrentState.name, newstate )) 
+        if( IsLegalTransition( currentState.name, newstate )) 
         {
-            // we are ready to transition so lets go!
             if (debugTransitions) 
             {
-                Debug.Log( this.GetType().ToString() + " transition: " + CurrentState.name + " => " + newstate );
+                Debug.Log( this.GetType().ToString() + " transition: " + currentState.name + " => " + newstate );
             }
 
             TransitionTo(newstate);
             FinalizeCurrentTransition();
         } else 
         {
-            Debug.LogError( this.GetType().ToString() + " requests transition: " + CurrentState.name + " => " + newstate + " but it is not a legal transition!" );
+            Debug.LogError( this.GetType().ToString() + " requests transition: " + currentState.name + " => " + newstate + " but it is not a legal transition!" );
             return false;
         }
         OnUpdate = null;
-        OnUpdate = CurrentState.updateMethod;
+        OnUpdate = currentState.updateMethod;
         return true;
     }
 
@@ -146,17 +145,17 @@ public class StatefulMonobehaviour : MonoBehaviour {
         {
             s.exitMethod = (Action<string>)Delegate.CreateDelegate(typeof(Action<string>), this, exit);
         }
-        this.legalStates.Add( newstate, s );
+        this.states.Add( newstate, s );
     }
 
     protected void AddStateWithTransitions(string newstate, string[] transitions) 
     {
         AddState(newstate);
-        State s = legalStates[newstate];
+        State s = states[newstate];
 
         foreach (string t in transitions) 
         {
-            s.allowedTransitions.Add( t );
+            s.transitions.Add( t );
         }
     }
 

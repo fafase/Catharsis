@@ -6,31 +6,15 @@ public class EndLevel : MonoBehaviour {
 	public Action OnEnd = () => { };
 	[SerializeField] private Skull skullManager;
 	[SerializeField] private GameObject endMenu;
-	CanvasGroup canvasGroup;
 
-
+    private bool callOnce = false;
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.gameObject.CompareTag ("Player")) 
+		if (col.gameObject.CompareTag ("Player") && callOnce == false) 
 		{
+            callOnce = true;
 			OnEnd();
 			skullManager.SetSkullCloseNoCollider();
-            FindObjectOfType<GameHandler>().RequestStateHandler(Utility.GAME_STATE_GAMEWON);
-			/*endMenu.SetActive (true);
-			canvasGroup = endMenu.GetComponent<CanvasGroup> ();
-			canvasGroup.alpha = 0;
-			StartCoroutine (FadeInEndScreen());*/
 		}
 	}
-
-	/*private IEnumerator FadeInEndScreen ()
-	{
-		float timer = 0f;
-		while (timer < 1f) 
-		{
-			timer += Time.deltaTime * 0.5f;
-			canvasGroup.alpha = timer;
-			yield return null;
-		}
-	}*/
 }

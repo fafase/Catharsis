@@ -18,7 +18,6 @@ public class CatHealth : MonoBehaviour {
         if (lives < 0)
         {
             lives = 0;
-            //OnLivesNull();
         }
         else 
         {

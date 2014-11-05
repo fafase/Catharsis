@@ -3,7 +3,6 @@ using System.Collections;
 
 public class GasLeak : DeathTrigger 
 {
-	SpriteRenderer spriteRenderer = null;
 	[SerializeField] private Transform castPoint;
 	[SerializeField]
 	private LayerMask layer;

@@ -5,9 +5,11 @@ using UnityEngine.UI;
 public class LoadingScreen : MonoBehaviour {
 
     [SerializeField]
-    private Text text;
+    private GUIText text;
     [SerializeField]
-    private Image bg;
+    private GUITexture bg;
+    [SerializeField]
+    private GameObject[] guiObjects;
 
     private float timer = 1f;
     private int index = 0;
@@ -16,6 +18,10 @@ public class LoadingScreen : MonoBehaviour {
     {
         text.text = str[index];
         FindObjectOfType<GameHandler>().OnChangeState += RemoveSreen;
+        for (int i = 0; i < guiObjects.Length; i++)
+        {
+            guiObjects[i].SetActive(false);
+        }
 	}
     private bool isLoading = true;
 	void Update () 
@@ -39,8 +45,16 @@ public class LoadingScreen : MonoBehaviour {
             col.a = Mathf.Lerp(col.a, 0.0f, 5f * Time.deltaTime);
             bg.color = col;
             text.color = col;
+            if (col.a <= 0.25)
+            {
+                for (int i = 0; i < guiObjects.Length; i++)
+                {
+                    guiObjects[i].SetActive(true);
+                }
+            }
             if (col.a <= 0.0f)
             {
+                
                 bg.gameObject.SetActive(false);
                 text.gameObject.SetActive(false);
             }
