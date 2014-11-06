@@ -7,6 +7,7 @@ public class GUIButtonControl : MonoBehaviour {
     [SerializeField]
     private GUITexture[] btn;
 
+
     private Action[] actions = new Action[3];
     private Vector3 mousePosition = Vector3.zero;
     void Awake() 

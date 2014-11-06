@@ -14,6 +14,8 @@ public class GameHandler : StatefulMonobehaviour
 	private GameObject endMenu;
     [SerializeField]
     private PauseHandler pauseHandler;
+    [SerializeField]
+    private GameObject inGameGUI;
     public Action<string> OnChangeState = (string s)=>{};
     private bool isPause = false;
     private float timer;
@@ -76,12 +78,14 @@ public class GameHandler : StatefulMonobehaviour
             RequestStateHandler(Utility.GAME_STATE_PLAYING);
         }
     }
-    // EnterGameWon/EnterGameLost are doing the same for now
+
     protected void EnterGameWon(string oldState)
     {
+        inGameGUI.SetActive(false);
         endMenu.SetActive(true);
-        //CanvasGroup canvasGroup = endMenu.GetComponent<CanvasGroup>();
-        //pauseHandler.enabled = true;
+        pauseHandler.enabled = true;
+        Transform tr = endMenu.transform.Find("TextInfo");
+        tr.GetComponent<GUIText>().text = "Press R to restart";
         StartCoroutine(FadeInEndScreen(endMenu));
     }
 
@@ -90,8 +94,7 @@ public class GameHandler : StatefulMonobehaviour
         endMenu.SetActive(true);
         StartCoroutine(FadeInEndScreen(endMenu));
     }
-    // Public method so that cat controller can modify the state of the game based on health mainly
-    // The method is also called for end level and pause, it also calls a public event for CatController to listen
+
     public void RequestStateHandler(string state)
     {
         RequestState(state);
@@ -109,6 +112,7 @@ public class GameHandler : StatefulMonobehaviour
     private void OnPause() 
     {
         isPause = !isPause;
+        inGameGUI.SetActive(!isPause);
         string state =  (isPause == true) ? Utility.GAME_STATE_PAUSE : Utility.GAME_STATE_PLAYING;
         Time.timeScale = (isPause == true) ? 0.0f : 1.0f;
         pauseMenu.SetActive(isPause);

@@ -18,6 +18,7 @@ public class CatController : StatefulMonobehaviour
     private GameHandler gameHandler;
     [SerializeField]
     private float resetTimer = 1.0f;
+     
 
     private SpriteRenderer spriteRenderer;
     private InputManager inputManager;
@@ -76,6 +77,7 @@ public class CatController : StatefulMonobehaviour
         {
             AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN, 1.0f, 1.0f);
         }
+        catMoveRef.enabled = true;
         SuscribeControl();
     }
     // Exiting playing we unsuscribe the control so that Pause or death disable controls
@@ -93,6 +95,8 @@ public class CatController : StatefulMonobehaviour
     {
         collider2D.enabled = false;
         rigidbody2D.isKinematic = true;
+        //GetComponent<CircleCollider2D>().sharedMaterial.friction = 1f;
+        catMoveRef.enabled = false;
         timer = resetTimer;
         UnsuscribeControl();
     }

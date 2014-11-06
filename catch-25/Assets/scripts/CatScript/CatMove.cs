@@ -15,24 +15,21 @@ public class CatMove : MonoBehaviour
     private Animator anim;
     [SerializeField]
     private bool wallJump = false;
+    [SerializeField]
+    private PhysicsMaterial2D mat;
     private bool facingRight = true;
     private bool grounded = false;
     private float movement = 0f;
-    private bool isAlive = true;
-    bool preventDbJump = false;
+
     void FixedUpdate()
     {
-        if (isAlive == false)
-        {
-            return;
-        }
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.50f, whatIsGround);
-        grounded = (hit.collider != null) ? true : false;
-        
+        grounded = (hit.collider != null) ? true : false;       
         anim.SetBool(Utility.ANIM_GROUND, grounded);
+
         if (grounded)
         {
-            preventDbJump = false;
+            mat.friction = 1f;
             float angle = Vector2.Angle(Vector2.up, hit.normal);
             transform.up = (angle > 30f) ? hit.normal : Vector2.up;
            
@@ -41,15 +38,11 @@ public class CatMove : MonoBehaviour
         }
         else
         {
+            mat.friction = 0f; // Here
             transform.up = Vector2.up;
             anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
             anim.SetFloat(Utility.ANIM_VSPEED, rigidbody2D.velocity.y);
         }
-        if (preventDbJump)
-        {
-            return;
-        }
-        preventDbJump = true;
         rigidbody2D.velocity = new Vector2(movement * maxSpeed, rigidbody2D.velocity.y);
     }
 
@@ -105,12 +98,10 @@ public class CatMove : MonoBehaviour
         anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
         anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
         anim.SetBool(Utility.ANIM_IS_DYING, true);
-        isAlive = false;
     }
 
     public void ResetToPlay() 
     {
-        isAlive = true;
         anim.SetBool(Utility.ANIM_IS_DYING, false);
     }
 }

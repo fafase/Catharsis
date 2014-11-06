@@ -66,6 +66,7 @@
      <Compile Include="Assets\scripts\GUI\Background.cs" />
      <Compile Include="Assets\scripts\GUI\FadeController.cs" />
      <Compile Include="Assets\scripts\GUI\GUIButtonControl.cs" />
+     <Compile Include="Assets\scripts\GUI\InGameGUI.cs" />
      <Compile Include="Assets\scripts\General\CameraSmoothFollow.cs" />
      <Compile Include="Assets\scripts\General\EndLevel.cs" />
      <Compile Include="Assets\scripts\General\GameHandler.cs" />
