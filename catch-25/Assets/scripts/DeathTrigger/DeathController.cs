@@ -3,10 +3,12 @@ using System;
 
 public abstract class DeathController : MonoBehaviour 
 {
-	public static event Action<bool> OnDeath = (bool newClone) => {};
-	protected void OnDeathCall(bool value)
+	public static event Action<CatDeath> OnDeath = (CatDeath catDeat) => {};
+	[SerializeField] private CatDeath catDeath;
+	protected void OnDeathCall()
 	{
-		OnDeath (value);
+		print (catDeath);
+		OnDeath (catDeath);
 	}
 
 	void OnDestroy() 

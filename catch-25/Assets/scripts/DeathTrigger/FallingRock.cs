@@ -9,13 +9,13 @@ public class FallingRock : DeathCollider
 		if (col.gameObject.CompareTag ("Player") && rigidbody2D.isKinematic == false && oneHitOnly == false) 
 		{
             oneHitOnly = true;
-			OnDeathCall (true);
+			OnDeathCall ();
 			AudioManager.Instance.PlayAudio (Utility.SOUND_SQUISHED, 1.0f, 1.0f);
 		}
-		if (col.gameObject.CompareTag ("DeadCat")) 
+		/*if (col.gameObject.CompareTag ("DeadCat")) 
 		{
 			col.gameObject.collider2D.enabled = false;  
 			col.gameObject.rigidbody2D.isKinematic = true;
-		}
+		}*/
 	}
 }

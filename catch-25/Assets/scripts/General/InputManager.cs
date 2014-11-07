@@ -41,10 +41,10 @@ public class InputManager : MonoBehaviour {
 
 		float horizontal = Input.GetAxis ("Horizontal");
 		OnMovementCall(horizontal);
-		if (Input.GetKeyDown (KeyCode.UpArrow) || Input.GetKeyDown (KeyCode.W)) 
+		if (Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Space)) 
 		{
-			OnJumpCall();
-		}
+			OnJumpCall ();
+		} 
         if (Input.GetKeyDown(KeyCode.P))
         {
             OnPause();

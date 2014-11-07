@@ -51,6 +51,7 @@
      <Compile Include="Assets\scripts\CatScript\CatHealth.cs" />
      <Compile Include="Assets\scripts\CatScript\CatInventory.cs" />
      <Compile Include="Assets\scripts\CatScript\CatMove.cs" />
+     <Compile Include="Assets\scripts\CatScript\DeadCatController.cs" />
      <Compile Include="Assets\scripts\CatScript\GuiScore.cs" />
      <Compile Include="Assets\scripts\ChallengeMessage.cs" />
      <Compile Include="Assets\scripts\Collectible\Coin.cs" />

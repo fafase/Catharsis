@@ -12,7 +12,7 @@ public class Flower : DeathTrigger
 		if (col.gameObject.CompareTag ("Player")) 
 		{
 			AudioManager.Instance.PlayAudio(Utility.SOUND_POISONED,1.0f,1.0f);
-			OnDeathCall (true);
+			OnDeathCall ();
 			particles.SetActive(false);
 			colliderBox.enabled = false;
 			anim.SetBool("retract", true);

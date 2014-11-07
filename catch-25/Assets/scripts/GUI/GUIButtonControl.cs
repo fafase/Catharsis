@@ -10,12 +10,10 @@ public class GUIButtonControl : MonoBehaviour {
 
     private Action[] actions = new Action[3];
     private Vector3 mousePosition = Vector3.zero;
+	InputManager inputManager;
     void Awake() 
     {
-        InputManager inputManager = FindObjectOfType<InputManager>();
-        inputManager.OnMousePointer += OnMousePointerEvent;
-        inputManager.OnMouseDown += OnMousePressEvent;
-        inputManager.OnMouseUp += OnMouseClickEvent;
+        inputManager = FindObjectOfType<InputManager>();
 
         PauseHandler pauseHandler = FindObjectOfType<PauseHandler>();
         if (pauseHandler != null)
@@ -25,7 +23,18 @@ public class GUIButtonControl : MonoBehaviour {
             actions[2] = pauseHandler.ButtonQASurvey;
         }       
     }
-
+	void OnEnable()
+	{
+		inputManager.OnMousePointer += OnMousePointerEvent;
+		inputManager.OnMouseDown += OnMousePressEvent;
+		inputManager.OnMouseUp += OnMouseClickEvent;
+	}
+	void OnDisable()
+	{
+		inputManager.OnMousePointer -= OnMousePointerEvent;
+		inputManager.OnMouseDown -= OnMousePressEvent;
+		inputManager.OnMouseUp -= OnMouseClickEvent;
+	}
     void OnMousePointerEvent(Vector3 position) 
     {
         if (mousePosition == position)
@@ -64,5 +73,9 @@ public class GUIButtonControl : MonoBehaviour {
             }
         }
     }
+	void MyMethod()
+	{
+		print ("Ok");
+	}
 }
 

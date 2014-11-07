@@ -24,8 +24,8 @@ public class CatController : StatefulMonobehaviour
     private InputManager inputManager;
     private int coins;
     float timer = 1f;
-    bool clone = false;
-
+    //bool clone = false;
+	CatDeath catDeath = CatDeath.None;
 	void Awake () 
 	{
         inputManager = FindObjectOfType<InputManager>();
@@ -95,7 +95,6 @@ public class CatController : StatefulMonobehaviour
     {
         collider2D.enabled = false;
         rigidbody2D.isKinematic = true;
-        //GetComponent<CircleCollider2D>().sharedMaterial.friction = 1f;
         catMoveRef.enabled = false;
         timer = resetTimer;
         UnsuscribeControl();
@@ -113,15 +112,11 @@ public class CatController : StatefulMonobehaviour
     protected virtual void ExitReset(string nextState)
     {
         // if we require a dead corpse
-        if (clone)
+        if (catDeath != CatDeath.Fall)
         {
             GameObject obj = (GameObject)Instantiate(catPrefab, transform.position, Quaternion.identity);
-            if (transform.localScale.x < 0)
-            {
-                Vector3 scale = obj.transform.localScale;
-                scale.x *= -1;
-                obj.transform.localScale = scale;
-            }
+			obj.GetComponent<DeadCatController>().InitDeadCat(catDeath, transform.localScale.x);
+            
         }
         // Place on the jelly
         Vector3 position = jellyPosition.position;
@@ -143,7 +138,7 @@ public class CatController : StatefulMonobehaviour
         timer -= Time.deltaTime;
         if (timer <= 0.0f)
         {
-            ResetOnDeath(true);
+            ResetOnDeath(CatDeath.Gas);
         }
     }
     protected virtual void ExitPoisoned(string oldState) 
@@ -187,12 +182,11 @@ public class CatController : StatefulMonobehaviour
         }
     }
 
-    private void ResetOnDeath(bool newClone)
+    private void ResetOnDeath(CatDeath catDeath)
     {
-        catMoveRef.ResetOnDeath(newClone);
+        catMoveRef.ResetOnDeath();
         int life = catHealth.DecreaseHealth();
-
-        this.clone = newClone;
+		this.catDeath = catDeath;
         if (life >= 0)
         {
             RequestState(Utility.STATE_RESET);
