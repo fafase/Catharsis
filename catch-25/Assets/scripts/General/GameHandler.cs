@@ -18,7 +18,8 @@ public class GameHandler : StatefulMonobehaviour
     private GameObject inGameGUI;
     public Action<string> OnChangeState = (string s)=>{};
     private bool isPause = false;
-    private float timer;
+    [SerializeField]
+	private float loadingTimer;
    
     // Singleton part
     private static GameHandler instance;
@@ -63,17 +64,10 @@ public class GameHandler : StatefulMonobehaviour
         StateUpdate();
     }
 
-    // Section for the various Enter/Exit/Update states
-    // Each method is called in the corresponding state at the corresponding moment of the state
-    protected virtual void EnterLoading(string oldState)
-    {
-        timer = 2.0f;
-    }
-
     protected virtual void UpdateLoading() 
     {
-        timer -= Time.deltaTime; 
-        if (timer <= 0.0f)
+        loadingTimer -= Time.deltaTime; 
+        if (loadingTimer <= 0.0f)
         {
             RequestStateHandler(Utility.GAME_STATE_PLAYING);
         }

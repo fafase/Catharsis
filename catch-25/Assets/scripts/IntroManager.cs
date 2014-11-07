@@ -12,16 +12,18 @@ public class IntroManager : MonoBehaviour {
     [SerializeField]
     private float speed;
 
+	private bool callOnce = false;
 	void Awake () 
-    {
-        FindObjectOfType<InputManager>().OnPress += LoadNextOnPress;
-      
+    {          
         StartCoroutine(AppearText());
 	}
 
     private void LoadNextOnPress() 
     {
-        StartCoroutine(RemoveText());
+		if (callOnce == false) 
+		{
+			StartCoroutine (RemoveText ());			
+		}
     }
     private IEnumerator AppearText() 
     {
@@ -46,14 +48,17 @@ public class IntroManager : MonoBehaviour {
             introText.color = col;
             yield return null;
         }
+		FindObjectOfType<InputManager>().OnPress += LoadNextOnPress;
     }
  
     private IEnumerator RemoveText() 
     {
+		callOnce = true;
+		Color col = introText.color;
         while (introText.color.a > 0)
         {
-            Color col = introText.color;
-            col.a -= Time.deltaTime;
+			print (introText.color.a);
+			col.a -= Time.deltaTime * 1 / speed;
             introText.color = col;
             yield return null;
         }
