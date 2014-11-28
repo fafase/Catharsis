@@ -55,7 +55,10 @@ public class InputManager : Singleton<InputManager>
             OnTouch(position);
         } 
     }
-
+	public void NextLevel()
+	{
+		Application.LoadLevel (1);
+	}
     void OnDestroy()
     {
         OnTouch = null;
