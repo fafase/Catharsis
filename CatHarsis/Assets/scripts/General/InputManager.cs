@@ -7,10 +7,8 @@ using UnityEngine;
 /// </summary>
 public class InputManager : Singleton<InputManager> 
 {
-
-#if UNITY_EDITOR
+	
 	public event Action<float> OnMovementCall= (f) => { };
-#endif
     public event Action<Vector3> OnTouch = (Vector3 v) => { };
 
     private Action UpdateDelegate = () => { };
@@ -43,7 +41,7 @@ public class InputManager : Singleton<InputManager>
         }
         return;
     }
-
+	
     void UpdateEditor() 
     {
         Vector3 position = Input.mousePosition;
@@ -62,8 +60,6 @@ public class InputManager : Singleton<InputManager>
     void OnDestroy()
     {
         OnTouch = null;
-#if UNITY_EDITOR
         OnMovementCall = null;
-#endif
     }
 }
