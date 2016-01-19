@@ -13,44 +13,35 @@ public class InputController : Singleton<InputController>
 
     [SerializeField]
     private CatController catController;
-
-
-    public event Action OnJump = () => { };
-    public event Action<float> OnMovement = (float f) => { };
-
-    Rect control, topScreen;
-    float width, height;
-	void Awake () 
-    {
-        width = Screen.width;
-        height = Screen.height;
-
-        control = new Rect(0, height / 2f, width / 2f, height / 2f);
-        float topMargin = height / 5f;
-        topScreen = new Rect(0, 0 ,width, topMargin );
-
-        InputManager.Instance.OnTouch += CheckInput;
-	}
 	
-	void CheckInput(Vector3 position) 
-    {
-        Vector3 pos = position;
-        float y = height - position.y;
-        pos.y = y;
-        if (control.Contains(pos) || topScreen.Contains(pos))
-        {
-            return;
-        }
-        OnJump();
+	public event EventHandler<EventArgs> RaiseJump;
+	protected void OnJump(EventArgs arg)
+	{
+		if (RaiseJump != null) 
+		{
+			RaiseJump(this, arg);		
+		}
+	}
+    public event Action<Vector3> RaiseMovement = (f) => { };
+
+#if UNITY_EDITOR
+	private void Update()
+	{
+		if (Input.GetKeyDown (KeyCode.Space)) 
+		{
+			OnJump(null);
+		}
+	}
+#endif
+
+	private void OnDestroy() 
+	{
+		RaiseMovement = null;
+		RaiseJump = null;
 	}
 
-    public void SliderValue(float value) 
+	public void Jump() 
     {
-        OnMovement(value);
-    }
-    void OnDestroy() 
-    {
-        OnMovement = null;
-        OnJump = null;
-    }
+		OnJump (null);
+	}
 }

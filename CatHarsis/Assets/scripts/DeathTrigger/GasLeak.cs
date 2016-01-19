@@ -28,10 +28,10 @@ public class GasLeak : DeathTrigger
             oneHitOnly = false;
 			particles.startLifetime = 3f;
 			particles.startSpeed = 1f;
-			collider2D.enabled = true;
+			GetComponent<Collider2D>().enabled = true;
 			return;
 		}
-		collider2D.enabled = false;
+		GetComponent<Collider2D>().enabled = false;
 		particles.startLifetime = 0.3f;
 		particles.startSpeed = 0.1f;
 	}

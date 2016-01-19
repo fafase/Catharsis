@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class CatMove : MonoBehaviour
 {
     [SerializeField]
@@ -20,10 +22,18 @@ public class CatMove : MonoBehaviour
     private bool facingRight = true;
     private bool grounded = false;
     private float movement = 0f;
+	private Rigidbody2D rig = null;
+	private Vector3 target;
 
-    void FixedUpdate()
+	private void Awake()
+	{
+		this.rig = GetComponent<Rigidbody2D> ();
+		this.target = this.transform.position;
+	}
+
+    private void FixedUpdate()
     {
-		float velY = rigidbody2D.velocity.y;
+		float velY = this.rig.velocity.y;
 		velY = (velY > 8.24f) ? 8f : velY;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.50f, whatIsGround);
         grounded = (hit.collider != null) ? true : false;       
@@ -35,27 +45,33 @@ public class CatMove : MonoBehaviour
             float angle = Vector2.Angle(Vector2.up, hit.normal);
             transform.up = (angle > 30f) ? hit.normal : Vector2.up;
            
-            anim.SetFloat(Utility.ANIM_SPEED, Mathf.Abs(rigidbody2D.velocity.x));
-            anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
+            anim.SetFloat(Utility.ANIM_SPEED, Mathf.Abs(this.rig.velocity.x));
         }
         else
         {
             mat.friction = 0f; 
             transform.up = Vector2.up;
             anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
-            anim.SetFloat(Utility.ANIM_VSPEED, rigidbody2D.velocity.y);
+            anim.SetFloat(Utility.ANIM_VSPEED, this.rig.velocity.y);
         }
-        rigidbody2D.velocity = new Vector2(movement * maxSpeed, velY);
+		if (Mathf.Abs (this.target.x - this.transform.position.x) < 0.5f) 
+		{
+			this.target = this.transform.position;
+			return;
+		}
+		this.rig.velocity = new Vector2(movement * maxSpeed, velY);
     }
 
-    public void Move(float move)
+    public void Move(Vector3 position)
     {
-        movement = move;
-        if (move > 0 && !facingRight)
+		float deltaX = position.x - transform.position.x; 
+		movement = deltaX > 0 ? 1f: -1f;
+		this.target = position;
+		if (deltaX > 0 && !facingRight)
         {
             Flip();
         }
-        else if (move < 0 && facingRight)
+		else if (deltaX < 0 && facingRight)
         {
             Flip();
         }
@@ -82,10 +98,10 @@ public class CatMove : MonoBehaviour
             }
                  
             Vector2 force = new Vector2(sideForce, jumpForce * 1.1f);
-            rigidbody2D.AddForce(force);
+            this.rig.AddForce(force);
             return;
         }
-        rigidbody2D.AddForce(new Vector2(0, jumpForce));
+        this.rig.AddForce(new Vector2(0, jumpForce));
     }
 
     void Flip()
@@ -105,6 +121,6 @@ public class CatMove : MonoBehaviour
     public void ResetToPlay() 
     {
         anim.SetBool(Utility.ANIM_IS_DYING, false);
-        movement = 0f;
+       // movement = 0f;
     }
 }

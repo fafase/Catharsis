@@ -6,7 +6,7 @@ public class FallingRock : DeathCollider
     private bool oneHitOnly = false;
 	protected override void CollisionCall (Collision2D col)
 	{
-		if (col.gameObject.CompareTag ("Player") && rigidbody2D.isKinematic == false && oneHitOnly == false) 
+		if (col.gameObject.CompareTag ("Player") && GetComponent<Rigidbody2D>().isKinematic == false && oneHitOnly == false) 
 		{
             oneHitOnly = true;
 			OnDeathCall ();

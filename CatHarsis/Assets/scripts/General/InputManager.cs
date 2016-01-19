@@ -8,58 +8,73 @@ using UnityEngine;
 public class InputManager : Singleton<InputManager> 
 {
 	
-	public event Action<float> OnMovementCall= (f) => { };
-    public event Action<Vector3> OnTouch = (Vector3 v) => { };
+	public event Action<Vector3> OnSingleTap;
+	public event Action OnDoubleTap;
+	[Tooltip("Defines the maximum time between two taps to make it double tap")]
+	[SerializeField]private float tapThreshold = 0.25f;
 
-    private Action UpdateDelegate = () => { };
+	private Action updateDelegate;
+	private float tapTimer = 0.0f;
+	private bool tap = false;
     
-    void Awake() 
-    {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            UpdateDelegate = UpdateMobile;
-        }
-        else 
-        {
-            UpdateDelegate = UpdateEditor;
-        }
-    }
+	private void Awake()
+	{
+#if UNITY_EDITOR || UNITY_STANDALONE
+		updateDelegate = UpdateEditor;
+#elif UNITY_IOS || UNITY_ANDROID
+		updateDelegate = UpdateMobile;
+#endif
+	}
 	void Update () 
 	{
-        UpdateDelegate();        
+		updateDelegate();        
 	}
 
-    void UpdateMobile() 
-    {
-        if (Input.touchCount == 0)
-        {
-            return;
-        }
-        foreach (Touch touch in Input.touches)
-        {
-            OnTouch(touch.position);
-        }
-        return;
-    }
-	
-    void UpdateEditor() 
-    {
-        Vector3 position = Input.mousePosition;
-
-        float horizontal = Input.GetAxis("Horizontal");
-        OnMovementCall(horizontal);
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            OnTouch(position);
-        } 
-    }
-	public void NextLevel()
+	private void OnDestroy()
 	{
-		Application.LoadLevel (1);
+		OnSingleTap = null;
+		OnDoubleTap = null;
 	}
-    void OnDestroy()
-    {
-        OnTouch = null;
-        OnMovementCall = null;
-    }
+	private Vector3 position;
+	#if UNITY_EDITOR || UNITY_STANDALONE
+	private void UpdateEditor() 
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			if (Time.time < this.tapTimer + this.tapThreshold)
+			{
+				if(OnDoubleTap != null)	{ OnDoubleTap(); } 
+				this.tap = false;
+				return;
+			}
+			this.position = Input.mousePosition;
+			this.tap = true;
+			this.tapTimer = Time.time;
+		}
+		
+		if (tap == true && Time.time > tapTimer + .3f) 
+		{
+			tap = false;
+			if(OnSingleTap != null) { OnSingleTap(Input.mousePosition);}
+		}	
+	}
+	#elif UNITY_IOS || UNITY_ANDROID
+	private void UpdateMobile () 
+	{
+		for (var i = 0; i < Input.touchCount; ++i)
+		{
+			if (Input.GetTouch(i).phase == TouchPhase.Began) 
+			{
+				if(Input.GetTouch(i).tapCount == 2)
+				{
+					OnDoubleTap();
+				}
+				if(Input.GetTouch(i).tapCount == 1)
+				{
+					OnSingleTap(Input.GetTouch(i).position);
+				}
+			}
+		}
+	}
+	#endif
 }

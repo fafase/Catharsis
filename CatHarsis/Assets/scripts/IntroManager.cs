@@ -19,7 +19,7 @@ public class IntroManager : MonoBehaviour
         StartCoroutine(AppearText());
 	}
 
-    private void LoadNextOnPress(Vector3 v) 
+    private void LoadNextOnPress() 
     {
 		if (callOnce == false) 
 		{
@@ -47,7 +47,7 @@ public class IntroManager : MonoBehaviour
             introText.color = col;
             yield return null;
         }
-		InputManager.Instance.OnTouch += LoadNextOnPress;
+		InputManager.Instance.OnDoubleTap += LoadNextOnPress;
     }
  
     private IEnumerator RemoveText() 

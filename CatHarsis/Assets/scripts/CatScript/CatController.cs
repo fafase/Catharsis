@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -25,7 +25,8 @@ public class CatController : StatefulMonobehaviour
     float timer = 1f;
 
 	CatDeath catDeath = CatDeath.None;
-	void Awake () 
+
+	private void Awake () 
 	{
         gameHandler = FindObjectOfType<GameHandler>();
 
@@ -38,7 +39,6 @@ public class CatController : StatefulMonobehaviour
         catInventory.OnAddSoul += CheckCoinForExtraLife;
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
         InitializeStateMachine(true);
         AddStateWithTransitions(Utility.STATE_STARTING, new string[]{Utility.STATE_PLAYING});
         AddStateWithTransitions(Utility.STATE_PLAYING, new string[] { Utility.STATE_PAUSE, Utility.STATE_RESET,Utility.STATE_POISONED, Utility.STATE_DEAD });
@@ -49,7 +49,7 @@ public class CatController : StatefulMonobehaviour
         RequestState(Utility.STATE_STARTING);   
 	}
     
-    void Update()
+    private void Update()
     {
         StateUpdate();
         if (CurrentState == Utility.STATE_STARTING)
@@ -90,8 +90,8 @@ public class CatController : StatefulMonobehaviour
     // timer is set and control are unregistered
     protected virtual void EnterReset(string oldState) 
     {
-        collider2D.enabled = false;
-        rigidbody2D.isKinematic = true;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().isKinematic = true;
         catMoveRef.enabled = false;
         timer = resetTimer;
         UnsuscribeControl();
@@ -116,14 +116,18 @@ public class CatController : StatefulMonobehaviour
             
         }
         // Place on the jelly
-        Vector3 position = jellyPosition.position;
-        position.y -= 0.5f;
-        transform.position = position;
+		if (this.jellyPosition != null) 
+		{
+			Vector3 position = jellyPosition.position;
+			position.y -= 0.5f;
+			transform.position = position;
+		}
+        
         // Reset the CatMove component
         catMoveRef.ResetToPlay();
         // Set the collider and rigidbody
-        collider2D.enabled = true;
-        rigidbody2D.isKinematic = false;
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().isKinematic = false;
     }
     protected virtual void EnterPoisoned(string oldState)
     {
@@ -156,14 +160,14 @@ public class CatController : StatefulMonobehaviour
 
     private void SuscribeControl() 
     {
-        InputController.Instance.OnMovement += catMoveRef.Move;
-        InputController.Instance.OnJump += catMoveRef.Jump;
+       // InputController.Instance.RaiseMovement += catMoveRef.Move;
+        //InputController.Instance.RaiseJump += catMoveRef.Jump;
     }
     private void UnsuscribeControl() 
     {
 #if UNITY_EDITOR
-        InputController.Instance.OnMovement -= catMoveRef.Move;
-        InputController.Instance.OnJump -= catMoveRef.Jump;
+       // InputController.Instance.RaiseMovement -= catMoveRef.Move;
+        //InputController.Instance.RaiseJump -= catMoveRef.Jump;
 #endif
     }
 

@@ -16,7 +16,7 @@ public class glowingLight : MonoBehaviour {
 	}
 
 	void Awake () {
-		light.intensity = lowIntensity;
+		GetComponent<Light>().intensity = lowIntensity;
 		targetIntensity = highIntensity;
 		glowOn = true;
 	}
@@ -27,20 +27,20 @@ public class glowingLight : MonoBehaviour {
 		if(glowOn)
 		{
 			// ... Lerp the light's intensity towards the current target.
-			light.intensity = Mathf.Lerp(light.intensity, targetIntensity, fadeSpeed * Time.deltaTime);
+			GetComponent<Light>().intensity = Mathf.Lerp(GetComponent<Light>().intensity, targetIntensity, fadeSpeed * Time.deltaTime);
 			// Check whether the target intensity needs changing and change it if so.
 			CheckTargetIntensity();
 		}
 		else
 			// Otherwise fade the light's intensity to zero.
-			light.intensity = Mathf.Lerp(light.intensity, 0f, fadeSpeed * Time.deltaTime);
+			GetComponent<Light>().intensity = Mathf.Lerp(GetComponent<Light>().intensity, 0f, fadeSpeed * Time.deltaTime);
 	}
 
 	
 	void CheckTargetIntensity ()
 	{
 		// If the difference between the target and current intensities is less than the change margin...
-		if(Mathf.Abs(targetIntensity - light.intensity) < changeMargin)
+		if(Mathf.Abs(targetIntensity - GetComponent<Light>().intensity) < changeMargin)
 		{
 			// ... if the target intensity is high...
 			if(targetIntensity == highIntensity)

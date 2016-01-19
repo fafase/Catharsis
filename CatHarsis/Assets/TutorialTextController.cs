@@ -1,0 +1,71 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class TutorialTextController : MonoBehaviour {
+
+	[SerializeField] private Text textCat0 = null;
+	[SerializeField] private Text textCat1 = null;
+	[SerializeField] private Text textJelly0 = null;
+	[SerializeField] private Text textJelly1 = null;
+	[SerializeField] private Animator animator = null;
+	[SerializeField] private InputManager inputManager = null; 
+	[SerializeField] private GameObject tapText = null;
+	[SerializeField] private GameObject jellyFish = null;
+	private int index = 0;
+
+	private void Awake()
+	{
+		this.tapText.SetActive (false);
+		this.jellyFish.SetActive (false);
+	}
+
+	public void WaitForTap()
+	{
+		this.inputManager.OnSingleTap += SetNextAnim;
+		this.tapText.SetActive (true);
+	}
+
+	private void SetNextAnim(Vector3 vec)
+	{
+		this.inputManager.OnSingleTap -= SetNextAnim;
+		index++;
+		this.animator.SetInteger ("index", index);
+		this.tapText.SetActive (false);
+	}
+	public void Anim0Text()
+	{
+		this.textCat0.text = "Mmm...Where am I?";
+	}
+
+	public void Anim1Text()
+	{
+		this.textJelly0.text = "You are finally deceased.";
+		this.textCat0.text = "Deceased??!! As in decesased of death?";
+		this.textJelly1.text = "...Somehow...yeah";
+		this.textCat1.text = "Who's there?";
+	}
+
+	public void Anim2Text()
+	{
+		StartCoroutine (ShowJelly ());
+		this.textCat0.text = "But where am I?";
+		this.textJelly0.text = "In limbo";
+		this.textCat1.text = "What for?";
+		this.textJelly1.text = "So that you can overcome challenges and get back to life.";
+	}
+
+	private IEnumerator ShowJelly()
+	{
+		this.jellyFish.SetActive (true);
+		SpriteRenderer sp = this.jellyFish.GetComponent<SpriteRenderer> ();
+		sp.color = new Color (1f,1f,1f,0f);
+		while (sp.color.a < 1f) 
+		{
+			Color col = sp.color;
+			col.a += Time.deltaTime;
+			sp.color = col;
+			yield return null;
+		}
+	}
+}

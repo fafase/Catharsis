@@ -14,14 +14,14 @@ public class DeadCatController : MonoBehaviour
 		{
 			case CatDeath.Crush:
 				GetComponent<SpriteRenderer> ().sortingOrder = 0;
-				gameObject.collider2D.enabled = false;  
-				gameObject.rigidbody2D.isKinematic = true;
+				gameObject.GetComponent<Collider2D>().enabled = false;  
+				gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 				break;
 			case CatDeath.Gas:
 				spriteRenderer.color = new Color(0.1f,0.6f,0.1f,1.0f);
 				break;
 			case CatDeath.Spike:
-				gameObject.rigidbody2D.isKinematic = true;
+				gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
 				break;
 			case CatDeath.Flower:
 				break;
