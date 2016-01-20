@@ -7,7 +7,7 @@ using System.Collections;
 /// It is of type StatefulMonobehaviour and controls the states of the cat. 
 /// It also communicates witht he GameHandler to update the game state, mainly if the cat is dead. 
 /// </summary>
-public class CatController : StatefulMonobehaviour 
+public class CatController : StatefulMonobehaviour, IInputListener
 {
 	[SerializeField] private CatMove catMoveRef;
 	[SerializeField] private CatHealth catHealth;
@@ -19,6 +19,7 @@ public class CatController : StatefulMonobehaviour
     [SerializeField]
     private float resetTimer = 1.0f;
      
+	[SerializeField] private InputController inputController = null;
 
     private SpriteRenderer spriteRenderer;
     private int coins;
@@ -75,7 +76,8 @@ public class CatController : StatefulMonobehaviour
         }
         catMoveRef.enabled = true;
         spriteRenderer.color = Color.white;
-        SuscribeControl();
+		this.inputController.Register (this);
+		this.catMoveRef.ResetToPlay (this.transform.position);
     }
     // Exiting playing we unsuscribe the control so that Pause or death disable controls
 
@@ -83,7 +85,7 @@ public class CatController : StatefulMonobehaviour
     {
         if (nextState != Utility.STATE_POISONED)
         {
-            UnsuscribeControl();
+			this.inputController.Unregister(this);
         }
     }
     // Entering the reset state, collider is disabled to avoid multiple collision
@@ -94,7 +96,7 @@ public class CatController : StatefulMonobehaviour
         GetComponent<Rigidbody2D>().isKinematic = true;
         catMoveRef.enabled = false;
         timer = resetTimer;
-        UnsuscribeControl();
+		this.inputController.Unregister (this);
     }
 
     protected virtual void UpdateReset() 
@@ -123,8 +125,6 @@ public class CatController : StatefulMonobehaviour
 			transform.position = position;
 		}
         
-        // Reset the CatMove component
-        catMoveRef.ResetToPlay();
         // Set the collider and rigidbody
         GetComponent<Collider2D>().enabled = true;
         GetComponent<Rigidbody2D>().isKinematic = false;
@@ -158,18 +158,17 @@ public class CatController : StatefulMonobehaviour
         }
     }
 
-    private void SuscribeControl() 
-    {
-       // InputController.Instance.RaiseMovement += catMoveRef.Move;
-        //InputController.Instance.RaiseJump += catMoveRef.Jump;
-    }
-    private void UnsuscribeControl() 
-    {
-#if UNITY_EDITOR
-       // InputController.Instance.RaiseMovement -= catMoveRef.Move;
-        //InputController.Instance.RaiseJump -= catMoveRef.Jump;
-#endif
-    }
+	public void HandleSingleTap(Vector3 vec)
+	{
+		Ray ray = Camera.main.ScreenPointToRay (vec);
+		Vector3 target = ray.origin;
+		target.z = 0f;
+		this.catMoveRef.Move (target);
+	}
+	public void HandlerDoubleTap()
+	{
+		this.catMoveRef.Jump ();
+	}
 
     private void CheckCoinForExtraLife(int coin) 
     {

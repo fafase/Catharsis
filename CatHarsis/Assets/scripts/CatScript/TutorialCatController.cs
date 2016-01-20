@@ -1,31 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TutorialCatController : MonoBehaviour 
+public class TutorialCatController : MonoBehaviour , IInputListener
 {
-	[SerializeField] private InputManager inputManager = null;
+	[SerializeField] private InputController inputCtrl = null;
 	[SerializeField] private CatMove catMove = null;
-	private void Awake()
-	{
-		//RegisterMovement ();
-	}
 
 	public void RegisterMovement()
 	{
-		this.inputManager.OnSingleTap += HandleOnMovementCall;
-		this.inputManager.OnDoubleTap += HandleOnTouch;
-	}
-
-	void HandleOnTouch ()
-	{
-		this.catMove.Jump ();
+		this.inputCtrl.RegisterSingleTap (this);
 	}
 	public void UnregisterMovement()
 	{
-		this.inputManager.OnSingleTap -= HandleOnMovementCall;
+		this.inputCtrl.UnregisterSingleTap (this);
+	}
+	public void RegisterJump()
+	{
+		this.inputCtrl.RegisterDoubleTap (this);
+	}
+	public void UnregisterJump()
+	{
+		this.inputCtrl.UnregisterDoubleTap (this);
 	}
 	private void HandleOnMovementCall (Vector3 value)
 	{
 		this.catMove.Move (value);
+	}
+
+	public void HandleSingleTap(Vector3 vec)
+	{
+		Ray ray = Camera.main.ScreenPointToRay (vec);
+		Vector3 target = ray.origin;
+		target.z = 0f;
+		this.catMove.Move (target);
+	}
+	public void HandlerDoubleTap()
+	{
+		this.catMove.Jump ();
 	}
 }

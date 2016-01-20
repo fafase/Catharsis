@@ -118,9 +118,9 @@ public class CatMove : MonoBehaviour
         anim.SetBool(Utility.ANIM_IS_DYING, true);
     }
 
-    public void ResetToPlay() 
+    public void ResetToPlay(Vector3 targetReset) 
     {
+		this.target = targetReset;
         anim.SetBool(Utility.ANIM_IS_DYING, false);
-       // movement = 0f;
     }
 }

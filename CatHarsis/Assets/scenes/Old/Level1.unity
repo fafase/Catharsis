@@ -396,7 +396,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
       propertyPath: jumpForce
-      value: 430
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
       propertyPath: mat
@@ -417,6 +417,14 @@ Prefab:
     - target: {fileID: 11400002, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
       propertyPath: lives
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
+      propertyPath: inputController
+      value: 
+      objectReference: {fileID: 1226610934}
+    - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
+      propertyPath: maxSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
@@ -3392,8 +3400,8 @@ EdgeCollider2D:
   - {x: 19.8143501, y: 1.13353324}
   - {x: 18.981369, y: 1.10654593}
   - {x: 18.6808491, y: .40741998}
-  - {x: 17.7170525, y: .214139014}
-  - {x: 17.4344006, y: -1.30919778}
+  - {x: 17.6367207, y: .214138821}
+  - {x: 17.4745693, y: -1.30919766}
   - {x: 16.25037, y: -1.31612933}
   - {x: 15.2466135, y: -2.29053497}
   - {x: 13.3685732, y: -2.66411448}
@@ -3415,7 +3423,7 @@ EdgeCollider2D:
   - {x: -4.10103083, y: 1.14396572}
   - {x: -5.50850344, y: 1.13361669}
   - {x: -5.15040207, y: -1.76515114}
-  - {x: -5.44621944, y: -3.63662148}
+  - {x: -5.24538612, y: -3.67678881}
   - {x: -6.82326317, y: -3.95297003}
   - {x: -8.35161304, y: -3.72634673}
   - {x: -10.1986504, y: -3.89267325}
@@ -3442,7 +3450,7 @@ EdgeCollider2D:
   - {x: -14.8043871, y: -3.70666528}
   - {x: -16.621994, y: -3.920156}
   - {x: -17.2845268, y: -4.25801516}
-  - {x: -18.031765, y: -4.68276119}
+  - {x: -18.1924324, y: -4.52209425}
   - {x: -18.127037, y: -5.37522125}
   - {x: -18.9704056, y: -5.53957033}
   - {x: -19.6737595, y: -5.90333366}
@@ -3705,7 +3713,7 @@ Camera:
   near clip plane: .300000012
   far clip plane: 100
   field of view: 32
-  orthographic: 0
+  orthographic: 1
   orthographic size: 3
   m_Depth: -1
   m_CullingMask:
@@ -4003,7 +4011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef60a83f0d94084081c82a81d267968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catController: {fileID: 1527935204}
+  inputManager: {fileID: 1226610931}
 --- !u!1 &1263826007
 GameObject:
   m_ObjectHideFlags: 0
@@ -4625,12 +4633,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 159000999}
   m_Script: {fileID: 11500000, guid: 810ecd73b862b5742b74b169e39dbdca, type: 3}
---- !u!114 &1527935204 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11400004, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b,
-    type: 2}
-  m_PrefabInternal: {fileID: 159000999}
-  m_Script: {fileID: 11500000, guid: 25dae5e4a3601304ca8f22936931ef9e, type: 3}
 --- !u!114 &1527935205 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400006, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b,

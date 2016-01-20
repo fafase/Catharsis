@@ -2,46 +2,50 @@
 using System.Collections;
 using System;
 
-/// <summary>
-/// InputController is attached to the GameManager
-/// Purpose is to link InputManager with classes needing input
-/// CatController for cat movements
-/// InGameGUI for GUI buttons
-/// </summary>
+[RequireComponent(typeof(InputManager))]
 public class InputController : Singleton<InputController> 
 {
+	private InputManager inputManager = null;
 
-    [SerializeField]
-    private CatController catController;
-	
-	public event EventHandler<EventArgs> RaiseJump;
-	protected void OnJump(EventArgs arg)
+	private void Awake()
 	{
-		if (RaiseJump != null) 
-		{
-			RaiseJump(this, arg);		
-		}
+		this.inputManager = this.gameObject.GetComponent<InputManager> ();
 	}
-    public event Action<Vector3> RaiseMovement = (f) => { };
 
-#if UNITY_EDITOR
-	private void Update()
+	public void RegisterSingleTap(IInputListener inputListener)
 	{
-		if (Input.GetKeyDown (KeyCode.Space)) 
-		{
-			OnJump(null);
-		}
+		this.inputManager.OnSingleTap += inputListener.HandleSingleTap;
 	}
-#endif
-
-	private void OnDestroy() 
+	public void UnregisterSingleTap(IInputListener inputListener)
 	{
-		RaiseMovement = null;
-		RaiseJump = null;
+		this.inputManager.OnSingleTap -= inputListener.HandleSingleTap;
 	}
+	public void RegisterDoubleTap(IInputListener inputListener)
+	{
+		this.inputManager.OnDoubleTap += inputListener.HandlerDoubleTap;
+	}
+	public void UnregisterDoubleTap(IInputListener inputListener)
+	{
+		this.inputManager.OnDoubleTap -= inputListener.HandlerDoubleTap;
+	}	
+	public void Register(IInputListener inputListener)
+	{
+		this.inputManager.OnSingleTap += inputListener.HandleSingleTap;
+		this.inputManager.OnDoubleTap += inputListener.HandlerDoubleTap;
+	}
+	public void Unregister(IInputListener inputListener)
+	{
+		this.inputManager.OnSingleTap -= inputListener.HandleSingleTap;
+		this.inputManager.OnDoubleTap -= inputListener.HandlerDoubleTap;
+	}
+	void OnDestroy()
+	{
+		this.inputManager = null;
+	}
+}
 
-	public void Jump() 
-    {
-		OnJump (null);
-	}
+public interface IInputListener
+{
+	void HandleSingleTap(Vector3 vec);
+	void HandlerDoubleTap();
 }
