@@ -45,6 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AnyComponent.cs" />
      <Compile Include="Assets\SampleAssets\2D\Scripts\Camera2DFollow.cs" />
      <Compile Include="Assets\SampleAssets\2D\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\SampleAssets\2D\Scripts\Platformer2DUserControl.cs" />
@@ -186,6 +187,7 @@
      <Compile Include="Assets\SampleAssets\Vehicles\Car\Scripts\Wheel.cs" />
      <Compile Include="Assets\SampleAssets\Vehicles\RollerBall\Scripts\Ball.cs" />
      <Compile Include="Assets\SampleAssets\Vehicles\RollerBall\Scripts\BallUserControl.cs" />
+     <Compile Include="Assets\Test.cs" />
      <Compile Include="Assets\TutorialController.cs" />
      <Compile Include="Assets\TutorialTextController.cs" />
      <Compile Include="Assets\scripts\AudioManager.cs" />

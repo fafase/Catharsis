@@ -38,15 +38,20 @@ public class TutorialTextController : MonoBehaviour {
 	public void WaitForTapIdle()
 	{
 		this.inputManager.OnSingleTap += SetIdle;
-		this.tapText.SetActive (true);
 	}
-	
+	private int tapCounter = 0;
 	private void SetIdle(Vector3 vec)
 	{
-		this.inputManager.OnSingleTap -= SetNextAnim;
-		//index++;
 		this.animator.SetBool ("idle", true);
-		//this.tapText.SetActive (false);
+		this.tapText.SetActive (false);
+		if (++this.tapCounter > 3) 
+		{
+			UnregisterMovement();
+			this.animator.SetBool ("idle", false);
+			this.inputManager.OnSingleTap -= SetIdle;
+			index++;
+			this.animator.SetInteger ("index", index);
+		}
 	}
 
 	public void Anim0Text()
@@ -93,6 +98,14 @@ public class TutorialTextController : MonoBehaviour {
 		this.textCat0.text = "Don't think I can.";
 		this.textJelly1.text = "Now you can. If the player would not mind a little tap.";
 		this.textCat1.text = "Player...? Can you do that?";
+	}
+	public void Anim6Text()
+	{
+		this.tutCatCtrl.HandleSingleTap (new Vector3(0.5f,-5.9f,0f));
+		this.textJelly0.text = "Ok, come back here now.";
+		this.textCat0.text = "So in this game of death, I can walk to overcome challenges. What if I fail?";
+		this.textJelly1.text = "You try again.";
+		this.textCat1.text = "Mmm...Original.";
 	}
 
 	private IEnumerator ShowJelly()
