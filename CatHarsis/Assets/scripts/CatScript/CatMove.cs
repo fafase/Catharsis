@@ -54,19 +54,19 @@ public class CatMove : MonoBehaviour
             anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
             anim.SetFloat(Utility.ANIM_VSPEED, this.rig.velocity.y);
         }
-		if (Mathf.Abs (this.target.x - this.transform.position.x) < 0.5f) 
-		{
-			this.target = this.transform.position;
-			return;
-		}
 		this.rig.velocity = new Vector2(movement * maxSpeed, velY);
     }
 
-    public void Move(Vector3 position)
+    public void Move(Vector3 position, bool overrideDirection = false)
     {
 		float deltaX = position.x - transform.position.x; 
-		movement = deltaX > 0 ? 1f: -1f;
-		this.target = position;
+		float tempMove = deltaX > 0 ? 1f : -1f;
+		if (overrideDirection == false) 
+		{
+			this.movement = (Mathf.Approximately (tempMove, this.movement) == true) ? 0f : tempMove;
+		} else {
+			this.movement = tempMove;
+		}
 		if (deltaX > 0 && !facingRight)
         {
             Flip();
@@ -76,7 +76,10 @@ public class CatMove : MonoBehaviour
             Flip();
         }
     }
-
+	public void StopMovement()
+	{
+		this.movement = 0;
+	}
     public void Jump()
 	{
         if (!grounded)
@@ -104,7 +107,7 @@ public class CatMove : MonoBehaviour
         this.rig.AddForce(new Vector2(0, jumpForce));
     }
 
-    void Flip()
+    public void Flip()
     {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
@@ -120,7 +123,7 @@ public class CatMove : MonoBehaviour
 
     public void ResetToPlay(Vector3 targetReset) 
     {
-		this.target = targetReset;
+		//this.target = targetReset;
         anim.SetBool(Utility.ANIM_IS_DYING, false);
     }
 }

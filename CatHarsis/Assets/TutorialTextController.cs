@@ -13,12 +13,15 @@ public class TutorialTextController : MonoBehaviour {
 	[SerializeField] private TutorialCatController tutCatCtrl = null;
 	[SerializeField] private GameObject tapText = null;
 	[SerializeField] private GameObject jellyFish = null;
+	[SerializeField] private GameObject movementTutorial = null;
+
 	private int index = 0;
 
 	private void Awake()
 	{
 		this.tapText.SetActive (false);
 		this.jellyFish.SetActive (false);
+		this.movementTutorial.SetActive (false);
 	}
 
 	public void WaitForTap()
@@ -39,18 +42,23 @@ public class TutorialTextController : MonoBehaviour {
 	{
 		this.inputManager.OnSingleTap += SetIdle;
 	}
+
 	private int tapCounter = 0;
 	private void SetIdle(Vector3 vec)
 	{
+		this.movementTutorial.SetActive (false);
 		this.animator.SetBool ("idle", true);
 		this.tapText.SetActive (false);
-		if (++this.tapCounter > 3) 
+		if (++this.tapCounter == 10) 
 		{
 			UnregisterMovement();
-			this.animator.SetBool ("idle", false);
+			UnregisterJump();
 			this.inputManager.OnSingleTap -= SetIdle;
-			index++;
-			this.animator.SetInteger ("index", index);
+			this.tutCatCtrl.MoveToPosition(()=> {
+				this.animator.SetBool ("idle", false);
+				index++;
+				this.animator.SetInteger ("index", index); 
+			});
 		}
 	}
 
@@ -124,6 +132,7 @@ public class TutorialTextController : MonoBehaviour {
 
 	public void RegisterMovement()
 	{
+		this.movementTutorial.SetActive (true);
 		this.tutCatCtrl.RegisterMovement ();
 	}
 

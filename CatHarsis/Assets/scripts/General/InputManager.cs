@@ -10,6 +10,7 @@ public class InputManager : Singleton<InputManager>
 	
 	public event Action<Vector3> OnSingleTap;
 	public event Action OnDoubleTap;
+	public event Action<Vector2, Vector2> OnSwipe;
 
 	[Tooltip("Defines the maximum time between two taps to make it double tap")]
 	[SerializeField]private float tapThreshold = 0.25f;
@@ -36,7 +37,7 @@ public class InputManager : Singleton<InputManager>
 		OnSingleTap = null;
 		OnDoubleTap = null;
 	}
-	//private Vector3 position;
+	private Vector3 position;
 	#if UNITY_EDITOR || UNITY_STANDALONE
 	private void UpdateEditor() 
 	{
@@ -48,11 +49,10 @@ public class InputManager : Singleton<InputManager>
 				this.tap = false;
 				return;
 			}
-			//this.position = Input.mousePosition;
+			this.position = Input.mousePosition;
 			this.tap = true;
 			this.tapTimer = Time.time;
 		}
-		
 		if (tap == true && Time.time > tapTimer + .3f) 
 		{
 			tap = false;
