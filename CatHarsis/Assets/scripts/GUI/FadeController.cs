@@ -10,12 +10,17 @@ public class FadeController : MonoBehaviour
 
 	private void Awake()
 	{
-		this.animator = this.gameObject.GetComponent<Animator> ();
+		if (this.animator == null) {
+			this.animator = this.gameObject.GetComponent<Animator> ();
+		}
 	}
 
 	public void StartFade (string parameter, System.Action onFadeDone)
 	{
 		action = onFadeDone;
+		if (this.animator == null) {
+			this.animator = this.gameObject.GetComponent<Animator> ();
+		}
 		this.animator.SetBool (parameter, true);
 	}
 	public void OnFadeoutDone()

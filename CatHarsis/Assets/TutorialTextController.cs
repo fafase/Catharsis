@@ -14,6 +14,7 @@ public class TutorialTextController : MonoBehaviour {
 	[SerializeField] private GameObject tapText = null;
 	[SerializeField] private GameObject jellyFish = null;
 	[SerializeField] private GameObject movementTutorial = null;
+	[SerializeField] private FadeController fadeCtrl = null;
 
 	private int index = 0;
 
@@ -22,6 +23,7 @@ public class TutorialTextController : MonoBehaviour {
 		this.tapText.SetActive (false);
 		this.jellyFish.SetActive (false);
 		this.movementTutorial.SetActive (false);
+		this.fadeCtrl.StartFade ("FadeIn", null);
 	}
 
 	public void WaitForTap()
@@ -29,7 +31,15 @@ public class TutorialTextController : MonoBehaviour {
 		this.inputManager.OnSingleTap += SetNextAnim;
 		this.tapText.SetActive (true);
 	}
-
+	public void WaitForFinalTap()
+	{
+		this.inputManager.OnSingleTap += LoadLevel;
+		this.tapText.SetActive (true);
+	}
+	private void LoadLevel(Vector3 vec)
+	{
+		Application.LoadLevel ("Level1");
+	}
 	private void SetNextAnim(Vector3 vec)
 	{
 		this.inputManager.OnSingleTap -= SetNextAnim;
@@ -70,8 +80,8 @@ public class TutorialTextController : MonoBehaviour {
 	public void Anim1Text()
 	{
 		this.textJelly0.text = "You are finally deceased.";
-		this.textCat0.text = "Deceased??!! As in decesased of death?";
-		this.textJelly1.text = "...Somehow...yeah";
+		this.textCat0.text = "Deceased??!! You mean deceased of death?";
+		this.textJelly1.text = "Well...Somehow...yeah";
 		this.textCat1.text = "Who's there?";
 	}
 
@@ -107,6 +117,7 @@ public class TutorialTextController : MonoBehaviour {
 		this.textJelly1.text = "Now you can. If the player would not mind a little tap.";
 		this.textCat1.text = "Player...? Can you do that?";
 	}
+
 	public void Anim6Text()
 	{
 		this.tutCatCtrl.HandleSingleTap (new Vector3(0.5f,-5.9f,0f));
@@ -114,6 +125,11 @@ public class TutorialTextController : MonoBehaviour {
 		this.textCat0.text = "So in this game of death, I can walk to overcome challenges. What if I fail?";
 		this.textJelly1.text = "You try again.";
 		this.textCat1.text = "Mmm...Original.";
+	}
+	public void Anim7Text()
+	{
+		this.textJelly0.text = "Let's see what we can do shall we?";
+		this.textCat0.text = "Sure thing!";
 	}
 
 	private IEnumerator ShowJelly()

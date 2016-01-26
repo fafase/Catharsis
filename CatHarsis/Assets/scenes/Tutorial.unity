@@ -139,7 +139,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2ae96961f160ca64eb5a961e84b121ce, type: 3}
+    m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2ae96961f160ca64eb5a961e84b121ce, type: 3}
+    m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -358,11 +358,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
       propertyPath: jumpForce
-      value: 200
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 21200000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
+      propertyPath: maxSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400004, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
@@ -565,6 +569,7 @@ MonoBehaviour:
   tapText: {fileID: 611979730}
   jellyFish: {fileID: 1732549266}
   movementTutorial: {fileID: 649539498}
+  fadeCtrl: {fileID: 2046430734}
 --- !u!95 &571534010
 Animator:
   serializedVersion: 3
@@ -636,7 +641,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2ae96961f160ca64eb5a961e84b121ce, type: 3}
+    m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -780,7 +785,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2ae96961f160ca64eb5a961e84b121ce, type: 3}
+    m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -950,6 +955,7 @@ RectTransform:
   m_Children:
   - {fileID: 611979731}
   - {fileID: 649539499}
+  - {fileID: 2046430733}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_AnchorMin: {x: 0, y: 0}
@@ -1178,8 +1184,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2ae96961f160ca64eb5a961e84b121ce, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: ac6bf4af3796f4e27a3cd55f67ba64a3, type: 3}
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1189,7 +1195,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Tap to move in a direction, \ntap the same directio to stop, \ntap opposite
+  m_Text: "Tap to move in a direction.\nTap the same direction to stop.\nTap opposite
     to move the opposite direction. \nDouble tap to jump."
 --- !u!222 &1125989591
 CanvasRenderer:
@@ -2205,6 +2211,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!1001 &1688495846
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 765841114}
+    m_Modifications:
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.14440918e-05
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 3.05180001e-05
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_Pivot.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+      propertyPath: m_Pivot.y
+      value: .5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1728405567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2459,6 +2547,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1839429673}
+--- !u!224 &2046430733 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1688495846}
+--- !u!114 &2046430734 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11445358, guid: 9da7df59083d24456a6b20b8aa94fac9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1688495846}
+  m_Script: {fileID: 11500000, guid: 9c6600be14a9dda419d305bd6489e95e, type: 3}
 --- !u!4 &2096706572 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
