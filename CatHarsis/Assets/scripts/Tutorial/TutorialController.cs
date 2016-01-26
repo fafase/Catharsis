@@ -32,7 +32,7 @@ public class TutorialController : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (Time.time < tapTimer + .3f)
+			if (Time.time < tapTimer + this.tapThreshold)
 			{
 				if(OnDoubleTap != null) { OnDoubleTap(); }
  				tap = false;
@@ -42,7 +42,7 @@ public class TutorialController : MonoBehaviour
 			tapTimer = Time.time;
 		}
 		
-		if (tap == true && Time.time > tapTimer + .3f) 
+		if (tap == true && Time.time > tapTimer + this.tapThreshold) 
 		{
 			tap = false;
 			if(OnSingleTap != null) { OnSingleTap(Input.mousePosition); }

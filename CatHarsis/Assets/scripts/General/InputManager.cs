@@ -37,7 +37,6 @@ public class InputManager : Singleton<InputManager>
 		OnSingleTap = null;
 		OnDoubleTap = null;
 	}
-	private Vector3 position;
 	#if UNITY_EDITOR || UNITY_STANDALONE
 	private void UpdateEditor() 
 	{
@@ -49,7 +48,6 @@ public class InputManager : Singleton<InputManager>
 				this.tap = false;
 				return;
 			}
-			this.position = Input.mousePosition;
 			this.tap = true;
 			this.tapTimer = Time.time;
 		}
