@@ -1,10 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/Tutorial/TutorialController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/General/InputManager.cs">
     <Files>
       <File FileName="Assets/scripts/ChallengeMessage.cs" Line="1" Column="1" />
-      <File FileName="Assets/Test.cs" Line="7" Column="2" />
+      <File FileName="Assets/Test.cs" Line="1" Column="1" />
       <File FileName="Assets/scripts/Tutorial/TutorialController.cs" Line="45" Column="62" />
+      <File FileName="Assets/scripts/General/InputManager.cs" Line="50" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
