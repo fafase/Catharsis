@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -15,7 +15,7 @@ public class LoadingScreen : MonoBehaviour {
 	void Awake () 
     {
         text.text = str[index];
-        FindObjectOfType<GameHandler>().OnChangeState += RemoveSreen;
+        FindObjectOfType<GameHandler>().RaiseChangeState += RemoveSreen;
 	}
     private bool isLoading = true;
 	void Update () 
@@ -49,9 +49,9 @@ public class LoadingScreen : MonoBehaviour {
         }
 	}
 
-    private void RemoveSreen(string newState) 
+    private void RemoveSreen( object sender, StateEventArg arg) 
     {
-        if (newState == Utility.GAME_STATE_PLAYING)
+        if (arg.currentState == Utility.GAME_STATE_PLAYING)
         {
             isLoading = false;
         }

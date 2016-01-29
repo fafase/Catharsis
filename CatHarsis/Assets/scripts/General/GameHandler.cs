@@ -2,51 +2,55 @@
 using System.Collections;
 using System;
 
-/// <summary>
-/// GameHandler class is attached to the GameManager game object
-/// It is a singleton class and a StatefulMonobehaviour type
-/// </summary>
+public class StateEventArg : System.EventArgs
+{
+	public readonly string currentState = null;
+	public StateEventArg(string currentState)
+	{
+		this.currentState = currentState;
+	}
+}
 public class GameHandler : StatefulMonobehaviour 
 {
-    [SerializeField]
-    private GameObject pauseMenu;
-	[SerializeField]
-	private GameObject endMenu;
-    [SerializeField]
-    private PauseHandler pauseHandler;
-    [SerializeField]
-    private GameObject inGameGUI;
-    public Action<string> OnChangeState = (string s)=>{};
-    private bool isPause = false;
-    [SerializeField]
-	private float loadingTimer;
+    [SerializeField] private GameObject pauseMenu = null;
+	[SerializeField] private GameObject endMenu = null;
+    [SerializeField] private PauseHandler pauseHandler;
+    [SerializeField] private GameObject inGameGUI;
+	private bool isPause = false;
+	[SerializeField] private float loadingTimer = 0.0f;
+
+	public EventHandler<StateEventArg> RaiseChangeState;
+	protected void OnChangeState(StateEventArg arg){
+		if (RaiseChangeState != null) {
+			RaiseChangeState(this, arg);		
+		}
+	}
    
     // Singleton part
-    private static GameHandler instance;
-	public static GameHandler Instance{
+    private static GameHandler instance = null;
+	public static GameHandler Instance
+	{
 		get
 		{
 			return instance;
 		}
 	}
     
-    void Awake() 
+    private void Awake() 
     {
         if (instance == null)
         {
             instance = this;
         }
-
-        SetGlobalSettings();
       
         // Register the pause and end level events
 		FindObjectOfType<EndLevel>().OnEnd += this.OnEnd;
         
         // Register all states of the game
         InitializeStateMachine(true);
-        AddStateWithTransitions(Utility.GAME_STATE_LOADING, new string []{ Utility.GAME_STATE_PLAYING });
+		AddStateWithTransitions(Utility.GAME_STATE_LOADING, new string []{ Utility.GAME_STATE_PLAYING,Utility.GAME_STATE_PAUSE });
         AddStateWithTransitions(Utility.GAME_STATE_PLAYING, new string[]{Utility.GAME_STATE_PAUSE, Utility.GAME_STATE_GAMEWON, Utility.GAME_STATE_GAMELOST});
-        AddStateWithTransitions(Utility.GAME_STATE_PAUSE, new string[]{Utility.GAME_STATE_PLAYING});
+		AddStateWithTransitions(Utility.GAME_STATE_PAUSE, new string[]{Utility.GAME_STATE_PLAYING,Utility.GAME_STATE_LOADING});
         AddStateWithTransitions(Utility.GAME_STATE_GAMELOST, new string[]{Utility.GAME_STATE_LOADING});
         AddStateWithTransitions(Utility.GAME_STATE_GAMEWON, new string[]{Utility.GAME_STATE_LOADING});
         RequestStateHandler(Utility.GAME_STATE_LOADING);
@@ -91,10 +95,8 @@ public class GameHandler : StatefulMonobehaviour
     public void RequestStateHandler(string state)
     {
         RequestState(state);
-        OnChangeState(CurrentState);
+        OnChangeState(new StateEventArg(CurrentState));
     }
-
- 
 
     public void OnPause() 
     {
@@ -149,15 +151,6 @@ public class GameHandler : StatefulMonobehaviour
             }
             yield return null;
         }
-    }
-
-    private void SetGlobalSettings()
-    {
-        // Set global settings for game
-        QualitySettings.vSyncCount = 0;
-        
-        Application.targetFrameRate = 60;
-        Application.runInBackground = true;
     }
 }
 

@@ -116,9 +116,15 @@ public class CatMove : MonoBehaviour
     }
     public void ResetOnDeath()
     {
-        anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
-        anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
-        anim.SetBool(Utility.ANIM_IS_DYING, true);
+		this.rig.velocity = Vector2.zero;
+		this.movement = 0f;
+        this.anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
+        this.anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
+        this.anim.SetBool(Utility.ANIM_IS_DYING, true);
+		this.facingRight = true;
+		Vector3 theScale = transform.localScale;
+		theScale.x = Mathf.Abs (theScale.x);
+		transform.localScale = theScale;
     }
 
     public void ResetToPlay(Vector3 targetReset) 

@@ -33,7 +33,7 @@ public class CatController : StatefulMonobehaviour, IInputListener
 
         if (gameHandler != null)
         {
-            gameHandler.OnChangeState += OnGameHandlerChangeState;
+            gameHandler.RaiseChangeState += OnGameHandlerChangeState;
         }
         DeathTrigger.OnDeath += ResetOnDeath;
 
@@ -142,13 +142,14 @@ public class CatController : StatefulMonobehaviour, IInputListener
             ResetOnDeath(CatDeath.Gas);
         }
     }
-    private void OnGameHandlerChangeState(string newState)
+    private void OnGameHandlerChangeState(object sender, StateEventArg arg)
     {
+		string newState = arg.currentState;
         if (newState == Utility.GAME_STATE_PLAYING)
         {
             RequestState(Utility.STATE_PLAYING);
         }
-        else if (newState == Utility.GAME_STATE_PAUSE || newState == Utility.GAME_STATE_GAMEWON)
+		else if (newState == Utility.GAME_STATE_PAUSE || newState == Utility.GAME_STATE_GAMEWON)
         {
             RequestState(Utility.STATE_PAUSE);
         }
