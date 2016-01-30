@@ -7,7 +7,10 @@ using System.Collections;
 /// It is of type StatefulMonobehaviour and controls the states of the cat. 
 /// It also communicates witht he GameHandler to update the game state, mainly if the cat is dead. 
 /// </summary>
-public class CatController : StatefulMonobehaviour, IInputListener
+using System;
+
+
+public class CatController : StateMachine, IInputListener
 {
 	[SerializeField] private CatMove catMoveRef;
 	[SerializeField] private CatHealth catHealth;
@@ -26,7 +29,7 @@ public class CatController : StatefulMonobehaviour, IInputListener
     float timer = 1f;
 
 	CatDeath catDeath = CatDeath.None;
-
+	enum CatState { Starting, Playing, Pause, Reset, Poisoned, Dead }
 	private void Awake () 
 	{
         gameHandler = FindObjectOfType<GameHandler>();
@@ -40,35 +43,25 @@ public class CatController : StatefulMonobehaviour, IInputListener
         catInventory.OnAddSoul += CheckCoinForExtraLife;
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        InitializeStateMachine(true);
-        AddStateWithTransitions(Utility.STATE_STARTING, new string[]{Utility.STATE_PLAYING});
-        AddStateWithTransitions(Utility.STATE_PLAYING, new string[] { Utility.STATE_PAUSE, Utility.STATE_RESET,Utility.STATE_POISONED, Utility.STATE_DEAD });
-        AddStateWithTransitions(Utility.STATE_RESET, new string[]{Utility.STATE_PLAYING, Utility.STATE_PAUSE});
-        AddStateWithTransitions(Utility.STATE_DEAD, new string[] { Utility.STATE_STARTING});
-        AddStateWithTransitions(Utility.STATE_PAUSE, new string[]{Utility.STATE_PLAYING, Utility.STATE_RESET});
-        AddStateWithTransitions(Utility.STATE_POISONED, new string[] { Utility.STATE_RESET});
-        RequestState(Utility.STATE_STARTING);   
+		InitializeStateMachine<CatState> (CatState.Starting, true);
+		AddTransitionsToState(CatState.Starting, new Enum[]{CatState.Playing});
+		AddTransitionsToState(CatState.Playing, new Enum[] { CatState.Pause, CatState.Reset,CatState.Poisoned, CatState.Dead });
+		AddTransitionsToState(CatState.Reset, new Enum[]{CatState.Playing, CatState.Pause});
+		AddTransitionsToState(CatState.Dead, new Enum[] { CatState.Starting });
+		AddTransitionsToState(CatState.Pause, new Enum[]{CatState.Playing, CatState.Reset});
+		AddTransitionsToState(CatState.Poisoned, new Enum[] { CatState.Reset});
 	}
-    
-    private void Update()
-    {
-        StateUpdate();
-        if (CurrentState == Utility.STATE_STARTING)
-        {
-            return;
-        }
-    }
 
     public void PoisonCat()
     {
-        if (CurrentState == Utility.STATE_POISONED) 
+        if ((CatState)CurrentState == CatState.Poisoned) 
         {
             return;
         }
-        RequestState(Utility.STATE_POISONED);
+        ChangeCurrentState(CatState.Poisoned);
     }
 
-    protected virtual void EnterPlaying(string oldState)
+    protected virtual void EnterPlaying(Enum oldState)
     {
         if (AudioManager.Instance != null)
         {
@@ -81,16 +74,16 @@ public class CatController : StatefulMonobehaviour, IInputListener
     }
     // Exiting playing we unsuscribe the control so that Pause or death disable controls
 
-    protected virtual void ExitPlaying(string nextState)
+    protected virtual void ExitPlaying(Enum nextState)
     {
-        if (nextState != Utility.STATE_POISONED)
+        if ((CatState)nextState != CatState.Poisoned)
         {
 			this.inputController.Unregister(this);
         }
     }
     // Entering the reset state, collider is disabled to avoid multiple collision
     // timer is set and control are unregistered
-    protected virtual void EnterReset(string oldState) 
+    protected virtual void EnterReset(Enum oldState) 
     {
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().isKinematic = true;
@@ -105,10 +98,10 @@ public class CatController : StatefulMonobehaviour, IInputListener
         timer -= Time.deltaTime;
         if (timer <= 0.0f) 
         {
-            RequestState(Utility.STATE_PLAYING);
+            ChangeCurrentState(CatState.Playing);
         }
     }
-    protected virtual void ExitReset(string nextState)
+    protected virtual void ExitReset(Enum nextState)
     {
         // if we require a dead corpse
         if (catDeath != CatDeath.Fall)
@@ -129,7 +122,7 @@ public class CatController : StatefulMonobehaviour, IInputListener
         GetComponent<Collider2D>().enabled = true;
         GetComponent<Rigidbody2D>().isKinematic = false;
     }
-    protected virtual void EnterPoisoned(string oldState)
+    protected virtual void EnterPoisoned(Enum oldState)
     {
         timer = 3f;
     }
@@ -144,18 +137,18 @@ public class CatController : StatefulMonobehaviour, IInputListener
     }
     private void OnGameHandlerChangeState(object sender, StateEventArg arg)
     {
-		string newState = arg.currentState;
-        if (newState == Utility.GAME_STATE_PLAYING)
+		GameState newState = (GameState)arg.currentState;
+		if (newState == GameState.Playing)
         {
-            RequestState(Utility.STATE_PLAYING);
+            ChangeCurrentState(CatState.Playing);
         }
-		else if (newState == Utility.GAME_STATE_PAUSE || newState == Utility.GAME_STATE_GAMEWON)
+		else if (newState == GameState.Pause || newState == GameState.GameWon)
         {
-            RequestState(Utility.STATE_PAUSE);
+			ChangeCurrentState(CatState.Pause);
         }
-        else if (newState == Utility.GAME_STATE_GAMELOST)
+		else if (newState == GameState.GameLost)
         {
-            RequestState(Utility.STATE_DEAD);
+			ChangeCurrentState(CatState.Dead);
         }
     }
 
@@ -188,11 +181,11 @@ public class CatController : StatefulMonobehaviour, IInputListener
 		this.catDeath = catDeath;
         if (life >= 0)
         {
-            RequestState(Utility.STATE_RESET);
+            ChangeCurrentState(CatState.Reset);
         }
         else
         {
-            gameHandler.RequestStateHandler(Utility.GAME_STATE_GAMELOST);
+			gameHandler.RequestStateHandler(GameState.GameLost);
         }
     } 
 }

@@ -51,7 +51,7 @@ public class LoadingScreen : MonoBehaviour {
 
     private void RemoveSreen( object sender, StateEventArg arg) 
     {
-        if (arg.currentState == Utility.GAME_STATE_PLAYING)
+		if ((GameState)arg.currentState == GameState.Playing)
         {
             isLoading = false;
         }
