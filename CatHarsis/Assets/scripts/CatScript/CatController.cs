@@ -17,6 +17,7 @@ public class CatController : StateMachine, IInputListener
     [SerializeField] private CatInventory catInventory;
 	[SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform jellyPosition;
+
     [SerializeField]
     private GameHandler gameHandler;
     [SerializeField]
@@ -29,7 +30,7 @@ public class CatController : StateMachine, IInputListener
     float timer = 1f;
 
 	CatDeath catDeath = CatDeath.None;
-	enum CatState { Starting, Playing, Pause, Reset, Poisoned, Dead }
+	enum CatState { OnHold, Starting, Playing, Pause, Reset, Poisoned, Dead }
 	private void Awake () 
 	{
         gameHandler = FindObjectOfType<GameHandler>();
@@ -41,15 +42,17 @@ public class CatController : StateMachine, IInputListener
         DeathTrigger.RaiseDeath += ResetOnDeath;
 
         catInventory.OnAddSoul += CheckCoinForExtraLife;
-
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		InitializeStateMachine<CatState> (CatState.Starting, true);
+		 
+		InitializeStateMachine<CatState> (CatState.OnHold, true);
+		AddTransitionsToState (CatState.OnHold, new Enum[] { CatState.Starting });
 		AddTransitionsToState(CatState.Starting, new Enum[]{CatState.Playing});
 		AddTransitionsToState(CatState.Playing, new Enum[] { CatState.Pause, CatState.Reset,CatState.Poisoned, CatState.Dead });
-		AddTransitionsToState(CatState.Reset, new Enum[]{CatState.Playing, CatState.Pause});
+		AddTransitionsToState(CatState.Reset, new Enum[]{ CatState.Starting, CatState.Playing, CatState.Pause});
 		AddTransitionsToState(CatState.Dead, new Enum[] { CatState.Starting });
 		AddTransitionsToState(CatState.Pause, new Enum[]{CatState.Playing, CatState.Reset});
 		AddTransitionsToState(CatState.Poisoned, new Enum[] { CatState.Reset});
+		this.spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+		this.spriteRenderer.enabled = false;
 	}
 
     public void PoisonCat()
@@ -60,8 +63,32 @@ public class CatController : StateMachine, IInputListener
         }
         ChangeCurrentState(CatState.Poisoned);
     }
-
-    protected virtual void EnterPlaying(Enum oldState)
+	protected void EnterStarting(Enum previous)
+	{
+		if (this.jellyPosition != null) 
+		{
+			Vector3 position = jellyPosition.position;
+			transform.position = position;
+			Vector3 pos = this.transform.position;
+			pos.x += 1f;
+			this.catMoveRef.Move (pos);
+		}
+	}
+	protected void UpdateStarting()
+	{
+		if (this.catMoveRef.IsGrounded == true) 
+		{
+			ChangeCurrentState(CatState.Playing);		
+		}
+	}
+	protected void ExitStarting(Enum next)
+	{
+		Vector3 pos = this.transform.position;
+		pos.x += 1f;
+		this.catMoveRef.Move (pos);
+	}
+    
+	protected virtual void EnterPlaying(Enum oldState)
     {
         if (AudioManager.Instance != null)
         {
@@ -98,7 +125,7 @@ public class CatController : StateMachine, IInputListener
         timer -= Time.deltaTime;
         if (timer <= 0.0f) 
         {
-            ChangeCurrentState(CatState.Playing);
+            ChangeCurrentState(CatState.Starting);
         }
     }
     protected virtual void ExitReset(Enum nextState)
@@ -107,16 +134,10 @@ public class CatController : StateMachine, IInputListener
         if (catDeath != CatDeath.Fall)
         {
             GameObject obj = (GameObject)Instantiate(catPrefab, transform.position, Quaternion.identity);
-			obj.GetComponent<DeadCatController>().InitDeadCat(catDeath, transform.localScale.x);
-            
+			obj.GetComponent<DeadCatController>().InitDeadCat(catDeath, transform.localScale.x);           
         }
         // Place on the jelly
-		if (this.jellyPosition != null) 
-		{
-			Vector3 position = jellyPosition.position;
-			position.y -= 0.5f;
-			transform.position = position;
-		}
+
         
         // Set the collider and rigidbody
         GetComponent<Collider2D>().enabled = true;
@@ -140,7 +161,8 @@ public class CatController : StateMachine, IInputListener
 		GameState newState = (GameState)arg.currentState;
 		if (newState == GameState.Playing)
         {
-            ChangeCurrentState(CatState.Playing);
+			this.spriteRenderer.enabled = true;
+            ChangeCurrentState(CatState.Starting);
         }
 		else if (newState == GameState.Pause || newState == GameState.GameWon)
         {

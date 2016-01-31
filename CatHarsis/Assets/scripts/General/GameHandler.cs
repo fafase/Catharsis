@@ -67,15 +67,6 @@ public class GameHandler : StateMachine
 
     }
 
-    /*protected virtual void UpdateLoading() 
-    {
-        loadingTimer -= Time.deltaTime; 
-        if (loadingTimer <= 0.0f)
-        {
-			RequestStateHandler(GameState.Playing);
-        }
-    }*/
-
     protected void EnterGameWon(Enum oldState)
     {
         inGameGUI.SetActive(false);
@@ -83,13 +74,11 @@ public class GameHandler : StateMachine
         pauseHandler.enabled = true;
         Transform tr = endMenu.transform.Find("TextInfo");
         tr.GetComponent<GUIText>().text = "Press R to restart";
-        //StartCoroutine(FadeInEndScreen(endMenu));
     }
 
     protected void EnterGameLost(Enum oldState)
     {
         endMenu.SetActive(true);
-        //StartCoroutine(FadeInEndScreen(endMenu));
     }
 
     public void RequestStateHandler(GameState state)
@@ -108,9 +97,7 @@ public class GameHandler : StateMachine
         pauseHandler.enabled = isPause;
         RequestStateHandler(state);
     }
-    
-    // OnEnd is called when EndLevel is called
-    // RequestStateHandler will propagate the message to listeners
+
 	private void OnEnd () 
 	{	
 		RequestStateHandler(GameState.GameWon);       

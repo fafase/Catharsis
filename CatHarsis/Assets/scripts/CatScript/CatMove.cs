@@ -21,6 +21,7 @@ public class CatMove : MonoBehaviour
     private PhysicsMaterial2D mat;
     private bool facingRight = true;
     private bool grounded = false;
+	public bool IsGrounded { get { return this.grounded; } }
     private float movement = 0f;
 	private Rigidbody2D rig = null;
 
@@ -34,10 +35,10 @@ public class CatMove : MonoBehaviour
 		float velY = this.rig.velocity.y;
 		velY = (velY > 8.24f) ? 8f : velY;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.50f, whatIsGround);
-        grounded = (hit.collider != null) ? true : false;       
+       	this.grounded = (hit.collider != null) ? true : false;       
 		anim.SetBool("Ground", grounded);
 
-        if (grounded)
+        if (this.grounded)
         {
             mat.friction = 1f;
             float angle = Vector2.Angle(Vector2.up, hit.normal);
