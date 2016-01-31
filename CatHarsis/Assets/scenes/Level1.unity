@@ -2618,6 +2618,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9,
     type: 2}
   m_PrefabInternal: {fileID: 561275109}
+--- !u!114 &583108417 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11445358, guid: 9da7df59083d24456a6b20b8aa94fac9,
+    type: 2}
+  m_PrefabInternal: {fileID: 561275109}
+  m_Script: {fileID: 11500000, guid: 9c6600be14a9dda419d305bd6489e95e, type: 3}
 --- !u!1001 &645077193
 Prefab:
   m_ObjectHideFlags: 0
@@ -3966,6 +3972,18 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1899866581}
   m_Script: {fileID: 11500000, guid: f385cbab93c5da04ca3025912c6ec1f5, type: 3}
+--- !u!114 &1226610932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1226610927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61235e1957314c00994ce1e02db3bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeController: {fileID: 583108417}
 --- !u!114 &1226610933 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400006, guid: 3bbca5cd544fe2641af98b7f5d3c1b46,
@@ -5269,6 +5287,10 @@ Prefab:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 839229823}
+    - target: {fileID: 11400000, guid: 3bbca5cd544fe2641af98b7f5d3c1b46, type: 2}
+      propertyPath: uiCtrl
+      value: 
+      objectReference: {fileID: 1226610932}
     m_RemovedComponents:
     - {fileID: 11400004, guid: 3bbca5cd544fe2641af98b7f5d3c1b46, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3bbca5cd544fe2641af98b7f5d3c1b46, type: 2}

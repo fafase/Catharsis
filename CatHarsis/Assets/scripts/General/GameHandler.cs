@@ -14,12 +14,15 @@ public enum GameState { Loading , Playing, Pause, GameLost, GameWon }
 
 public class GameHandler : StateMachine
 {
+	[SerializeField] private UIController uiCtrl = null;
+
+
     [SerializeField] private GameObject pauseMenu = null;
 	[SerializeField] private GameObject endMenu = null;
     [SerializeField] private PauseHandler pauseHandler;
     [SerializeField] private GameObject inGameGUI;
 	private bool isPause = false;
-	[SerializeField] private float loadingTimer = 0.0f;
+	//[SerializeField] private float loadingTimer = 0.0f;
 
 	public EventHandler<StateEventArg> RaiseChangeState;
 	protected void OnChangeState(StateEventArg arg){
@@ -47,7 +50,8 @@ public class GameHandler : StateMachine
       
         // Register the pause and end level events
 		FindObjectOfType<EndLevel>().OnEnd += this.OnEnd;
-        
+		this.uiCtrl.RaiseFadeInDone += HandleFadeInDone;
+		this.uiCtrl.StartFade ();
         // Register all states of the game
         InitializeStateMachine<GameState>(GameState.Loading,true);
 		AddTransitionsToState(GameState.Loading, new Enum []{ GameState.Playing,GameState.Pause });
@@ -60,16 +64,17 @@ public class GameHandler : StateMachine
         pauseHandler.enabled = false;
         pauseMenu.SetActive(false);
 		endMenu.SetActive (false);
+
     }
 
-    protected virtual void UpdateLoading() 
+    /*protected virtual void UpdateLoading() 
     {
         loadingTimer -= Time.deltaTime; 
         if (loadingTimer <= 0.0f)
         {
 			RequestStateHandler(GameState.Playing);
         }
-    }
+    }*/
 
     protected void EnterGameWon(Enum oldState)
     {
@@ -109,6 +114,11 @@ public class GameHandler : StateMachine
 	private void OnEnd () 
 	{	
 		RequestStateHandler(GameState.GameWon);       
+	}
+
+	private void HandleFadeInDone (object sender, EventArgs e)
+	{
+		OnChangeState(new StateEventArg(GameState.Playing));
 	}
 }
 

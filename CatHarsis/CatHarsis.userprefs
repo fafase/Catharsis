@@ -1,20 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/DeathTrigger/GasLeak.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/General/GameHandler.cs">
     <Files>
-      <File FileName="Assets/scripts/General/GameHandler.cs" Line="89" Column="1" />
-      <File FileName="Assets/scripts/CatScript/CatController.cs" Line="68" Column="45" />
-      <File FileName="Assets/scripts/LoadingScreen.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/CatScript/CatMove.cs" Line="25" Column="33" />
-      <File FileName="Assets/scripts/CatScript/StateMachine.cs" Line="7" Column="1" />
-      <File FileName="Assets/scripts/DeathTrigger/DeathZone.cs" Line="11" Column="36" />
-      <File FileName="Assets/scripts/DeathTrigger/FallingRock.cs" Line="14" Column="4" />
-      <File FileName="Assets/scripts/DeathTrigger/SkullDeath.cs" Line="11" Column="46" />
-      <File FileName="Assets/scripts/General/SetRespawn.cs" Line="23" Column="45" />
-      <File FileName="Assets/scripts/DeathTrigger/Spike.cs" Line="12" Column="49" />
-      <File FileName="Assets/scripts/Level1/TriggerRock.cs" Line="33" Column="62" />
-      <File FileName="Assets/scripts/DeathTrigger/Flower.cs" Line="14" Column="50" />
-      <File FileName="Assets/scripts/DeathTrigger/GasLeak.cs" Line="19" Column="50" />
+      <File FileName="Assets/scripts/UIController/UIControllerLevel.cs" Line="8" Column="3" />
+      <File FileName="Assets/scripts/GUI/UIAction.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/UIController/UIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/GUI/FadeController.cs" Line="1" Column="1" />
+      <File FileName="Assets/scripts/General/GameHandler.cs" Line="25" Column="4" />
+      <File FileName="Assets/scripts/CatScript/CatController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
