@@ -61,11 +61,6 @@
      <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\ImageEffects\TiltShiftEditor.cs" />
      <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\ImageEffects\TonemappingEditor.cs" />
      <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\ImageEffects\VignettingEditor.cs" />
-     <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\Water (Pro Only)\GerstnerDisplaceEditor.cs" />
-     <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\Water (Pro Only)\PlanarReflectionEditor.cs" />
-     <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\Water (Pro Only)\SpecularLightingEditor.cs" />
-     <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\Water (Pro Only)\WaterBaseEditor.cs" />
-     <Compile Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Editor\Water (Pro Only)\WaterEditorUtility.cs" />
      <Compile Include="Assets\SampleAssets\Effects\LightShafts\Editor\LightShaftsEditor.cs" />
      <Compile Include="Assets\SampleAssets\Vehicles\Car\Scripts\Editor\WheelEditor.cs" />
      <None Include="Assets\SampleAssets\Effects\Projectors\ProjectorGuidelines.txt" />
@@ -100,7 +95,6 @@
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\FisheyeShader.shader" />
      <None Include="Assets\SampleAssets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\ContrastStretch\Apply.shader" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\FXWaterV4Simple.shader" />
      <None Include="Assets\SampleAssets\Effects\Projectors\Shaders\ProjectorAdditive.shader" />
      <None Include="Assets\SampleAssets\Environment\Skyboxes\SkyboxGuidelines.txt" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\FragAO.cginc" />
@@ -136,7 +130,6 @@
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\BlurEffectConeTaps.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\CameraMotionBlur.shader" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\FXWaterPro.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_Antialiasing\DLAA.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\NoiseAndGrainDX11.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
@@ -168,8 +161,6 @@
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_BloomAndFlares\Blend.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\BlendModesOverlay.shader" />
      <None Include="Assets\SampleAssets\Effects\LightShafts\Shaders\Depth.shader" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\WaterInclude.cginc" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\FXWaterV4Pro.shader" />
      <None Include="Assets\SampleAssets\Vehicles\RollerBall\RollerBallGuidelines.txt" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\SimpleClear.shader" />
      <None Include="Assets\SampleAssets\Effects\LightShafts\LightShaftsGuidelines.txt" />

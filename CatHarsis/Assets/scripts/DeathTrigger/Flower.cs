@@ -11,7 +11,7 @@ public class Flower : DeathTrigger
 	{
 		if (col.gameObject.CompareTag ("Player")) 
 		{
-			AudioManager.Instance.PlayAudio(Utility.SOUND_POISONED,1.0f,1.0f);
+			AudioManager.Instance.PlayAudio("gas_poisoning",1.0f,1.0f);
 			OnDeathCall ();
 			particles.SetActive(false);
 			colliderBox.enabled = false;

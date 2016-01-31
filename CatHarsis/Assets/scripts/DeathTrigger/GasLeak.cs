@@ -16,7 +16,7 @@ public class GasLeak : DeathTrigger
 		{
             oneHitOnly = true;
             col.GetComponent<CatController>().PoisonCat();
-			AudioManager.Instance.PlayAudio(Utility.SOUND_POISONED,1.0f,1.0f);
+			AudioManager.Instance.PlayAudio("gas_poisoning",1.0f,1.0f);
 		}
 	}
 

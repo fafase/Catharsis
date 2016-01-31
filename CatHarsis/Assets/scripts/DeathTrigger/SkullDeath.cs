@@ -8,7 +8,7 @@ public class SkullDeath : DeathCollider
 		if (col.gameObject.CompareTag ("Player")) 
 		{
 			OnDeathCall();
-			AudioManager.Instance.PlayAudio(Utility.SOUND_SQUISHED,1.0f,1.0f);
+			AudioManager.Instance.PlayAudio("squished",1.0f,1.0f);
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class CatController : StateMachine, IInputListener
         {
             gameHandler.RaiseChangeState += OnGameHandlerChangeState;
         }
-        DeathTrigger.OnDeath += ResetOnDeath;
+        DeathTrigger.RaiseDeath += ResetOnDeath;
 
         catInventory.OnAddSoul += CheckCoinForExtraLife;
 
@@ -65,7 +65,7 @@ public class CatController : StateMachine, IInputListener
     {
         if (AudioManager.Instance != null)
         {
-            AudioManager.Instance.PlayAudio(Utility.SOUND_RESPAWN, 1.0f, 1.0f);
+			AudioManager.Instance.PlayAudio("respawn", 1.0f, 1.0f);
         }
         catMoveRef.enabled = true;
         spriteRenderer.color = Color.white;
@@ -132,7 +132,7 @@ public class CatController : StateMachine, IInputListener
         timer -= Time.deltaTime;
         if (timer <= 0.0f)
         {
-            ResetOnDeath(CatDeath.Gas);
+            ResetOnDeath(null, new CatDeathEventArg(CatDeath.Gas));
         }
     }
     private void OnGameHandlerChangeState(object sender, StateEventArg arg)
@@ -174,11 +174,11 @@ public class CatController : StateMachine, IInputListener
         }
     }
 
-    private void ResetOnDeath(CatDeath catDeath)
+    private void ResetOnDeath(object sender, CatDeathEventArg arg)
     {
         catMoveRef.ResetOnDeath();
         int life = catHealth.DecreaseHealth();
-		this.catDeath = catDeath;
+		this.catDeath = arg.catDeath;
         if (life >= 0)
         {
             ChangeCurrentState(CatState.Reset);

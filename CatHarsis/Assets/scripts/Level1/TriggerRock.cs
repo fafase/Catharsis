@@ -30,7 +30,7 @@ public class TriggerRock: MonoBehaviour
                 rockFallen = true;
                 target = rockRigidbody.transform;
                 range = 0.2f;
-                AudioManager.Instance.PlayAudio(Utility.SOUND_FALLING_ROCK);
+                AudioManager.Instance.PlayAudio("falling_rock");
             }
             else
             {

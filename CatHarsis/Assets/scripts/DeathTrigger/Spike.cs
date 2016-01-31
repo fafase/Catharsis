@@ -9,7 +9,7 @@ public class Spike : DeathCollider
 		if (col.gameObject.CompareTag("Player"))
 		{
 			OnDeathCall();
-			AudioManager.Instance.PlayAudio(Utility.SOUND_SPIKE_IMPALE,1.0f,1.0f);
+			AudioManager.Instance.PlayAudio("spike_impale",1.0f,1.0f);
 		}
 	}
 }

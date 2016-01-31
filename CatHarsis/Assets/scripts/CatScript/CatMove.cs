@@ -23,12 +23,10 @@ public class CatMove : MonoBehaviour
     private bool grounded = false;
     private float movement = 0f;
 	private Rigidbody2D rig = null;
-	private Vector3 target;
 
 	private void Awake()
 	{
 		this.rig = GetComponent<Rigidbody2D> ();
-		this.target = this.transform.position;
 	}
 
     private void FixedUpdate()
@@ -37,7 +35,7 @@ public class CatMove : MonoBehaviour
 		velY = (velY > 8.24f) ? 8f : velY;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.50f, whatIsGround);
         grounded = (hit.collider != null) ? true : false;       
-        anim.SetBool(Utility.ANIM_GROUND, grounded);
+		anim.SetBool("Ground", grounded);
 
         if (grounded)
         {
@@ -45,14 +43,14 @@ public class CatMove : MonoBehaviour
             float angle = Vector2.Angle(Vector2.up, hit.normal);
             transform.up = (angle > 30f) ? hit.normal : Vector2.up;
            
-            anim.SetFloat(Utility.ANIM_SPEED, Mathf.Abs(this.rig.velocity.x));
+			anim.SetFloat("speed", Mathf.Abs(this.rig.velocity.x));
         }
         else
         {
             mat.friction = 0f; 
             transform.up = Vector2.up;
-            anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
-            anim.SetFloat(Utility.ANIM_VSPEED, this.rig.velocity.y);
+			anim.SetFloat("speed", 0.0f);
+			anim.SetFloat("vSpeed", this.rig.velocity.y);
         }
 		this.rig.velocity = new Vector2(movement * maxSpeed, velY);
     }
@@ -118,9 +116,9 @@ public class CatMove : MonoBehaviour
     {
 		this.rig.velocity = Vector2.zero;
 		this.movement = 0f;
-        this.anim.SetFloat(Utility.ANIM_SPEED, Utility.ZERO);
-        this.anim.SetFloat(Utility.ANIM_VSPEED, Utility.ZERO);
-        this.anim.SetBool(Utility.ANIM_IS_DYING, true);
+		this.anim.SetFloat("speed", 0.0f);
+        this.anim.SetFloat("vSpeed", 0.0f);
+		this.anim.SetBool("isDying", true);
 		this.facingRight = true;
 		Vector3 theScale = transform.localScale;
 		theScale.x = Mathf.Abs (theScale.x);
@@ -129,7 +127,6 @@ public class CatMove : MonoBehaviour
 
     public void ResetToPlay(Vector3 targetReset) 
     {
-		//this.target = targetReset;
-        anim.SetBool(Utility.ANIM_IS_DYING, false);
+		anim.SetBool("isDying", false);
     }
 }

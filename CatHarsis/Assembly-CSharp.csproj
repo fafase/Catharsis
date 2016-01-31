@@ -132,14 +132,6 @@
      <Compile Include="Assets\SampleAssets\Effects\ParticleSystems\scripts\SmokeParticles.cs" />
      <Compile Include="Assets\SampleAssets\Effects\ParticleSystems\scripts\WaterHoseParticles.cs" />
      <Compile Include="Assets\SampleAssets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\Displace.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\GerstnerDisplace.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\MeshContainer.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\PlanarReflection.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\SpecularLighting.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\Water.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\WaterBase.cs" />
-     <Compile Include="Assets\SampleAssets\Environment\Water (Pro Only)\Scripts\WaterTile.cs" />
      <Compile Include="Assets\SampleAssets\SampleScenes\Scripts\Clouds.cs" />
      <Compile Include="Assets\SampleAssets\SampleScenes\Scripts\ParticleSceneControls.cs" />
      <Compile Include="Assets\SampleAssets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
@@ -223,7 +215,6 @@
      <Compile Include="Assets\scripts\General\PauseHandler.cs" />
      <Compile Include="Assets\scripts\General\SetRespawn.cs" />
      <Compile Include="Assets\scripts\General\Singleton.cs" />
-     <Compile Include="Assets\scripts\General\Utility.cs" />
      <Compile Include="Assets\scripts\Level1\DeathTrigger.cs" />
      <Compile Include="Assets\scripts\Level1\PressurePlate.cs" />
      <Compile Include="Assets\scripts\Level1\TriggerRock.cs" />
@@ -268,7 +259,6 @@
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\FisheyeShader.shader" />
      <None Include="Assets\SampleAssets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\ContrastStretch\Apply.shader" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\FXWaterV4Simple.shader" />
      <None Include="Assets\SampleAssets\Effects\Projectors\Shaders\ProjectorAdditive.shader" />
      <None Include="Assets\SampleAssets\Environment\Skyboxes\SkyboxGuidelines.txt" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\FragAO.cginc" />
@@ -304,7 +294,6 @@
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\BlurEffectConeTaps.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\CameraMotionBlur.shader" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\FXWaterPro.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_Antialiasing\DLAA.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\NoiseAndGrainDX11.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
@@ -336,8 +325,6 @@
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_BloomAndFlares\Blend.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\BlendModesOverlay.shader" />
      <None Include="Assets\SampleAssets\Effects\LightShafts\Shaders\Depth.shader" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\WaterInclude.cginc" />
-     <None Include="Assets\SampleAssets\Environment\Water (Pro Only)\Shaders\FXWaterV4Pro.shader" />
      <None Include="Assets\SampleAssets\Vehicles\RollerBall\RollerBallGuidelines.txt" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\SimpleClear.shader" />
      <None Include="Assets\SampleAssets\Effects\LightShafts\LightShaftsGuidelines.txt" />
