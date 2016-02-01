@@ -178,6 +178,7 @@
      <Compile Include="Assets\SampleAssets\Vehicles\Car\Scripts\Wheel.cs" />
      <Compile Include="Assets\SampleAssets\Vehicles\RollerBall\Scripts\Ball.cs" />
      <Compile Include="Assets\SampleAssets\Vehicles\RollerBall\Scripts\BallUserControl.cs" />
+     <Compile Include="Assets\SmokeAnimation.cs" />
      <Compile Include="Assets\Test.cs" />
      <Compile Include="Assets\scripts\AudioManager.cs" />
      <Compile Include="Assets\scripts\CatScript\CatController.cs" />
@@ -213,6 +214,7 @@
      <Compile Include="Assets\scripts\General\PauseHandler.cs" />
      <Compile Include="Assets\scripts\General\SetRespawn.cs" />
      <Compile Include="Assets\scripts\General\Singleton.cs" />
+     <Compile Include="Assets\scripts\JellyController.cs" />
      <Compile Include="Assets\scripts\Level1\DeathTrigger.cs" />
      <Compile Include="Assets\scripts\Level1\PressurePlate.cs" />
      <Compile Include="Assets\scripts\Level1\TriggerRock.cs" />

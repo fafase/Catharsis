@@ -12,6 +12,14 @@ using System;
 
 public class CatController : StateMachine, IInputListener
 {
+	public EventHandler<EventArgs> RaiseReborn;
+	protected void OnReborn (EventArgs args)
+	{
+		if (RaiseReborn != null) {
+			RaiseReborn(this, args);		
+		}
+	}
+
 	[SerializeField] private CatMove catMoveRef;
 	[SerializeField] private CatHealth catHealth;
     [SerializeField] private CatInventory catInventory;
@@ -67,6 +75,7 @@ public class CatController : StateMachine, IInputListener
 	{
 		if (this.jellyPosition != null) 
 		{
+			OnReborn(null);
 			Vector3 position = jellyPosition.position;
 			transform.position = position;
 			Vector3 pos = this.transform.position;

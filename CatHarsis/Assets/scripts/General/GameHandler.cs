@@ -10,19 +10,24 @@ public class StateEventArg : System.EventArgs
 		this.currentState = currentState;
 	}
 }
-public enum GameState { Loading , Playing, Pause, GameLost, GameWon }
+public enum GameState { Loading, Playing, Pause, GameLost, GameWon }
 
 public class GameHandler : StateMachine
 {
 	[SerializeField] private UIController uiCtrl = null;
-
+	[SerializeField] private CatController catCtrl = null;
+	public EventHandler<EventArgs>RaiseReborn;
+	protected void OnReborn(EventArgs args){
+		if (RaiseReborn != null) {
+			RaiseReborn(this, null);		
+		}
+	}
 
     [SerializeField] private GameObject pauseMenu = null;
 	[SerializeField] private GameObject endMenu = null;
     [SerializeField] private PauseHandler pauseHandler;
     [SerializeField] private GameObject inGameGUI;
 	private bool isPause = false;
-	//[SerializeField] private float loadingTimer = 0.0f;
 
 	public EventHandler<StateEventArg> RaiseChangeState;
 	protected void OnChangeState(StateEventArg arg){
@@ -47,7 +52,7 @@ public class GameHandler : StateMachine
         {
             instance = this;
         }
-      
+		this.catCtrl.RaiseReborn += RaiseReborn;
         // Register the pause and end level events
 		FindObjectOfType<EndLevel>().OnEnd += this.OnEnd;
 		this.uiCtrl.RaiseFadeInDone += HandleFadeInDone;
