@@ -206,6 +206,9 @@
      <Compile Include="Assets\scripts\GUI\SliderController.cs" />
      <Compile Include="Assets\scripts\GUI\TitleController.cs" />
      <Compile Include="Assets\scripts\GUI\UIAction.cs" />
+     <Compile Include="Assets\scripts\GUI\UIController.cs" />
+     <Compile Include="Assets\scripts\GUI\UIControllerFrontPage.cs" />
+     <Compile Include="Assets\scripts\GUI\UIControllerLevel.cs" />
      <Compile Include="Assets\scripts\General\CameraSmoothFollow.cs" />
      <Compile Include="Assets\scripts\General\EndLevel.cs" />
      <Compile Include="Assets\scripts\General\GameHandler.cs" />
@@ -218,6 +221,7 @@
      <Compile Include="Assets\scripts\Level1\DeathTrigger.cs" />
      <Compile Include="Assets\scripts\Level1\PressurePlate.cs" />
      <Compile Include="Assets\scripts\Level1\TriggerRock.cs" />
+     <Compile Include="Assets\scripts\LevelMap\LevelMapController.cs" />
      <Compile Include="Assets\scripts\LoadingScreen.cs" />
      <Compile Include="Assets\scripts\Settings\SettingGUIButton.cs" />
      <Compile Include="Assets\scripts\Skull\Jaws.cs" />
@@ -225,8 +229,6 @@
      <Compile Include="Assets\scripts\Skull\SkullTrigger.cs" />
      <Compile Include="Assets\scripts\Tutorial\TutorialController.cs" />
      <Compile Include="Assets\scripts\Tutorial\TutorialTextController.cs" />
-     <Compile Include="Assets\scripts\UIController\UIController.cs" />
-     <Compile Include="Assets\scripts\UIController\UIControllerLevel.cs" />
      <Compile Include="Assets\scripts\followingLight.cs" />
      <Compile Include="Assets\scripts\glowingLight.cs" />
      <None Include="Assets\SampleAssets\Effects\Projectors\ProjectorGuidelines.txt" />
