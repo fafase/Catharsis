@@ -31,7 +31,7 @@ public class LevelMapController : MonoBehaviour {
 			this.buttons = this.gameObject.GetComponentsInChildren<Button> ();
 			Array.Sort (this.buttons, (x,y) => String.Compare (x.name, y.name));
 		}
-		this.level = 3; PlayerPrefs.GetInt("Level", 0);
+		this.level = PlayerPrefs.GetInt("Level", 0);
 		foreach (Button btn in this.buttons) 
 		{
 			btn.interactable = false;

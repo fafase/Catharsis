@@ -40,12 +40,12 @@ public class UIController : MonoBehaviour
 	protected virtual void FadeOutDone()
 	{
 		OnFadeOutDone (null);
-		/*if (this.level == null) 
+		if (this.level == null) 
 		{
 			return;		
 		}
 		Application.LoadLevel (this.level);
-		this.level = null;*/
+		this.level = null;
 	}
 	protected virtual void FadeInDone(){ OnFadeInDone (null); }
 }

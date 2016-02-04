@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+#if UNITY_5_3
+using UnityEngine.SceneManager;
+#endif
 
 public class TutorialTextController : MonoBehaviour {
 
@@ -15,6 +18,7 @@ public class TutorialTextController : MonoBehaviour {
 	[SerializeField] private GameObject jellyFish = null;
 	[SerializeField] private GameObject movementTutorial = null;
 	[SerializeField] private FadeController fadeCtrl = null;
+	[SerializeField] private CameraSmoothFollow cameraFollow = null;
 
 	private int index = 0;
 
@@ -24,6 +28,7 @@ public class TutorialTextController : MonoBehaviour {
 		this.jellyFish.SetActive (false);
 		this.movementTutorial.SetActive (false);
 		this.fadeCtrl.StartFade ("FadeIn", null);
+		this.cameraFollow.enabled = false;
 	}
 
 	public void WaitForTap()
@@ -51,6 +56,7 @@ public class TutorialTextController : MonoBehaviour {
 	public void WaitForTapIdle()
 	{
 		this.inputManager.OnSingleTap += SetIdle;
+		this.cameraFollow.enabled = true;
 	}
 
 	private int tapCounter = 0;
@@ -68,6 +74,7 @@ public class TutorialTextController : MonoBehaviour {
 				this.animator.SetBool ("idle", false);
 				index++;
 				this.animator.SetInteger ("index", index); 
+				this.cameraFollow.enabled = false;
 			});
 		}
 	}
@@ -165,5 +172,16 @@ public class TutorialTextController : MonoBehaviour {
 	public void UnregisterJump()
 	{
 		this.tutCatCtrl.UnregisterJump ();
+	}
+
+	public void SkipTutorial()
+	{
+
+#if UNITY_5_2
+		this.fadeCtrl.StartFade("FadeOut",()=>{Application.LoadLevel("LevelMap");});
+#endif
+#if UNITY_5_3
+		this.fadeCtrl.StartFade("FadeOut",()=>{SceneManager.LoadScene("LevelMap");});
+#endif
 	}
 }

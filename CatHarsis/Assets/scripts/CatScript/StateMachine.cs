@@ -43,7 +43,7 @@ public class StateMachine : MonoBehaviour
 	
 	protected virtual void Update()
 	{
-		this.OnUpdate();
+		if(this.OnUpdate != null) this.OnUpdate();
 	}
 	
 	#endregion
