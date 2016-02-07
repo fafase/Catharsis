@@ -185,3 +185,7 @@ public class TutorialTextController : MonoBehaviour {
 #endif
 	}
 }
+
+public class MyClass{
+	public int TestMethod(int a , int b){ return a + b;}
+}

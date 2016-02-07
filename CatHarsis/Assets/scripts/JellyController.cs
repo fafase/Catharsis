@@ -12,6 +12,12 @@ public class JellyController : MonoBehaviour
 		this.animator.GetComponentInChildren<SpriteRenderer>().enabled = false;
 	}
 
+	private void OnDestroy()
+	{
+		this.gameHandler.RaiseReborn += HandleReborn;
+		this.gameHandler = null;
+	}
+
 	private void HandleReborn(object sender, System.EventArgs arg)
 	{
 		this.animator.GetComponentInChildren<SpriteRenderer>().enabled = true;

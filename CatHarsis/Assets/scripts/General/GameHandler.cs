@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -11,25 +11,31 @@ public class StateEventArg : System.EventArgs
 	}
 }
 public enum GameState { Loading, Playing, Pause, GameLost, GameWon }
-
-public class GameHandler : StateMachine
+public interface IGameHandler 
+{ 
+	event EventHandler <EventArgs> RaiseReborn; 
+	event EventHandler <StateEventArg> RaiseChangeState;
+	void RequestStateHandler(GameState gameState);
+}
+public class GameHandler : StateMachine , IGameHandler
 {
 	[SerializeField] private UIController uiCtrl = null;
 	[SerializeField] private CatController catCtrl = null;
-	public EventHandler<EventArgs>RaiseReborn;
+	[SerializeField] private GameObject pauseMenu = null;
+	[SerializeField] private GameObject endMenu = null;
+	[SerializeField] private PauseHandler pauseHandler;
+	[SerializeField] private GameObject inGameGUI;
+	
+	private bool isPause = false;
+
+	public event EventHandler<EventArgs>RaiseReborn;
 	protected void OnReborn(EventArgs args){
 		if (RaiseReborn != null) {
 			RaiseReborn(this, null);		
 		}
 	}
 
-    [SerializeField] private GameObject pauseMenu = null;
-	[SerializeField] private GameObject endMenu = null;
-    [SerializeField] private PauseHandler pauseHandler;
-    [SerializeField] private GameObject inGameGUI;
-	private bool isPause = false;
-
-	public EventHandler<StateEventArg> RaiseChangeState;
+	public event EventHandler<StateEventArg> RaiseChangeState;
 	protected void OnChangeState(StateEventArg arg){
 		if (RaiseChangeState != null) {
 			RaiseChangeState(this, arg);		
@@ -54,7 +60,7 @@ public class GameHandler : StateMachine
         }
 		this.catCtrl.RaiseReborn += RaiseReborn;
         // Register the pause and end level events
-		FindObjectOfType<EndLevel>().OnEnd += this.OnEnd;
+		FindObjectOfType<EndLevel>().RaiseEndLevel += this.OnEnd;
 		this.uiCtrl.RaiseFadeInDone += HandleFadeInDone;
 		this.uiCtrl.StartFade ();
         // Register all states of the game
@@ -69,16 +75,14 @@ public class GameHandler : StateMachine
         pauseHandler.enabled = false;
         pauseMenu.SetActive(false);
 		endMenu.SetActive (false);
-
+		this.catCtrl.Init (this as IGameHandler);
     }
 
     protected void EnterGameWon(Enum oldState)
     {
         inGameGUI.SetActive(false);
         endMenu.SetActive(true);
-        pauseHandler.enabled = true;
-        Transform tr = endMenu.transform.Find("TextInfo");
-        tr.GetComponent<GUIText>().text = "Press R to restart";
+		pauseHandler.enabled = true;
     }
 
     protected void EnterGameLost(Enum oldState)
@@ -103,14 +107,15 @@ public class GameHandler : StateMachine
         RequestStateHandler(state);
     }
 
-	private void OnEnd () 
+	private void OnEnd (object sender, EventArgs arg) 
 	{	
 		RequestStateHandler(GameState.GameWon);       
 	}
 
 	private void HandleFadeInDone (object sender, EventArgs e)
 	{
-		OnChangeState(new StateEventArg(GameState.Playing));
+		RequestStateHandler (GameState.Playing);
+		//OnChangeState(new StateEventArg(GameState.Playing));
 	}
 }
 

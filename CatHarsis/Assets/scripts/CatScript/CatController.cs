@@ -27,7 +27,7 @@ public class CatController : StateMachine, IInputListener
     [SerializeField] private Transform jellyPosition;
 
     [SerializeField]
-    private GameHandler gameHandler;
+    private IGameHandler gameHandler = null;
     [SerializeField]
     private float resetTimer = 1.0f;
      
@@ -39,18 +39,25 @@ public class CatController : StateMachine, IInputListener
 
 	CatDeath catDeath = CatDeath.None;
 	enum CatState { OnHold, Starting, Playing, Pause, Reset, Poisoned, Dead }
-	private void Awake () 
-	{
-        gameHandler = FindObjectOfType<GameHandler>();
 
-        if (gameHandler != null)
+	public void Init (IGameHandler gameHandler) 
+	{
+		InitStateMachine ();
+		this.gameHandler = gameHandler;
+        if (this.gameHandler != null)
         {
-            gameHandler.RaiseChangeState += OnGameHandlerChangeState;
+            this.gameHandler.RaiseChangeState += OnGameHandlerChangeState;
         }
         DeathTrigger.RaiseDeath += ResetOnDeath;
 
         catInventory.OnAddSoul += CheckCoinForExtraLife;
-		 
+
+		this.spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+		this.spriteRenderer.enabled = false;
+	}
+
+	private void InitStateMachine()
+	{
 		InitializeStateMachine<CatState> (CatState.OnHold, true);
 		AddTransitionsToState (CatState.OnHold, new Enum[] { CatState.Starting });
 		AddTransitionsToState(CatState.Starting, new Enum[]{CatState.Playing});
@@ -59,10 +66,7 @@ public class CatController : StateMachine, IInputListener
 		AddTransitionsToState(CatState.Dead, new Enum[] { CatState.Starting });
 		AddTransitionsToState(CatState.Pause, new Enum[]{CatState.Playing, CatState.Reset});
 		AddTransitionsToState(CatState.Poisoned, new Enum[] { CatState.Reset});
-		this.spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		this.spriteRenderer.enabled = false;
 	}
-
     public void PoisonCat()
     {
         if ((CatState)CurrentState == CatState.Poisoned) 
@@ -78,9 +82,6 @@ public class CatController : StateMachine, IInputListener
 			OnReborn(null);
 			Vector3 position = jellyPosition.position;
 			transform.position = position;
-			Vector3 pos = this.transform.position;
-			pos.x += 1f;
-			this.catMoveRef.Move (pos);
 		}
 	}
 	protected void UpdateStarting()
@@ -89,12 +90,6 @@ public class CatController : StateMachine, IInputListener
 		{
 			ChangeCurrentState(CatState.Playing);		
 		}
-	}
-	protected void ExitStarting(Enum next)
-	{
-		Vector3 pos = this.transform.position;
-		pos.x += 1f;
-		this.catMoveRef.Move (pos);
 	}
     
 	protected virtual void EnterPlaying(Enum oldState)
@@ -216,7 +211,7 @@ public class CatController : StateMachine, IInputListener
         }
         else
         {
-			gameHandler.RequestStateHandler(GameState.GameLost);
+			this.gameHandler.RequestStateHandler(GameState.GameLost);
         }
     } 
 }
