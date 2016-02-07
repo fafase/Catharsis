@@ -22,21 +22,17 @@ public class CatController : StateMachine, IInputListener
 
 	[SerializeField] private CatMove catMoveRef;
 	[SerializeField] private CatHealth catHealth;
-    [SerializeField] private CatInventory catInventory;
+   
 	[SerializeField] private GameObject catPrefab;
     [SerializeField] private Transform jellyPosition;
-
-    [SerializeField]
-    private IGameHandler gameHandler = null;
-    [SerializeField]
-    private float resetTimer = 1.0f;
-     
+	[SerializeField] private float resetTimer = 1.0f;
 	[SerializeField] private InputController inputController = null;
 
+    private IGameHandler gameHandler = null;
     private SpriteRenderer spriteRenderer;
     private int coins;
     float timer = 1f;
-
+	private CatInventory catInventory;
 	CatDeath catDeath = CatDeath.None;
 	enum CatState { OnHold, Starting, Playing, Pause, Reset, Poisoned, Dead }
 
@@ -50,10 +46,20 @@ public class CatController : StateMachine, IInputListener
         }
         DeathTrigger.RaiseDeath += ResetOnDeath;
 
-        catInventory.OnAddSoul += CheckCoinForExtraLife;
-
 		this.spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		this.spriteRenderer.enabled = false;
+		this.catInventory = new CatInventory ();
+	}
+
+	private void OnDestroy()
+	{
+		this.catInventory = null;
+	}
+
+	public void SetSoulsAmount(int value)
+	{
+		int soulAmount =this.catInventory.SetSoulsAmount (value);
+		this.gameHandler.SetSoulsAmount (soulAmount);
 	}
 
 	private void InitStateMachine()
@@ -189,16 +195,6 @@ public class CatController : StateMachine, IInputListener
 	{
 		this.catMoveRef.Jump ();
 	}
-
-    private void CheckCoinForExtraLife(int coin) 
-    {
-        coins += coin;
-        if (coins > 10)
-        {
-            coins -= 10;
-            catHealth.IncreaseHealth();
-        }
-    }
 
     private void ResetOnDeath(object sender, CatDeathEventArg arg)
     {

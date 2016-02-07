@@ -385,63 +385,10 @@ Prefab:
       value: 
       objectReference: {fileID: 2052024195}
     - target: {fileID: 11400004, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: gameHandler
-      value: 
-      objectReference: {fileID: 1226610928}
-    - target: {fileID: 11400006, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: whatIsGround.m_Bits
-      value: 49152
-      objectReference: {fileID: 0}
-    - target: {fileID: 21200000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6100000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: m_Size.x
-      value: 2.00999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: jumpForce
-      value: 165
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: mat
-      value: 
-      objectReference: {fileID: 6200000, guid: 21f2b4941a2e99247a3acc56a3da2046, type: 2}
-    - target: {fileID: 21200000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21200000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21200000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: lives
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
       propertyPath: inputController
       value: 
       objectReference: {fileID: 1226610934}
-    - target: {fileID: 11400000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: maxSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5000000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
-      propertyPath: m_Interpolate
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8100000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &211877975
@@ -4078,6 +4025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeController: {fileID: 583108417}
+  guiScore: {fileID: 1263826012}
 --- !u!114 &1226610933 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400006, guid: 3bbca5cd544fe2641af98b7f5d3c1b46,
@@ -4212,7 +4160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catHealth: {fileID: 1527935203}
-  catInventory: {fileID: 1527935205}
   healthText: {fileID: 436264511}
   soulText: {fileID: 527323259}
 --- !u!1001 &1320260489
@@ -4583,12 +4530,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 159000999}
   m_Script: {fileID: 11500000, guid: 810ecd73b862b5742b74b169e39dbdca, type: 3}
---- !u!114 &1527935205 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11400006, guid: 88a0b9ccfe8ee284cbeb91ddbec54e6b,
-    type: 2}
-  m_PrefabInternal: {fileID: 159000999}
-  m_Script: {fileID: 11500000, guid: b44c76dc083dfbf4aadc233ded9a77c0, type: 3}
 --- !u!1 &1541859561
 GameObject:
   m_ObjectHideFlags: 0

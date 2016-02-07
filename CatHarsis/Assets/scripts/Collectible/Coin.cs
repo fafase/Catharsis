@@ -2,8 +2,8 @@
 using System.Collections;
 
 
-public class Coin : Collectible {
-
+public class Coin : Collectible 
+{
     [SerializeField] private int value;
     [SerializeField] private AudioClip sounds;
     private float startPosition;
@@ -12,9 +12,10 @@ public class Coin : Collectible {
     [SerializeField] private float frequency;
     private Vector3 translatePosition;
     private Vector3 target;
-    CatInventory ci = null;
+    private CatController catController = null;
+	private bool isCollided = false;
 
-    void Start() 
+    private void Start() 
     {
         float distance = Mathf.Abs(Camera.main.transform.position.z);
         var frustumHeight = distance * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
@@ -24,42 +25,42 @@ public class Coin : Collectible {
         randomStart = Random.Range(0.0f, Mathf.PI);
         startPosition = transform.position.y;
         GameObject cat = GameObject.FindGameObjectWithTag("Player");
-        ci = cat.GetComponent<CatInventory>();
+		this.catController = cat.GetComponent<CatController> ();
     }
-    private bool isCollided = false;
-    void Update() 
+
+    private void Update() 
     {
-        if (isCollided == false)
+        if (this.isCollided == false)
         {
-            Vector3 position = transform.position;
-            position.y = startPosition + amplitude * Mathf.Sin(frequency * Time.time + randomStart);
-            transform.position = position;
+            Vector3 position = this.transform.position;
+            position.y = this.startPosition + this.amplitude * Mathf.Sin(this.frequency * Time.time + this.randomStart);
+            this.transform.position = position;
         }
         else 
         {
             ResetTargetPoint();
 
-            transform.position = Vector3.MoveTowards(transform.position,target, 10f *Time.deltaTime);
-            if (Vector3.Distance(transform.position, target) < 0.1f) 
+            this.transform.position = Vector3.MoveTowards(this.transform.position,target, 10f *Time.deltaTime);
+            if (Vector3.Distance(this.transform.position, this.target) < 0.1f) 
             {
-               ci.SetSoulsAmount(value);
-               Destroy(gameObject);
+               this.catController.SetSoulsAmount(value);
+               Destroy(this.gameObject);
             }
         }
     }
 
-	void OnTriggerEnter2D (Collider2D col) 
+	private void OnTriggerEnter2D (Collider2D col) 
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            isCollided = true;
+            this.isCollided = true;
         }
 	}
 
-    void ResetTargetPoint() 
+    private void ResetTargetPoint() 
     {
-        target = Camera.main.transform.position;
-        target.z = 0f;
-        target += translatePosition;
+        this.target = Camera.main.transform.position;
+        this.target.z = 0f;
+        this.target += translatePosition;
     }
 }

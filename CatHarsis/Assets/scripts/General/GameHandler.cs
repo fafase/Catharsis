@@ -15,11 +15,14 @@ public interface IGameHandler
 { 
 	event EventHandler <EventArgs> RaiseReborn; 
 	event EventHandler <StateEventArg> RaiseChangeState;
+	event EventHandler<SoulCollectionEventArg> RaiseSoulCollected;
 	void RequestStateHandler(GameState gameState);
+
+	void SetSoulsAmount (int soulAmount);
 }
 public class GameHandler : StateMachine , IGameHandler
 {
-	[SerializeField] private UIController uiCtrl = null;
+	[SerializeField] private UIControllerLevel uiCtrl = null;
 	[SerializeField] private CatController catCtrl = null;
 	[SerializeField] private GameObject pauseMenu = null;
 	[SerializeField] private GameObject endMenu = null;
@@ -41,7 +44,14 @@ public class GameHandler : StateMachine , IGameHandler
 			RaiseChangeState(this, arg);		
 		}
 	}
-   
+	public event EventHandler<SoulCollectionEventArg> RaiseSoulCollected;
+	protected void OnSoulCollected(SoulCollectionEventArg arg)
+	{
+		if (RaiseSoulCollected != null) 
+		{
+			RaiseSoulCollected(this, arg);		
+		}
+	}
     // Singleton part
     private static GameHandler instance = null;
 	public static GameHandler Instance
@@ -58,7 +68,7 @@ public class GameHandler : StateMachine , IGameHandler
         {
             instance = this;
         }
-		this.catCtrl.RaiseReborn += RaiseReborn;
+		this.catCtrl.RaiseReborn += HandleRaiseReborn;
         // Register the pause and end level events
 		FindObjectOfType<EndLevel>().RaiseEndLevel += this.OnEnd;
 		this.uiCtrl.RaiseFadeInDone += HandleFadeInDone;
@@ -77,12 +87,18 @@ public class GameHandler : StateMachine , IGameHandler
 		endMenu.SetActive (false);
 		this.catCtrl.Init (this as IGameHandler);
     }
-
+	private void HandleRaiseReborn(object sender, EventArgs arg){
+		OnReborn (arg);
+	}
     protected void EnterGameWon(Enum oldState)
     {
         inGameGUI.SetActive(false);
-        endMenu.SetActive(true);
 		pauseHandler.enabled = true;
+		// Display UI
+		endMenu.SetActive(true);
+		// Fetch gem collection
+		// Add to inventory
+		// Save to playerprefs.
     }
 
     protected void EnterGameLost(Enum oldState)
@@ -109,13 +125,18 @@ public class GameHandler : StateMachine , IGameHandler
 
 	private void OnEnd (object sender, EventArgs arg) 
 	{	
-		RequestStateHandler(GameState.GameWon);       
+		RequestStateHandler(GameState.GameWon);    
 	}
 
 	private void HandleFadeInDone (object sender, EventArgs e)
 	{
 		RequestStateHandler (GameState.Playing);
-		//OnChangeState(new StateEventArg(GameState.Playing));
+	}
+
+	public void SetSoulsAmount (int soulAmount)
+	{
+		OnSoulCollected(new SoulCollectionEventArg(soulAmount));
+		this.uiCtrl.SetUISoul (soulAmount);
 	}
 }
 

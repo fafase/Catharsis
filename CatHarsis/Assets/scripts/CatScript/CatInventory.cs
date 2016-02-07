@@ -3,18 +3,24 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 
-public class CatInventory : MonoBehaviour {
+public class SoulCollectionEventArg:System.EventArgs
+{
+	public readonly int soulCollected = 0;
+	public SoulCollectionEventArg(int soul)
+	{
+		this.soulCollected = soul;
+	}
+}
 
-    private int soulAmount;
-    public event Action<int> OnAddSoul = (int i) => { };
-    void Start() 
-    {
-        soulAmount = 0;
-    }
+public class CatInventory 
+{
+	public int SoulAmount { get; private set;}
 
-    public void SetSoulsAmount(int value) 
+	public CatInventory() { }
+
+    public int SetSoulsAmount(int value) 
     {
-        soulAmount += value;
-        OnAddSoul(soulAmount);
+        this.SoulAmount += value;
+		return this.SoulAmount;
     }
 }

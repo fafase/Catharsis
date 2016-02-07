@@ -25,7 +25,6 @@ public class UIController : MonoBehaviour
 			RaiseFadeOutDone(this, arg);
 		}
 	}
-
 	public virtual void StartFade()
 	{
 		this.fadeController.StartFade ("FadeIn", FadeInDone);

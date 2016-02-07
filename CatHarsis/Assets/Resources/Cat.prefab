@@ -29,8 +29,6 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400006}
-  - 81: {fileID: 8100000}
   - 58: {fileID: 5800000}
   - 61: {fileID: 6100000}
   m_Layer: 12
@@ -74,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.82250023, y: -1.796, z: 0}
+  m_LocalPosition: {x: -12.7200003, y: -1.70000005, z: 0}
   m_LocalScale: {x: .280000001, y: .280000001, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -105,7 +103,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: .600000024
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -121,7 +119,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: .800000012
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -134,14 +132,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .610000014}
   serializedVersion: 2
-  m_Size: {x: 2.16000009, y: 1.42999995}
---- !u!81 &8100000
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Size: {x: 2.00999999, y: 1.42999995}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -174,11 +165,11 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 49152
-  maxSpeed: 3
-  jumpForce: 400
+  maxSpeed: 1.5
+  jumpForce: 165
   anim: {fileID: 9500000}
   wallJump: 0
-  mat: {fileID: 0}
+  mat: {fileID: 6200000, guid: 21f2b4941a2e99247a3acc56a3da2046, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,22 +195,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catMoveRef: {fileID: 11400000}
   catHealth: {fileID: 11400002}
-  catInventory: {fileID: 11400006}
   catPrefab: {fileID: 100000, guid: 9866f444e1a05ac41bce8b8e2fc8f624, type: 2}
   jellyPosition: {fileID: 0}
-  gameHandler: {fileID: 0}
   resetTimer: 1
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b44c76dc083dfbf4aadc233ded9a77c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  inputController: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -245,7 +224,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300014, guid: 5c8288c4022e0224cbca8790bba30adf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
