@@ -24,7 +24,7 @@ public class GameHandler : StateMachine , IGameHandler
 {
 	[SerializeField] private UIControllerLevel uiCtrl = null;
 	[SerializeField] private CatController catCtrl = null;
-	[SerializeField] private GameObject pauseMenu = null;
+	//[SerializeField] private GameObject pauseMenu = null;
 	[SerializeField] private GameObject endMenu = null;
 	[SerializeField] private PauseHandler pauseHandler;
 	[SerializeField] private GameObject inGameGUI;
@@ -83,7 +83,7 @@ public class GameHandler : StateMachine , IGameHandler
 
         // Disable pause and endMenu GUI
         pauseHandler.enabled = false;
-        pauseMenu.SetActive(false);
+      //  pauseMenu.SetActive(false);
 		endMenu.SetActive (false);
 		this.catCtrl.Init (this as IGameHandler);
     }
@@ -92,7 +92,7 @@ public class GameHandler : StateMachine , IGameHandler
 	}
     protected void EnterGameWon(Enum oldState)
     {
-        inGameGUI.SetActive(false);
+        //inGameGUI.SetActive(false);
 		pauseHandler.enabled = true;
 		// Display UI
 		endMenu.SetActive(true);
@@ -118,7 +118,7 @@ public class GameHandler : StateMachine , IGameHandler
         inGameGUI.SetActive(!isPause);
 		GameState state =  (isPause == true) ? GameState.Pause : GameState.Playing;
         Time.timeScale = (isPause == true) ? 0.0f : 1.0f;
-        pauseMenu.SetActive(isPause);
+       // pauseMenu.SetActive(isPause);
         pauseHandler.enabled = isPause;
         RequestStateHandler(state);
     }

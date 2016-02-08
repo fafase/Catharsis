@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 #if UNITY_5_3
-using UnityEngine.SceneManager;
+using UnityEngine.SceneManagement;
 #endif
 
 public class TutorialTextController : MonoBehaviour {
