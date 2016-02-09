@@ -203,6 +203,7 @@
      <Compile Include="Assets\scripts\DeathTrigger\Spike.cs" />
      <Compile Include="Assets\scripts\GUI\Background.cs" />
      <Compile Include="Assets\scripts\GUI\FadeController.cs" />
+     <Compile Include="Assets\scripts\GUI\LevelData.cs" />
      <Compile Include="Assets\scripts\GUI\SliderController.cs" />
      <Compile Include="Assets\scripts\GUI\TitleController.cs" />
      <Compile Include="Assets\scripts\GUI\UIAction.cs" />
@@ -222,6 +223,8 @@
      <Compile Include="Assets\scripts\Level1\PressurePlate.cs" />
      <Compile Include="Assets\scripts\Level1\TriggerRock.cs" />
      <Compile Include="Assets\scripts\LevelMap\LevelMapController.cs" />
+     <Compile Include="Assets\scripts\LevelMap\UIActionLevelMap.cs" />
+     <Compile Include="Assets\scripts\LevelMap\UiControllerLevelMap.cs" />
      <Compile Include="Assets\scripts\LoadingScreen.cs" />
      <Compile Include="Assets\scripts\Settings\SettingGUIButton.cs" />
      <Compile Include="Assets\scripts\Skull\Jaws.cs" />

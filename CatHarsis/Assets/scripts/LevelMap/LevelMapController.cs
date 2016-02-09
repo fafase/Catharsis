@@ -5,7 +5,9 @@ using System;
 
 
 public class LevelMapController : MonoBehaviour {
-	
+
+	[SerializeField] private UiControllerLevelMap uiCtrl = null;
+
 	private int level = 0;
 	private Button [] buttons = null;
 
@@ -29,20 +31,31 @@ public class LevelMapController : MonoBehaviour {
 		if (this.buttons == null || this.buttons.Length == 0) 
 		{
 			this.buttons = this.gameObject.GetComponentsInChildren<Button> ();
-			Array.Sort (this.buttons, (x,y) => String.Compare (x.name, y.name));
+			//Array.Sort (this.buttons, (x,y) => String.Compare (x.name, y.name));
 		}
-		this.level = PlayerPrefs.GetInt("Level", 0);
+		this.level = 3;// PlayerPrefs.GetInt("Level", 0);
 		foreach (Button btn in this.buttons) 
 		{
 			btn.interactable = false;
+			Color col = btn.GetComponent<Image> ().color;
+			col.a = 0.5f;
+			btn.GetComponent<Image> ().color = col;
 		}
 
 		for (int i = 0; i <= this.level; i++) 
 		{
 			this.buttons[i].interactable = true;
-			this.buttons[i].GetComponent<Image>().color = Color.green;
+			Color col = this.buttons [i].GetComponent<Image> ().color;
+			col.a = 1f;
+			this.buttons [i].GetComponent<Image> ().color = col;
 			string level = "Level" + i.ToString();
-			this.buttons[i].onClick.AddListener(()=>{ Debug.Log(level);});
+			LevelData ld = this.buttons [i].GetComponent<LevelData> ();
+			this.buttons[i].onClick.AddListener(()=>{ DisplayLevelEntry(ld);});
 		}
+	}
+
+	public void DisplayLevelEntry(LevelData levelData)
+	{
+		this.uiCtrl.SetLevelPrice (levelData);
 	}
 }

@@ -70,7 +70,7 @@ public class CatController : StateMachine, IInputListener
 		AddTransitionsToState(CatState.Playing, new Enum[] { CatState.Pause, CatState.Reset,CatState.Poisoned, CatState.Dead });
 		AddTransitionsToState(CatState.Reset, new Enum[]{ CatState.Starting, CatState.Playing, CatState.Pause});
 		AddTransitionsToState(CatState.Dead, new Enum[] { CatState.Starting });
-		AddTransitionsToState(CatState.Pause, new Enum[]{CatState.Playing, CatState.Reset});
+		AddTransitionsToState(CatState.Pause, new Enum[]{CatState.Playing, CatState.Reset,CatState.Starting});
 		AddTransitionsToState(CatState.Poisoned, new Enum[] { CatState.Reset});
 	}
     public void PoisonCat()
