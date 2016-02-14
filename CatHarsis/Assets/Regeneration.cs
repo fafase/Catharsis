@@ -11,7 +11,6 @@ public class RegenerationEventArg:EventArgs{
 	public RegenerationEventArg(int lifeAmount){
 		this.lifeAmount = lifeAmount;
 	}
-
 }
 
 public class Regeneration : MonoBehaviour 
@@ -26,6 +25,7 @@ public class Regeneration : MonoBehaviour
 	private DateTime next;
 
 	private int minutesForNewLife = 10;
+	private int secondsForUI;
 
 	public event EventHandler<RegenerationEventArg> RaiseNewLife;
 	protected void OnNewLife(RegenerationEventArg arg){
@@ -50,12 +50,14 @@ public class Regeneration : MonoBehaviour
 			this.minutesForNewLife = int.Parse(strs[3]);
 
 			int result = DateTime.Compare (recordedDt, DateTime.Now);
-			if (result < 0) {
-				this.lifeAmount = this.maxLifeAmount = 5;
+			if (result < 0) 
+			{
+				// Full time for life
+				this.lifeAmount = this.maxLifeAmount;
 				timerText.text = this.minutesForNewLife.ToString () + ":00";
 
 			} else {
-				Debug.Log (recordedDt);
+				// Timer is not over
 				TimeSpan ts = recordedDt - DateTime.Now;
 				int timeRemaining = (int)ts.TotalSeconds;
 				int timeForLife = (this.minutesForNewLife * 60);
@@ -63,14 +65,11 @@ public class Regeneration : MonoBehaviour
 				int remainingTimeForTimer = timeRemaining % timeForLife;
 				int removeLife = (timeRemaining / timeForLife);
 				this.lifeAmount = this.maxLifeAmount - removeLife -1;
-			//	int seconds = remainingTimeForTimer % 60;
-			//	int minutes = remainingTimeForTimer / 60;
 				this.next = DateTime.Now.AddSeconds (remainingTimeForTimer);
 			}
 		}
 		else {
 			// first time playing
-			Debug.Log("First");
 			this.lifeAmount = this.maxLifeAmount = 5;
 			int min = this.minutesForNewLife = 10;
 			timerText.text = min.ToString () + ":00";
@@ -98,6 +97,11 @@ public class Regeneration : MonoBehaviour
 			}
 
 		}
+		if (ts.Seconds != secondsForUI) 
+		{
+			secondsForUI = ts.Seconds;
+			timerText.text = ts.Minutes.ToString () + ":" + ts.Seconds.ToString ("00") ; 
+		}
 		timerText.text = ts.Minutes.ToString () + ":" + ts.Seconds.ToString ("00") ; 
 	}
 
@@ -113,7 +117,22 @@ public class Regeneration : MonoBehaviour
 		}
 	}
 
-	void OnApplicationQuit()
+	// If quitting the app, pausing the app or changing scene, Save data.
+	private void OnApplicationQuit()
+	{
+		Save ();
+	}
+
+	private void OnApplicationPause(bool resume)
+	{
+		Save ();
+	}
+	private void OnDestroy()
+	{
+		Save ();
+	}
+
+	private void Save()
 	{
 		string save = null;
 		if (this.lifeAmount != this.maxLifeAmount) 
@@ -126,14 +145,7 @@ public class Regeneration : MonoBehaviour
 			PlayerPrefs.SetString ("SaveData",save);
 			return;
 		}
-		Debug.Log ("Recording for nothing");
 		save = DateTime.Now.ToString () + "?" + this.lifeAmount + "?" + this.maxLifeAmount +"?"+this.minutesForNewLife;
-		PlayerPrefs.SetString ("SaveData",save);
-	}
-
-	void OnApplicationPause(bool resume)
-	{
-		string save = DateTime.Now.ToString () + "?" + this.lifeAmount + "?" + this.maxLifeAmount +"?"+this.minutesForNewLife;
 		PlayerPrefs.SetString ("SaveData",save);
 	}
 }
