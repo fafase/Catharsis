@@ -10,6 +10,7 @@ public class UiControllerLevelMap : UIController
 	[SerializeField] private GameObject levelCheckout = null;
 	[SerializeField] private Button buttonYes = null;
 	[SerializeField] private Regeneration regeneration = null;
+	[SerializeField] private ShopController shopCtrl = null;
 	public LevelData CurrentLeveData { get; private set;}
 
 	void Awake () 
@@ -17,7 +18,7 @@ public class UiControllerLevelMap : UIController
 		this.levelCheckout.SetActive (false);
 		this.fadeController.StartFade ("FadeIn",null);
 		int playerCurrency = PlayerPrefs.GetInt ("Coin",0);
-		//this.currencyPlayer.text = playerCurrency.ToString ();
+		this.shopCtrl.Init ();
 		this.regeneration.RaiseNewLife += HandleNewLife;
 	}
 	private void HandleNewLife(object sender, RegenerationEventArg arg)

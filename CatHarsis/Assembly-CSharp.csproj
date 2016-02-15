@@ -205,6 +205,7 @@
      <Compile Include="Assets\scripts\GUI\Background.cs" />
      <Compile Include="Assets\scripts\GUI\FadeController.cs" />
      <Compile Include="Assets\scripts\GUI\LevelData.cs" />
+     <Compile Include="Assets\scripts\GUI\ShopController.cs" />
      <Compile Include="Assets\scripts\GUI\SliderController.cs" />
      <Compile Include="Assets\scripts\GUI\TitleController.cs" />
      <Compile Include="Assets\scripts\GUI\UIAction.cs" />

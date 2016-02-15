@@ -12,4 +12,8 @@ public class UIActionLevelMap : MonoBehaviour {
 	{
 		obj.SetActive (false);
 	}
+	public void ButtonActionSet(GameObject obj)
+	{
+		obj.SetActive (!obj.activeSelf);
+	}
 }
