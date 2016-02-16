@@ -28,7 +28,7 @@ public class GameHandler : StateMachine , IGameHandler
 	[SerializeField] private GameObject endMenu = null;
 	[SerializeField] private PauseHandler pauseHandler;
 	[SerializeField] private GameObject inGameGUI;
-	
+	[SerializeField] private int currentLevel = 0;
 	private bool isPause = false;
 
 	public event EventHandler<EventArgs>RaiseReborn;
@@ -70,7 +70,7 @@ public class GameHandler : StateMachine , IGameHandler
         }
 		this.catCtrl.RaiseReborn += HandleRaiseReborn;
         // Register the pause and end level events
-		FindObjectOfType<EndLevel>().RaiseEndLevel += this.OnEnd;
+		FindObjectOfType<EndLevel>().RaiseEndLevel += HandleEndLevel;
 		this.uiCtrl.RaiseFadeInDone += HandleFadeInDone;
 		this.uiCtrl.StartFade ();
         // Register all states of the game
@@ -123,8 +123,9 @@ public class GameHandler : StateMachine , IGameHandler
         RequestStateHandler(state);
     }
 
-	private void OnEnd (object sender, EventArgs arg) 
+	private void HandleEndLevel (object sender, EventArgs arg) 
 	{	
+		PlayerPrefs.SetInt ("Level", this.currentLevel);
 		RequestStateHandler(GameState.GameWon);    
 	}
 
