@@ -1,10 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using System;
-using UnityEngine.Events;
 
 public class RegenerationEventArg:EventArgs{
 	public readonly  int lifeAmount = 0;

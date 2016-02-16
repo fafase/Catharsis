@@ -79,6 +79,7 @@
      <None Include="Assets\SampleAssets\Effects\LightShafts\Shaders\SamplePositions.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_Antialiasing\NFAA.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
+     <None Include="Assets\Shader\GlowShader.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_BloomAndFlares\VignetteShader.shader" />
      <None Include="Assets\SampleAssets\Effects\ImageEffects (Pro Only)\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
      <None Include="Assets\SampleAssets\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />

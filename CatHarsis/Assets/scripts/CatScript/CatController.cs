@@ -88,6 +88,7 @@ public class CatController : StateMachine, IInputListener
 			OnReborn(null);
 			Vector3 position = jellyPosition.position;
 			transform.position = position;
+			this.catMoveRef.enabled = true;
 		}
 	}
 	protected void UpdateStarting()
@@ -97,7 +98,10 @@ public class CatController : StateMachine, IInputListener
 			ChangeCurrentState(CatState.Playing);		
 		}
 	}
-    
+	protected void EnterPause(Enum previous)
+	{
+		this.catMoveRef.Pause ();
+	}
 	protected virtual void EnterPlaying(Enum oldState)
     {
         if (AudioManager.Instance != null)
