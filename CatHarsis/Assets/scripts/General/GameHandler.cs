@@ -10,7 +10,7 @@ public class StateEventArg : System.EventArgs
 		this.currentState = currentState;
 	}
 }
-public enum GameState { Loading, Playing, Pause, GameLost, GameWon }
+public enum GameState { None, Loading, Playing, Pause, Transit, GameLost, GameWon }
 public interface IGameHandler 
 { 
 	event EventHandler <EventArgs> RaiseReborn; 
@@ -26,7 +26,6 @@ public class GameHandler : StateMachine , IGameHandler
 	[SerializeField] private CatController catCtrl = null;
 	[SerializeField] private GameObject pauseMenu = null;
 	[SerializeField] private GameObject endMenu = null;
-	[SerializeField] private PauseHandler pauseHandler;
 	[SerializeField] private GameObject inGameGUI;
 	[SerializeField] private int currentLevel = 0;
 	[SerializeField] private RewardManager rewardManager = null;
@@ -78,37 +77,51 @@ public class GameHandler : StateMachine , IGameHandler
         // Register all states of the game
         InitializeStateMachine<GameState>(GameState.Loading,true);
 		AddTransitionsToState(GameState.Loading, new Enum []{ GameState.Playing,GameState.Pause });
-		AddTransitionsToState(GameState.Playing, new Enum[]{GameState.Pause, GameState.GameWon, GameState.GameLost});
+		AddTransitionsToState(GameState.Playing, new Enum[]{GameState.Pause, GameState.GameWon, GameState.GameLost,GameState.Transit});
 		AddTransitionsToState(GameState.Pause, new Enum[]{GameState.Playing, GameState.Loading});
 		AddTransitionsToState(GameState.GameLost, new Enum[]{GameState.Loading});
 		AddTransitionsToState(GameState.GameWon, new Enum[]{GameState.Loading});
+		AddTransitionsToState(GameState.Transit, new Enum[]{GameState.GameLost,GameState.GameWon});
 
         // Disable pause and endMenu GUI
-        pauseHandler.enabled = false;
         pauseMenu.SetActive(false);
 		endMenu.SetActive (false);
 		this.catCtrl.Init (this as IGameHandler);
     }
-	private void HandleRaiseReborn(object sender, EventArgs arg){
+	private void HandleRaiseReborn(object sender, EventArgs arg)
+	{
 		OnReborn (arg);
+	}
+	private float timer = 0f; 
+	protected void EnterTransit(Enum oldState)
+	{
+		this.timer = 0f;
+	}
+	protected void UpdateTransit()
+	{
+		if (this.timer < 1.5f) 
+		{
+			this.timer += Time.deltaTime;
+			return;
+		}
+		RequestStateHandler (this.queueState);
 	}
     protected void EnterGameWon(Enum oldState)
     {
-        //inGameGUI.SetActive(false);
-		pauseHandler.enabled = true;
-		// Display UI
-		endMenu.SetActive(true);
 		// Fetch gem collection
 		// Add to inventory
 		// Save to playerprefs.
-    }
-
+		endMenu.SetActive(true);
+		this.rewardManager.StartReward (this.catCtrl as IInventory);
+	}
+    
     protected void EnterGameLost(Enum oldState)
     {
         endMenu.SetActive(true);
+		this.timer = 0f;
     }
 
-    public void RequestStateHandler(GameState state)
+	public void RequestStateHandler(GameState state)
     {
         ChangeCurrentState(state);
         OnChangeState(new StateEventArg(CurrentState));
@@ -121,15 +134,14 @@ public class GameHandler : StateMachine , IGameHandler
 		GameState state =  (isPause == true) ? GameState.Pause : GameState.Playing;
         Time.timeScale = (isPause == true) ? 0.0f : 1.0f;
         pauseMenu.SetActive(isPause);
-        pauseHandler.enabled = isPause;
         RequestStateHandler(state);
     }
-
+	private GameState queueState = GameState.None;
 	private void HandleEndLevel (object sender, EventArgs arg) 
 	{	
 		PlayerPrefs.SetInt ("Level", this.currentLevel);
-		RequestStateHandler(GameState.GameWon);    
-		this.rewardManager.StartReward (this.catCtrl as IInventory);
+		this.queueState = GameState.GameWon;
+		RequestStateHandler(GameState.Transit);    
 	}
 
 	private void HandleFadeInDone (object sender, EventArgs e)

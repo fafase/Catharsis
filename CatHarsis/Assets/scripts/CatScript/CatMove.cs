@@ -82,7 +82,7 @@ public class CatMove : MonoBehaviour
 	public void Pause()
 	{
 		this.rig.velocity = Vector2.zero;
-		this.enabled = false;
+		this.movement = 0;
 	}
     public void Jump()
 	{

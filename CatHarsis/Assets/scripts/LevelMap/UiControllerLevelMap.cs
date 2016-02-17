@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UiControllerLevelMap : UIController 
 {
-	[SerializeField] private Text currencyPlayer = null;
-	[SerializeField] private Text levelPrice = null;
 	[SerializeField] private GameObject levelCheckout = null;
 	[SerializeField] private Button buttonYes = null;
 	[SerializeField] private Regeneration regeneration = null;
@@ -17,7 +15,7 @@ public class UiControllerLevelMap : UIController
 	{
 		this.levelCheckout.SetActive (false);
 		this.fadeController.StartFade ("FadeIn",null);
-		int playerCurrency = PlayerPrefs.GetInt ("Coin",0);
+		//int playerCurrency = PlayerPrefs.GetInt ("Coin",0);
 		this.shopCtrl.Init ();
 		this.regeneration.RaiseNewLife += HandleNewLife;
 	}

@@ -19,11 +19,13 @@ public class RewardManager : MonoBehaviour
 		this.audioSource.clip = this.coinAudio;
 	}
 
-	public void StartReward(IInventory inventory)
+	public void StartReward(IInventory inventory)  
 	{
 		int coinAmount = inventory.CoinAmount;
 		int lives = inventory.LifeAmount;
 		int total = coinAmount * (lives / 2);
+		int totalCoin = PlayerPrefs.GetInt ("TotalCoin",0);
+		total += totalCoin;
 		PlayerPrefs.SetInt ("TotalCoin", total); 
 		StartCoroutine (SetValueCoroutine(coinAmount, lives, total));
 	}

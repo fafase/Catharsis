@@ -48,7 +48,6 @@ public class LevelMapController : MonoBehaviour {
 			Color col = this.buttons [i].GetComponent<Image> ().color;
 			col.a = 1f;
 			this.buttons [i].GetComponent<Image> ().color = col;
-			string level = "Level" + i.ToString();
 			LevelData ld = this.buttons [i].GetComponent<LevelData> ();
 			this.buttons[i].onClick.AddListener(()=>{ DisplayLevelEntry(ld);});
 		}

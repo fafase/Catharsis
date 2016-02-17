@@ -184,7 +184,7 @@ public class CatController : StateMachine, IInputListener, IInventory
 			this.spriteRenderer.enabled = true;
             ChangeCurrentState(CatState.Starting);
         }
-		else if (newState == GameState.Pause || newState == GameState.GameWon)
+		else if (newState == GameState.Transit)
         {
 			ChangeCurrentState(CatState.Pause);
         }
