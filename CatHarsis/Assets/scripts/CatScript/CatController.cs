@@ -9,8 +9,12 @@ using System.Collections;
 /// </summary>
 using System;
 
-
-public class CatController : StateMachine, IInputListener
+public interface IInventory
+{ 
+	int CoinAmount { get; } 
+	int LifeAmount { get; }
+}
+public class CatController : StateMachine, IInputListener, IInventory
 {
 	public EventHandler<EventArgs> RaiseReborn;
 	protected void OnReborn (EventArgs args)
@@ -31,6 +35,8 @@ public class CatController : StateMachine, IInputListener
     private IGameHandler gameHandler = null;
     private SpriteRenderer spriteRenderer;
     private int coins;
+	public int CoinAmount { get { return this.coins; } }
+	public int LifeAmount { get { return this.catHealth.Lives; } }
     float timer = 1f;
 	private CatInventory catInventory;
 	CatDeath catDeath = CatDeath.None;
@@ -58,8 +64,8 @@ public class CatController : StateMachine, IInputListener
 
 	public void SetSoulsAmount(int value)
 	{
-		int soulAmount =this.catInventory.SetSoulsAmount (value);
-		this.gameHandler.SetSoulsAmount (soulAmount);
+		this.coins = this.catInventory.SetSoulsAmount (value);
+		this.gameHandler.SetSoulsAmount (this.coins);
 	}
 
 	private void InitStateMachine()

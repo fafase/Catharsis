@@ -29,6 +29,8 @@ public class GameHandler : StateMachine , IGameHandler
 	[SerializeField] private PauseHandler pauseHandler;
 	[SerializeField] private GameObject inGameGUI;
 	[SerializeField] private int currentLevel = 0;
+	[SerializeField] private RewardManager rewardManager = null;
+
 	private bool isPause = false;
 
 	public event EventHandler<EventArgs>RaiseReborn;
@@ -127,6 +129,7 @@ public class GameHandler : StateMachine , IGameHandler
 	{	
 		PlayerPrefs.SetInt ("Level", this.currentLevel);
 		RequestStateHandler(GameState.GameWon);    
+		this.rewardManager.StartReward (this.catCtrl as IInventory);
 	}
 
 	private void HandleFadeInDone (object sender, EventArgs e)

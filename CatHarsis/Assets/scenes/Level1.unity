@@ -252,7 +252,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
-    m_FontSize: 50
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -4604,7 +4604,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
-    m_FontSize: 50
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -4615,7 +4615,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Total
+  m_Text: Bonus
 --- !u!222 &1025266946
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5193,6 +5193,22 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1226610927}
   m_Enabled: 1
+--- !u!114 &1226610936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1226610927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1ebf3f92b214ce4912f6312433425a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeText: {fileID: 1794515347}
+  coinText: {fileID: 1412117752}
+  totalText: {fileID: 47824610}
+  coinAudio: {fileID: 8300000, guid: 4dc5bcb1815c94ce6a14a24969fac129, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &1263826007
 GameObject:
   m_ObjectHideFlags: 0
@@ -5680,10 +5696,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
-    m_FontSize: 50
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -6721,10 +6737,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ab421a9b4e5cc4c6f91191d857db9a92, type: 3}
-    m_FontSize: 50
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -6965,7 +6981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1879973565
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7159,6 +7175,14 @@ Prefab:
       propertyPath: catCtrl
       value: 
       objectReference: {fileID: 88937289}
+    - target: {fileID: 11400000, guid: 3bbca5cd544fe2641af98b7f5d3c1b46, type: 2}
+      propertyPath: currentLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3bbca5cd544fe2641af98b7f5d3c1b46, type: 2}
+      propertyPath: rewardManager
+      value: 
+      objectReference: {fileID: 1226610936}
     m_RemovedComponents:
     - {fileID: 11400004, guid: 3bbca5cd544fe2641af98b7f5d3c1b46, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3bbca5cd544fe2641af98b7f5d3c1b46, type: 2}
