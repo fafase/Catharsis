@@ -197,6 +197,7 @@
      <Compile Include="Assets\scripts\GUI\UIController.cs" />
      <Compile Include="Assets\scripts\GUI\UIControllerFrontPage.cs" />
      <Compile Include="Assets\scripts\GUI\UIControllerLevel.cs" />
+     <Compile Include="Assets\scripts\GUI\UITooltip.cs" />
      <Compile Include="Assets\scripts\General\CameraSmoothFollow.cs" />
      <Compile Include="Assets\scripts\General\EndLevel.cs" />
      <Compile Include="Assets\scripts\General\GameHandler.cs" />
