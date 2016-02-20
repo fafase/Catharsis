@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class UIController : MonoBehaviour
 
 	public virtual void SetLevel (string parameter, string newLevel)
 	{
+		if (newLevel == "Tutorial") 
+		{
+			PlayerPrefs.SetInt ("RemoveTutorial",1);
+		}
 		this.level = newLevel;
 		this.fadeController.StartFade (parameter, FadeOutDone);
 	}
@@ -43,7 +48,7 @@ public class UIController : MonoBehaviour
 		{
 			return;		
 		}
-		Application.LoadLevel (this.level);
+		SceneManager.LoadScene (this.level);
 		this.level = null;
 	}
 	protected virtual void FadeInDone(){ OnFadeInDone (null); }

@@ -16,7 +16,7 @@ public class TutorialTextController : MonoBehaviour {
 	[SerializeField] private TutorialCatController tutCatCtrl = null;
 	[SerializeField] private GameObject tapText = null;
 	[SerializeField] private GameObject jellyFish = null;
-	[SerializeField] private GameObject movementTutorial = null;
+	//[SerializeField] private GameObject movementTutorial = null;
 	[SerializeField] private FadeController fadeCtrl = null;
 	[SerializeField] private CameraSmoothFollow cameraFollow = null;
 
@@ -26,7 +26,7 @@ public class TutorialTextController : MonoBehaviour {
 	{
 		this.tapText.SetActive (false);
 		this.jellyFish.SetActive (false);
-		this.movementTutorial.SetActive (false);
+		//this.movementTutorial.SetActive (false);
 		this.fadeCtrl.StartFade ("FadeIn", null);
 		this.cameraFollow.enabled = false;
 	}
@@ -43,7 +43,7 @@ public class TutorialTextController : MonoBehaviour {
 	}
 	private void LoadLevel(Vector3 vec)
 	{
-		Application.LoadLevel ("Level1");
+		SceneManager.LoadScene ("Level1");
 	}
 	private void SetNextAnim(Vector3 vec)
 	{
@@ -62,7 +62,7 @@ public class TutorialTextController : MonoBehaviour {
 	private int tapCounter = 0;
 	private void SetIdle(Vector3 vec)
 	{
-		this.movementTutorial.SetActive (false);
+		//this.movementTutorial.SetActive (false);
 		this.animator.SetBool ("idle", true);
 		this.tapText.SetActive (false);
 		if (++this.tapCounter == 10) 
@@ -155,7 +155,7 @@ public class TutorialTextController : MonoBehaviour {
 
 	public void RegisterMovement()
 	{
-		this.movementTutorial.SetActive (true);
+		//this.movementTutorial.SetActive (true);
 		this.tutCatCtrl.RegisterMovement ();
 	}
 
