@@ -8,10 +8,10 @@ public class UIController : MonoBehaviour
 	[SerializeField] protected FadeController fadeController = null;
 	protected string level = null;
 
-	public EventHandler<EventArgs> RaiseFadeOutDone;
-	public EventHandler<EventArgs> RaiseFadeInDone;
+	public event EventHandler<EventArgs> RaiseFadeOutDone;
+	public event EventHandler<EventArgs> RaiseFadeInDone;
 
-	protected void OnFadeInDone(EventArgs arg)
+	protected virtual void OnFadeInDone(EventArgs arg)
 	{
 		if (RaiseFadeInDone != null) 
 		{
@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-	protected void OnFadeOutDone(EventArgs arg)
+	protected virtual void OnFadeOutDone(EventArgs arg)
 	{
 		if (RaiseFadeOutDone != null) 
 		{
@@ -31,14 +31,15 @@ public class UIController : MonoBehaviour
 		this.fadeController.StartFade ("FadeIn", FadeInDone);
 	}
 
-	public virtual void SetLevel (string parameter, string newLevel)
+	public virtual void SetLevel (FadeParameter parameter, string newLevel)
 	{
 		if (newLevel == "Tutorial") 
 		{
 			PlayerPrefs.SetInt ("RemoveTutorial",1);
 		}
 		this.level = newLevel;
-		this.fadeController.StartFade (parameter, FadeOutDone);
+		string fade = (parameter == FadeParameter.FadeIn) ? "FadeIn" : "FadeOut"; 
+		this.fadeController.StartFade (fade, FadeOutDone);
 	}
 
 	protected virtual void FadeOutDone()
@@ -52,4 +53,6 @@ public class UIController : MonoBehaviour
 		this.level = null;
 	}
 	protected virtual void FadeInDone(){ OnFadeInDone (null); }
+
+	public enum FadeParameter { FadeIn, FadeOut } 
 }

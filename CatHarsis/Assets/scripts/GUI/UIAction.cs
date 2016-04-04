@@ -10,6 +10,6 @@ public class UIAction : MonoBehaviour {
 	}
 	public void LoadLevel(string levelName)
 	{
-		this.uiCtrl.SetLevel ("FadeOut", levelName);
+		this.uiCtrl.SetLevel (UIController.FadeParameter.FadeOut, levelName);
 	}
 }

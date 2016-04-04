@@ -2,19 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="Assets/scripts/Tutorial/TutorialTextController.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/General/GameHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/GUI/UIControllerLevel.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/GUI/UIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/CatScript/CatController.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/CatScript/TutorialCatController.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/CatScript/CatMove.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/CatScript/GuiScore.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/CatScript/CatInventory.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Collectible/Coin.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Collectible/Collectible.cs" Line="1" Column="1" />
       <File FileName="Assets/scenes/UTest.cs" Line="1" Column="1" />
       <File FileName="Assets/SampleAssets/CrossPlatformInput/Scripts/Editor/InputAxisScrollbarCI.cs" Line="1" Column="1" />
+      <File FileName="../../Sayduck/Assets/_Scripts/Test.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

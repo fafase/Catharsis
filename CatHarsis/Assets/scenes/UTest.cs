@@ -1,39 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 
 public class UTest : MonoBehaviour 
 {
-	int seconds = 300;
-	private int life = 5;
-	public int currentLife  = 0;
-	private DateTime target;
+	IDictionary<string, Func<GameObject,Component>> dict = new Dictionary<string, Func<GameObject,Component>> ();
+
 	void Start()
 	{
-		System.DateTime value = new System.DateTime (2016, 02, 12, 23, 15, 00);
-		System.DateTime now = System.DateTime.Now;
+		dict.Add ("Rigidbody",(obj)=>{ return obj.AddComponent<Rigidbody>() as Component; });
 
-		TimeSpan ts = now - value;
-		int elapsed = (int)ts.TotalSeconds;
-
-		int addLife = elapsed / seconds;
-		currentLife += addLife;
-		currentLife = (currentLife > life) ? life : currentLife;
-		int remainingSec = seconds - (elapsed - (addLife * seconds));
-
-		target = now.AddSeconds (remainingSec);
-	}
-
-	void Update()
-	{
-		if (life == currentLife) 
-		{
-			Debug.Log (currentLife.ToString()+":00");
-			return;
-		}
-		TimeSpan ts = target.Subtract(DateTime.Now);
-		Debug.Log (ts.Minutes.ToString()+":"+ts.Seconds.ToString("00"));
-
+		dict ["Rigidbody"](this.gameObject);
 	}
 }
