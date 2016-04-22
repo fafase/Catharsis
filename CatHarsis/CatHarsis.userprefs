@@ -1,10 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/IntroTutorialController.cs">
     <Files>
       <File FileName="Assets/scenes/UTest.cs" Line="1" Column="1" />
       <File FileName="Assets/SampleAssets/CrossPlatformInput/Scripts/Editor/InputAxisScrollbarCI.cs" Line="1" Column="1" />
       <File FileName="../../Sayduck/Assets/_Scripts/Test.cs" Line="1" Column="1" />
+      <File FileName="Assets/IntroTutorialController.cs" Line="6" Column="25" />
+      <File FileName="Assets/IntroTutorialAction.cs" Line="32" Column="27" />
+      <File FileName="Assets/scripts/GUI/UIController.cs" Line="41" Column="49" />
+      <File FileName="Assets/scripts/GUI/UIAction.cs" Line="16" Column="1" />
+      <File FileName="Assets/scripts/GUI/FadeController.cs" Line="18" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
