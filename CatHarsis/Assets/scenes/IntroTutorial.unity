@@ -249,10 +249,10 @@ RectTransform:
   - {fileID: 1535172899}
   m_Father: {fileID: 1192657940}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 170, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -85, y: -36.563}
+  m_SizeDelta: {x: 170, y: -280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758887628
 MonoBehaviour:
@@ -530,6 +530,7 @@ GameObject:
   - 114: {fileID: 1192657937}
   - 114: {fileID: 1192657936}
   - 114: {fileID: 1192657935}
+  - 95: {fileID: 1192657941}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -640,6 +641,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &1192657941
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1192657934}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a49088855d01e4e97879dfb62865b2da, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1201421763
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,10 +815,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1192657940}
   m_RootOrder: 4
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 48.5, y: 0.000022888184}
+  m_SizeDelta: {x: 100, y: -280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1384068692
 MonoBehaviour:
@@ -1025,7 +1043,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 22497162, guid: 9da7df59083d24456a6b20b8aa94fac9, type: 2}
       propertyPath: m_AnchoredPosition.x
